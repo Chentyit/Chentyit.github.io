@@ -86,18 +86,20 @@
 
 
 
-<meta name="description" content="1. 在java中守护线程和本地线程的区别java中的线程分为两种：守护线程（Daemon）和用户线程（User） 任何线程都可以设置为守护线程和用户线程，通过方法Thread.setDaemon(boolean)；true则把该线程设置为守护线程，反之则为用户抛出异常。Thread.setDaemon()必须在Thread.start()之前调用，否则运行时会抛出异常 两者的区别：虚拟机（JVM">
+<meta name="description" content="知识点目录 在java中守护线程和本地线程的区别 线程与进程的区别 多线程的上下文切换 死锁与活锁的区别，死锁与饥饿的区别 Java中用到的线程调度算法 什么是线程组，为什么在Java中不推荐使用 为什么使用Executor框架    图片来自第三方 Unsplash">
 <meta name="keywords" content="多线程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java多线程知识点（1-7）">
-<meta property="og:url" content="http://chentyit.cn/2019/03/03/Java多线程知识点（1-7）/index.html">
+<meta property="og:title" content="Java多线程知识点（第一篇）">
+<meta property="og:url" content="http://chentyit.cn/2019/03/03/Java多线程知识点（第一篇）/index.html">
 <meta property="og:site_name" content="翼叶知秋">
-<meta property="og:description" content="1. 在java中守护线程和本地线程的区别java中的线程分为两种：守护线程（Daemon）和用户线程（User） 任何线程都可以设置为守护线程和用户线程，通过方法Thread.setDaemon(boolean)；true则把该线程设置为守护线程，反之则为用户抛出异常。Thread.setDaemon()必须在Thread.start()之前调用，否则运行时会抛出异常 两者的区别：虚拟机（JVM">
+<meta property="og:description" content="知识点目录 在java中守护线程和本地线程的区别 线程与进程的区别 多线程的上下文切换 死锁与活锁的区别，死锁与饥饿的区别 Java中用到的线程调度算法 什么是线程组，为什么在Java中不推荐使用 为什么使用Executor框架    图片来自第三方 Unsplash">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-03T02:49:50.473Z">
+<meta property="og:image" content="http://chentyit.cn/2019/03/03/Java多线程知识点（第一篇）/juan-gomez-1406168-unsplash.jpg">
+<meta property="og:updated_time" content="2019-03-04T13:11:04.202Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java多线程知识点（1-7）">
-<meta name="twitter:description" content="1. 在java中守护线程和本地线程的区别java中的线程分为两种：守护线程（Daemon）和用户线程（User） 任何线程都可以设置为守护线程和用户线程，通过方法Thread.setDaemon(boolean)；true则把该线程设置为守护线程，反之则为用户抛出异常。Thread.setDaemon()必须在Thread.start()之前调用，否则运行时会抛出异常 两者的区别：虚拟机（JVM">
+<meta name="twitter:title" content="Java多线程知识点（第一篇）">
+<meta name="twitter:description" content="知识点目录 在java中守护线程和本地线程的区别 线程与进程的区别 多线程的上下文切换 死锁与活锁的区别，死锁与饥饿的区别 Java中用到的线程调度算法 什么是线程组，为什么在Java中不推荐使用 为什么使用Executor框架    图片来自第三方 Unsplash">
+<meta name="twitter:image" content="http://chentyit.cn/2019/03/03/Java多线程知识点（第一篇）/juan-gomez-1406168-unsplash.jpg">
 
 
 
@@ -127,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://chentyit.cn/2019/03/03/Java多线程知识点（1-7）/">
+  <link rel="canonical" href="http://chentyit.cn/2019/03/03/Java多线程知识点（第一篇）/">
 
 
 
 
 
-  <title>Java多线程知识点（1-7） | 翼叶知秋</title>
+  <title>Java多线程知识点（第一篇） | 翼叶知秋</title>
   
 
 
@@ -313,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chentyit.cn/2019/03/03/Java多线程知识点（1-7）/">
+    <link itemprop="mainEntityOfPage" href="http://chentyit.cn/2019/03/03/Java多线程知识点（第一篇）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Tianyi">
@@ -330,7 +332,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java多线程知识点（1-7）</h1>
+          <h1 class="post-title" itemprop="name headline">Java多线程知识点（第一篇）</h1>
         
 
         <div class="post-meta">
@@ -383,8 +385,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/03/Java多线程知识点（1-7）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/03/Java多线程知识点（1-7）/" itemprop="commentCount"></span>
+                <a href="/2019/03/03/Java多线程知识点（第一篇）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/03/Java多线程知识点（第一篇）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -411,7 +413,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,196
+                  1,286
                 </span>
               
 
@@ -448,13 +450,27 @@
       
 
       
-        <h3 id="1-在java中守护线程和本地线程的区别"><a href="#1-在java中守护线程和本地线程的区别" class="headerlink" title="1. 在java中守护线程和本地线程的区别"></a>1. 在java中守护线程和本地线程的区别</h3><p>java中的线程分为两种：守护线程（Daemon）和用户线程（User）</p>
+        <h2 id="知识点目录"><a href="#知识点目录" class="headerlink" title="知识点目录"></a>知识点目录</h2><ul>
+<li>在java中守护线程和本地线程的区别</li>
+<li>线程与进程的区别</li>
+<li>多线程的上下文切换</li>
+<li>死锁与活锁的区别，死锁与饥饿的区别</li>
+<li>Java中用到的线程调度算法</li>
+<li>什么是线程组，为什么在Java中不推荐使用</li>
+<li>为什么使用Executor框架</li>
+</ul>
+<p><img src="/2019/03/03/Java多线程知识点（第一篇）/juan-gomez-1406168-unsplash.jpg" alt="插图"></p>
+<blockquote>
+<p>图片来自第三方 <a href="https://unsplash.com/" target="_blank" rel="noopener">Unsplash</a></p>
+</blockquote>
+<a id="more"></a>
+<h3 id="在java中守护线程和本地线程的区别"><a href="#在java中守护线程和本地线程的区别" class="headerlink" title="在java中守护线程和本地线程的区别"></a>在java中守护线程和本地线程的区别</h3><p>java中的线程分为两种：守护线程（Daemon）和用户线程（User）</p>
 <p>任何线程都可以设置为守护线程和用户线程，通过方法Thread.setDaemon(boolean)；true则把该线程设置为守护线程，反之则为用户抛出异常。Thread.setDaemon()必须在Thread.start()之前调用，否则运行时会抛出异常</p>
 <p>两者的区别：<br>虚拟机（JVM）何时离开，Daemon是为其他线程提供服务，如果全部的UserThread已经撤离，Daemon没有可服务的线程，JVM撤离。也可以理解为守护线程是JVM自动创建的线程（但不一定），用户线程是程序创建的线程，守护线程就没有工作继续执行，当垃圾回收线程是Java虚拟机上仅剩的线程时，Java虚拟机会自动离开</p>
 <p>扩展：Thread Dump打印出来的线程信息，含有daemon字样的线程即为守护进程，可能会有：服务守护进程、编译守护进程、windows下的监听Ctrl+break的守护进程、Finalizer守护进程、引用处理守护进程、GC守护进程</p>
-<h3 id="2-线程与进程的区别"><a href="#2-线程与进程的区别" class="headerlink" title="2. 线程与进程的区别"></a>2. 线程与进程的区别</h3><p>进程是操作系统分配资源的最小单元，线程是操作系统调度的最小单元。<br>一个程序至少有一个进程，一个进程至少有一个线程</p>
-<h3 id="3-多线程的上下文切换"><a href="#3-多线程的上下文切换" class="headerlink" title="3. 多线程的上下文切换"></a>3. 多线程的上下文切换</h3><p>多线程会共同使用一组计算机的CPU，二线程数大于给程序分配的CPU数是，为了让各个线程都有执行的机会，就需要轮转使用CPU。<br>不同的线程切换使用CPU发生的切换数据等就是上下文切换</p>
-<h3 id="4-死锁与活锁的区别，死锁与饥饿的区别"><a href="#4-死锁与活锁的区别，死锁与饥饿的区别" class="headerlink" title="4. 死锁与活锁的区别，死锁与饥饿的区别"></a>4. 死锁与活锁的区别，死锁与饥饿的区别</h3><p><strong>死锁</strong>：是指两个或两个以上的进程（或线程）在指定过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去</p>
+<h3 id="线程与进程的区别"><a href="#线程与进程的区别" class="headerlink" title="线程与进程的区别"></a>线程与进程的区别</h3><p>进程是操作系统分配资源的最小单元，线程是操作系统调度的最小单元。<br>一个程序至少有一个进程，一个进程至少有一个线程</p>
+<h3 id="多线程的上下文切换"><a href="#多线程的上下文切换" class="headerlink" title="多线程的上下文切换"></a>多线程的上下文切换</h3><p>多线程会共同使用一组计算机的CPU，二线程数大于给程序分配的CPU数是，为了让各个线程都有执行的机会，就需要轮转使用CPU。<br>不同的线程切换使用CPU发生的切换数据等就是上下文切换</p>
+<h3 id="死锁与活锁的区别，死锁与饥饿的区别"><a href="#死锁与活锁的区别，死锁与饥饿的区别" class="headerlink" title="死锁与活锁的区别，死锁与饥饿的区别"></a>死锁与活锁的区别，死锁与饥饿的区别</h3><p><strong>死锁</strong>：是指两个或两个以上的进程（或线程）在指定过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去</p>
 <p><strong>产生死锁的必要条件</strong>：</p>
 <ul>
 <li>互斥条件：所谓互斥就是进程在某一时间内独占资源</li>
@@ -471,9 +487,9 @@
 <li>线程被永久堵塞在一个等待进入同步块的状态，因为其他线程总是能在他之前持续对该同步块进行访问</li>
 <li>线程在等待一个本身也处于永久等待完成的对象（比如调用这个对象的wait方法），因为其他线程总是被持续地获得唤醒</li>
 </ul>
-<h3 id="5-Java中用到的线程调度算法"><a href="#5-Java中用到的线程调度算法" class="headerlink" title="5. Java中用到的线程调度算法"></a>5. Java中用到的线程调度算法</h3><p>采用时间片轮转的方式，可以设置线程的优先级，会映射到下层的系统上面的优先级上，如非特别需要，尽量不要用，防止线程饥饿</p>
-<h3 id="6-什么是线程组，为什么在Java中不推荐使用"><a href="#6-什么是线程组，为什么在Java中不推荐使用" class="headerlink" title="6. 什么是线程组，为什么在Java中不推荐使用"></a>6. 什么是线程组，为什么在Java中不推荐使用</h3><p>ThreadGroup类，可以把线程归属到某一个线程组中，线程组中可以有线程对象，也可以有线程组，组中还可以有线程，这样的组织结构类似于树，有安全隐患，推荐使用线程池</p>
-<h3 id="7-为什么使用Executor框架"><a href="#7-为什么使用Executor框架" class="headerlink" title="7. 为什么使用Executor框架"></a>7. 为什么使用Executor框架</h3><p>每次执行任务创建线程 new Thread() 比较消耗性能，创建一个线程是比较耗时的、耗资源的</p>
+<h3 id="Java中用到的线程调度算法"><a href="#Java中用到的线程调度算法" class="headerlink" title="Java中用到的线程调度算法"></a>Java中用到的线程调度算法</h3><p>采用时间片轮转的方式，可以设置线程的优先级，会映射到下层的系统上面的优先级上，如非特别需要，尽量不要用，防止线程饥饿</p>
+<h3 id="什么是线程组，为什么在Java中不推荐使用"><a href="#什么是线程组，为什么在Java中不推荐使用" class="headerlink" title="什么是线程组，为什么在Java中不推荐使用"></a>什么是线程组，为什么在Java中不推荐使用</h3><p>ThreadGroup类，可以把线程归属到某一个线程组中，线程组中可以有线程对象，也可以有线程组，组中还可以有线程，这样的组织结构类似于树，有安全隐患，推荐使用线程池</p>
+<h3 id="为什么使用Executor框架"><a href="#为什么使用Executor框架" class="headerlink" title="为什么使用Executor框架"></a>为什么使用Executor框架</h3><p>每次执行任务创建线程 new Thread() 比较消耗性能，创建一个线程是比较耗时的、耗资源的</p>
 <p>调用 new Thread() 创建的线程缺乏管理，被称为野线程，而且可以无限制的创建，线程之间的互相竞争会导致过多占用系统资源而导致系统瘫痪，还有线程之间的频繁交替也会消耗很多系统资源</p>
 <p>直接使用 new Thread() 启动的线程不利于扩展，比如定时执行、定期执行、定时定期执行、线程中断等都不便实现</p>
 
@@ -544,6 +560,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/04/Java多线程知识点（第二篇）/" rel="prev" title="Java多线程知识点（第二篇）">
+                Java多线程知识点（第二篇） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -631,7 +651,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -724,7 +744,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-在java中守护线程和本地线程的区别"><span class="nav-number">1.</span> <span class="nav-text">1. 在java中守护线程和本地线程的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-线程与进程的区别"><span class="nav-number">2.</span> <span class="nav-text">2. 线程与进程的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-多线程的上下文切换"><span class="nav-number">3.</span> <span class="nav-text">3. 多线程的上下文切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-死锁与活锁的区别，死锁与饥饿的区别"><span class="nav-number">4.</span> <span class="nav-text">4. 死锁与活锁的区别，死锁与饥饿的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Java中用到的线程调度算法"><span class="nav-number">5.</span> <span class="nav-text">5. Java中用到的线程调度算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-什么是线程组，为什么在Java中不推荐使用"><span class="nav-number">6.</span> <span class="nav-text">6. 什么是线程组，为什么在Java中不推荐使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-为什么使用Executor框架"><span class="nav-number">7.</span> <span class="nav-text">7. 为什么使用Executor框架</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点目录"><span class="nav-number">1.</span> <span class="nav-text">知识点目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在java中守护线程和本地线程的区别"><span class="nav-number">1.1.</span> <span class="nav-text">在java中守护线程和本地线程的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程与进程的区别"><span class="nav-number">1.2.</span> <span class="nav-text">线程与进程的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程的上下文切换"><span class="nav-number">1.3.</span> <span class="nav-text">多线程的上下文切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁与活锁的区别，死锁与饥饿的区别"><span class="nav-number">1.4.</span> <span class="nav-text">死锁与活锁的区别，死锁与饥饿的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java中用到的线程调度算法"><span class="nav-number">1.5.</span> <span class="nav-text">Java中用到的线程调度算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是线程组，为什么在Java中不推荐使用"><span class="nav-number">1.6.</span> <span class="nav-text">什么是线程组，为什么在Java中不推荐使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么使用Executor框架"><span class="nav-number">1.7.</span> <span class="nav-text">为什么使用Executor框架</span></a></li></ol></li></ol></div>
             
 
           </div>

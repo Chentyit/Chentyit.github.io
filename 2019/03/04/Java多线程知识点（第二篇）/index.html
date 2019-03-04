@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="导航,分享,">
+  <meta name="keywords" content="多线程,">
 
 
 
@@ -86,20 +86,20 @@
 
 
 
-<meta name="description" content="FirstBlog第一篇文章这是三级标题 列表1 列表2  a 子列表  b 子列表 列表3    ZEALER  倾斜字体 加粗 println(&amp;quot;Hello World&amp;quot;); for (int i = 0; i &amp;lt; 10; i++) {     println(&amp;quot;Hello World&amp;quot;); }  引用文章  Markdown源码# FirstBl">
-<meta name="keywords" content="导航,分享">
+<meta name="description" content="知识点目录 在 Java 中 Executor 和 Executors 的区别 原子操作 Java Concurrency API 中的 Lock 接口是什么？对比同步有什么优势？ Executors 框架 什么是阻塞队列？阻塞队列的实现原理是什么？如何使用阻塞队列来实现生产者 - 消费者模型？ 什么是 Callable 和 Future ？ 什么是 FutureTask ？    图片来自第三方">
+<meta name="keywords" content="多线程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FirstBlog">
-<meta property="og:url" content="http://chentyit.cn/2019/02/13/FirstBlog/index.html">
+<meta property="og:title" content="Java多线程知识点（第二篇）">
+<meta property="og:url" content="http://chentyit.cn/2019/03/04/Java多线程知识点（第二篇）/index.html">
 <meta property="og:site_name" content="翼叶知秋">
-<meta property="og:description" content="FirstBlog第一篇文章这是三级标题 列表1 列表2  a 子列表  b 子列表 列表3    ZEALER  倾斜字体 加粗 println(&amp;quot;Hello World&amp;quot;); for (int i = 0; i &amp;lt; 10; i++) {     println(&amp;quot;Hello World&amp;quot;); }  引用文章  Markdown源码# FirstBl">
+<meta property="og:description" content="知识点目录 在 Java 中 Executor 和 Executors 的区别 原子操作 Java Concurrency API 中的 Lock 接口是什么？对比同步有什么优势？ Executors 框架 什么是阻塞队列？阻塞队列的实现原理是什么？如何使用阻塞队列来实现生产者 - 消费者模型？ 什么是 Callable 和 Future ？ 什么是 FutureTask ？    图片来自第三方">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://i.loli.net/2019/02/14/5c657aef1fa74.jpg">
-<meta property="og:updated_time" content="2019-02-28T00:46:16.306Z">
+<meta property="og:image" content="http://chentyit.cn/2019/03/04/Java多线程知识点（第二篇）/nicole-honeywill-1406229-unsplash.jpg">
+<meta property="og:updated_time" content="2019-03-04T13:11:09.348Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FirstBlog">
-<meta name="twitter:description" content="FirstBlog第一篇文章这是三级标题 列表1 列表2  a 子列表  b 子列表 列表3    ZEALER  倾斜字体 加粗 println(&amp;quot;Hello World&amp;quot;); for (int i = 0; i &amp;lt; 10; i++) {     println(&amp;quot;Hello World&amp;quot;); }  引用文章  Markdown源码# FirstBl">
-<meta name="twitter:image" content="http://i.loli.net/2019/02/14/5c657aef1fa74.jpg">
+<meta name="twitter:title" content="Java多线程知识点（第二篇）">
+<meta name="twitter:description" content="知识点目录 在 Java 中 Executor 和 Executors 的区别 原子操作 Java Concurrency API 中的 Lock 接口是什么？对比同步有什么优势？ Executors 框架 什么是阻塞队列？阻塞队列的实现原理是什么？如何使用阻塞队列来实现生产者 - 消费者模型？ 什么是 Callable 和 Future ？ 什么是 FutureTask ？    图片来自第三方">
+<meta name="twitter:image" content="http://chentyit.cn/2019/03/04/Java多线程知识点（第二篇）/nicole-honeywill-1406229-unsplash.jpg">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://chentyit.cn/2019/02/13/FirstBlog/">
+  <link rel="canonical" href="http://chentyit.cn/2019/03/04/Java多线程知识点（第二篇）/">
 
 
 
 
 
-  <title>FirstBlog | 翼叶知秋</title>
+  <title>Java多线程知识点（第二篇） | 翼叶知秋</title>
   
 
 
@@ -315,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chentyit.cn/2019/02/13/FirstBlog/">
+    <link itemprop="mainEntityOfPage" href="http://chentyit.cn/2019/03/04/Java多线程知识点（第二篇）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Tianyi">
@@ -332,7 +332,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">FirstBlog</h1>
+          <h1 class="post-title" itemprop="name headline">Java多线程知识点（第二篇）</h1>
         
 
         <div class="post-meta">
@@ -344,8 +344,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-13T14:42:28+08:00">
-                2019-02-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-04T19:36:35+08:00">
+                2019-03-04
               </time>
             
 
@@ -367,8 +367,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -385,8 +385,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/13/FirstBlog/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/13/FirstBlog/" itemprop="commentCount"></span>
+                <a href="/2019/03/04/Java多线程知识点（第二篇）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/04/Java多线程知识点（第二篇）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -413,7 +413,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  113
+                  1,885
                 </span>
               
 
@@ -429,7 +429,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  7
                 </span>
               
             </div>
@@ -450,48 +450,66 @@
       
 
       
-        <h1 id="FirstBlog"><a href="#FirstBlog" class="headerlink" title="FirstBlog"></a>FirstBlog</h1><h2 id="第一篇文章"><a href="#第一篇文章" class="headerlink" title="第一篇文章"></a>第一篇文章</h2><h3 id="这是三级标题"><a href="#这是三级标题" class="headerlink" title="这是三级标题"></a>这是三级标题</h3><ul>
-<li>列表1</li>
-<li>列表2<br>  a 子列表<br>  b 子列表</li>
-<li>列表3</li>
+        <h2 id="知识点目录"><a href="#知识点目录" class="headerlink" title="知识点目录"></a>知识点目录</h2><ul>
+<li>在 Java 中 Executor 和 Executors 的区别</li>
+<li>原子操作</li>
+<li>Java Concurrency API 中的 Lock 接口是什么？对比同步有什么优势？</li>
+<li>Executors 框架</li>
+<li>什么是阻塞队列？阻塞队列的实现原理是什么？如何使用阻塞队列来实现生产者 - 消费者模型？</li>
+<li>什么是 Callable 和 Future ？</li>
+<li>什么是 FutureTask ？</li>
 </ul>
-<hr>
-<hr>
-<p><a href="http://www.zealer.com/" target="_blank" rel="noopener">ZEALER</a></p>
-<p><img src="http://i.loli.net/2019/02/14/5c657aef1fa74.jpg" alt="白蛇缘起"></p>
-<p><em>倾斜字体</em></p>
-<p><strong>加粗</strong></p>
-<p><code>println(&quot;Hello World&quot;);</code></p>
-<pre><code>for (int i = 0; i &lt; 10; i++) {
-    println(&quot;Hello World&quot;);
-}
-</code></pre><blockquote>
-<p>引用文章</p>
+<p><img src="/2019/03/04/Java多线程知识点（第二篇）/nicole-honeywill-1406229-unsplash.jpg" alt="插图"></p>
+<blockquote>
+<p>图片来自第三方 <a href="https://unsplash.com/" target="_blank" rel="noopener">Unsplash</a></p>
 </blockquote>
-<h1 id="Markdown源码"><a href="#Markdown源码" class="headerlink" title="Markdown源码"></a>Markdown源码</h1><pre><code># FirstBlog
-## 第一篇文章
-### 这是三级标题
+<a id="more"></a>
+<h3 id="在-Java-中-Executor-和-Executors-的区别"><a href="#在-Java-中-Executor-和-Executors-的区别" class="headerlink" title="在 Java 中 Executor 和 Executors 的区别"></a>在 Java 中 Executor 和 Executors 的区别</h3><ul>
+<li>Executors 工具类的不同方法按照我们的需求创建了不同的线程池，来满足业务的需求  </li>
+<li>Executor 接口对象能执行我们的线程任务  </li>
+<li>ExecutorService 接口继承了 Executor 接口并进行了扩展，提供了更多的方法，能获得任务的执行状态并且可以获取任务的返回值  </li>
+<li>使用 ThreadPoolExecutor 可以穿件自定义线程池</li>
+<li>Future 表示异步计算的结果，他提供了检查计算是否完成的方法，以等待计算的完成，并可以使用get()方法获取计算的结果</li>
+</ul>
+<h3 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h3><p>原子操作是指一个不受其他操作影响的操作任务单元。原子操作是在多线程环境下避免数据不一致必须的手段。  </p>
+<p>处理器使用基于对缓存加锁或总线加锁的方式来实现多处理器之间的原子操作  </p>
+<p>在 Java 中可以通过锁和循环 CAS 的方式来实现原子操作。CAS 操作 —— Compare &amp; Set，或是 Compare &amp; Swap，现在几乎所有的CPU指令都支持 CAS 的原子操作  </p>
+<p>int++ 并不是一个原子操作，所以当一个线程读取它的值并加1时，另外一个线程有可能会读到之前的值，这就会引发错误  </p>
+<p>为了解决这个问题，必须保证增加操作是原子的，在JDK1.5之前我们可以使用同步技术来做到这一点。到JDK1.5之后，java.util.concurrent.automic 包提供了int和long类型的原子包装类，它们可以自动的保证对于它们的操作是原子的并且不需要使用同步  </p>
+<p>java.util.concurrent 这个包里面提供了一组原子类。其基本方法的特性就是在多线程环境下，当有多个线程同时执行这些类的实例包含的方法时，具有排他性，即当某个线程进入方法，执行其中的指令的时候，不会被其他线程打断，而别的线程就像自旋锁一样，一致等到该方法执行完成，才由 JVM 从等待队列中选择一个线程进入。</p>
+<h3 id="Java-Concurrency-API-中的-Lock-接口是什么？对比同步有什么优势？"><a href="#Java-Concurrency-API-中的-Lock-接口是什么？对比同步有什么优势？" class="headerlink" title="Java Concurrency API 中的 Lock 接口是什么？对比同步有什么优势？"></a>Java Concurrency API 中的 Lock 接口是什么？对比同步有什么优势？</h3><p>Lock 接口比同步方法和同步块提供了更具扩展性的锁操作  </p>
+<p>他们允许更灵活的结构，可以具有完全不同的性质，并且可以支持多个相关的条件对象  </p>
+<p>优势有：  </p>
+<ul>
+<li>可以使锁更公平</li>
+<li>可以使线程在等待锁的时候响应中断</li>
+<li>可以让线程尝试获取锁，并在无法获取锁的时候立即返回或者等待一段时间</li>
+<li>可以在不同的范围，以不同的顺序获取和释放锁</li>
+</ul>
+<p>整体上来说，Lock 是 synchronize 的扩展版，Lock提供了无条件的，可轮询的，定时的，可中断的，可多条件队列的锁操作。另外 Lock 的实现类都基本支持非公平锁和公平锁，synchronize 只支持非公平锁，但大部分情况下，非公平锁是高效的选择</p>
+<h3 id="Executors-框架"><a href="#Executors-框架" class="headerlink" title="Executors 框架"></a>Executors 框架</h3><p>Executor 框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架  </p>
+<p>无限制的创建线程或引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量，并且可以回收再利用这些线程。利用 Executors 开那个价可以非常方便的创建一个线程池</p>
+<h3 id="什么是阻塞队列？阻塞队列的实现原理是什么？如何使用阻塞队列来实现生产者-消费者模型？"><a href="#什么是阻塞队列？阻塞队列的实现原理是什么？如何使用阻塞队列来实现生产者-消费者模型？" class="headerlink" title="什么是阻塞队列？阻塞队列的实现原理是什么？如何使用阻塞队列来实现生产者 - 消费者模型？"></a>什么是阻塞队列？阻塞队列的实现原理是什么？如何使用阻塞队列来实现生产者 - 消费者模型？</h3><p>阻塞队列是一个支持两个附加操作的队列。在队列为空时，获取元素的线程会等待队列变为非空。当队列满时，存储元素的线程会等待队列可用。</p>
+<p>阻塞队列常用于生产者和消费者的场景，生产者是往队列里添加元素的线程，消费者是从队列里拿元素的线程。阻塞队列就是生产者存放元素的容器，而消费者也只从容器里拿出元素</p>
+<p>JDK7 提供了7个阻塞队列：</p>
+<ul>
+<li>ArrayBlockingQueue：一个由数组结构组成的游街阻塞队列</li>
+<li>LinkedBlockingQueue：一个由链表结构组成的有界阻塞队列</li>
+<li>PriorityBlockingQueue：一个支持优先级排序的无界阻塞队列</li>
+<li>DelayQueue：一个使用优先级队列实现的无界阻塞队列</li>
+<li>SynchronousQueue：一个不存储元素的阻塞队列</li>
+<li>LinkedTransferQueue：一个由链表结构组成的无界阻塞队列</li>
+<li>LinkedBlockingDeque：一个由链表结构组成的双向阻塞队列</li>
+</ul>
+<p>Java5 之前实现同步存取时，可以使用普通的一个集合，然后在使用线程的协作和线程同步可以实现生产者，消费者模式，主要技术就是用 wait，notify，notifyAll，synchronized 这些关键字。在 Java5 之后，可以使用阻塞队列来实现，此方式大大减少了代码量，是的多线程编程更加容易，安全方面也有保障。</p>
+<p>BlockingQueue 接口是 Queue 的子接口，它的主要用途并不是作为容器，而是作为线程同步的工具，因此他具有一个很明显的特征，当生产者线程试图从中取出一个元素时，如果队列为空，则该线程会被阻塞，正是因为他所具有这个特性，所以在程序中多个线程交替向 BlockingQueue 中放入元素，取出元素，他可以很好的控制线程之间的通信</p>
+<p>阻塞队列使用最经典的场景就是 socket 客户端数据的读取和解析，读取数据的线程不断将数据放入队列，然后解析线程，不断从队列取数据解析</p>
+<h3 id="什么是-Callable-和-Future-？"><a href="#什么是-Callable-和-Future-？" class="headerlink" title="什么是 Callable 和 Future ？"></a>什么是 Callable 和 Future ？</h3><p>Callable 接口类似于 Runnable，但是Runnable不会返回结果，并且无法抛出返回结果的异常，而 Callable 功能更强大一些，被线程执行后，可以返回值，这个返回值可以被 Future 拿到，也就是说 Future 可以拿到异步执行任务的返回值</p>
+<p>可以认为是带有回调的 Runnable</p>
+<p>Future 接口表示异步任务，是还没有完成的任务给出的未来结果。所以所 Callable 用于产生结果，Future 用于获取结果</p>
+<h3 id="什么是-FutureTask-？"><a href="#什么是-FutureTask-？" class="headerlink" title="什么是 FutureTask ？"></a>什么是 FutureTask ？</h3><p>在 Java 并发程序中 FutureTask 表示一个可以取消的异步运算。他有启动和取消运算、查询运算是否完成和取回运算结果等方法</p>
+<p>只有当运算完成的时候结果才能取回，如果运算尚未完成 get 方法将会阻塞。一个 FutureTask 对象可以对调用了 Callable 和 Runnable 的对象进行包装，由于 FutureTask 也是调用了 Runnabel 接口，所以它可以提交给 Executor 来执行</p>
 
-- 列表1
-- 列表2
-    a 子列表
-    b 子列表
-- 列表3
-
----
-
----------------------
-
-[ZEALER](http://www.zealer.com/)
-
-![白色缘起](https://img1.doubanio.com/view/photo/l/public/p2540374727.webp)
-
-*倾斜字体*
-
-**加粗**
-
-`println(&quot;Hello World&quot;);`
-</code></pre>
       
     </div>
     
@@ -537,9 +555,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/导航/" rel="tag"><i class="fas fa-bookmark"></i> 导航</a>
-          
-            <a href="/tags/分享/" rel="tag"><i class="fas fa-bookmark"></i> 分享</a>
+            <a href="/tags/多线程/" rel="tag"><i class="fas fa-bookmark"></i> 多线程</a>
           
         </div>
       
@@ -552,15 +568,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/03/03/Java多线程知识点（第一篇）/" rel="next" title="Java多线程知识点（第一篇）">
+                <i class="fa fa-chevron-left"></i> Java多线程知识点（第一篇）
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/14/白蛇缘起影评/" rel="prev" title="白蛇缘起影评">
-                白蛇缘起影评 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -741,7 +757,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FirstBlog"><span class="nav-number">1.</span> <span class="nav-text">FirstBlog</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一篇文章"><span class="nav-number">1.1.</span> <span class="nav-text">第一篇文章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#这是三级标题"><span class="nav-number">1.1.1.</span> <span class="nav-text">这是三级标题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Markdown源码"><span class="nav-number">2.</span> <span class="nav-text">Markdown源码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点目录"><span class="nav-number">1.</span> <span class="nav-text">知识点目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在-Java-中-Executor-和-Executors-的区别"><span class="nav-number">1.1.</span> <span class="nav-text">在 Java 中 Executor 和 Executors 的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原子操作"><span class="nav-number">1.2.</span> <span class="nav-text">原子操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Concurrency-API-中的-Lock-接口是什么？对比同步有什么优势？"><span class="nav-number">1.3.</span> <span class="nav-text">Java Concurrency API 中的 Lock 接口是什么？对比同步有什么优势？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Executors-框架"><span class="nav-number">1.4.</span> <span class="nav-text">Executors 框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是阻塞队列？阻塞队列的实现原理是什么？如何使用阻塞队列来实现生产者-消费者模型？"><span class="nav-number">1.5.</span> <span class="nav-text">什么是阻塞队列？阻塞队列的实现原理是什么？如何使用阻塞队列来实现生产者 - 消费者模型？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-Callable-和-Future-？"><span class="nav-number">1.6.</span> <span class="nav-text">什么是 Callable 和 Future ？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-FutureTask-？"><span class="nav-number">1.7.</span> <span class="nav-text">什么是 FutureTask ？</span></a></li></ol></li></ol></div>
             
 
           </div>
