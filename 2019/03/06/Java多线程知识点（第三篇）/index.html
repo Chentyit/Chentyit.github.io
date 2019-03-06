@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="多线程,">
 
 
 
@@ -86,16 +86,20 @@
 
 
 
-<meta name="description" content="通往牛逼的路上风景差得只想让人说脏话">
-<meta property="og:type" content="website">
-<meta property="og:title" content="翼叶知秋">
-<meta property="og:url" content="http://chentyit.cn/categories/Java/index.html">
+<meta name="description" content="知识点目录 什么是并发容器的实现？ 多线程同步和互斥实现方法 什么是竞争条件 为什么调用 start() 方法时会执行 run() 方法，为什么不直接调用 run() 方法 Java 中怎样唤醒一个阻塞地线程 CycliBarriar 和 CountdownLatch 有什么区别？ 什么是不可变对象，它对写并发应用有什么帮助？    图片来自第三方 Unsplash">
+<meta name="keywords" content="多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java多线程知识点（第三篇）">
+<meta property="og:url" content="http://chentyit.cn/2019/03/06/Java多线程知识点（第三篇）/index.html">
 <meta property="og:site_name" content="翼叶知秋">
-<meta property="og:description" content="通往牛逼的路上风景差得只想让人说脏话">
+<meta property="og:description" content="知识点目录 什么是并发容器的实现？ 多线程同步和互斥实现方法 什么是竞争条件 为什么调用 start() 方法时会执行 run() 方法，为什么不直接调用 run() 方法 Java 中怎样唤醒一个阻塞地线程 CycliBarriar 和 CountdownLatch 有什么区别？ 什么是不可变对象，它对写并发应用有什么帮助？    图片来自第三方 Unsplash">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://chentyit.cn/2019/03/06/Java多线程知识点（第三篇）/hello-i-m-nik-1399233-unsplash.jpg">
+<meta property="og:updated_time" content="2019-03-06T09:14:18.473Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="翼叶知秋">
-<meta name="twitter:description" content="通往牛逼的路上风景差得只想让人说脏话">
+<meta name="twitter:title" content="Java多线程知识点（第三篇）">
+<meta name="twitter:description" content="知识点目录 什么是并发容器的实现？ 多线程同步和互斥实现方法 什么是竞争条件 为什么调用 start() 方法时会执行 run() 方法，为什么不直接调用 run() 方法 Java 中怎样唤醒一个阻塞地线程 CycliBarriar 和 CountdownLatch 有什么区别？ 什么是不可变对象，它对写并发应用有什么帮助？    图片来自第三方 Unsplash">
+<meta name="twitter:image" content="http://chentyit.cn/2019/03/06/Java多线程知识点（第三篇）/hello-i-m-nik-1399233-unsplash.jpg">
 
 
 
@@ -125,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://chentyit.cn/categories/Java/">
+  <link rel="canonical" href="http://chentyit.cn/2019/03/06/Java多线程知识点（第三篇）/">
 
 
 
 
 
-  <title>分类: Java | 翼叶知秋</title>
+  <title>Java多线程知识点（第三篇） | 翼叶知秋</title>
   
 
 
@@ -150,7 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/Chentyit" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
@@ -297,105 +301,289 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Java<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chentyit.cn/2019/03/06/Java多线程知识点（第三篇）/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chen Tianyi">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="翼叶知秋">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/03/06/Java多线程知识点（第三篇）/" itemprop="url">
-              
-                <span itemprop="name">Java多线程知识点（第三篇）</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Java多线程知识点（第三篇）</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-06T16:56:28+08:00" content="2019-03-06">
-          03-06
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-06T16:56:28+08:00">
+                2019-03-06
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/06/Java多线程知识点（第三篇）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/06/Java多线程知识点（第三篇）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,828
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/04/Java多线程知识点（第二篇）/" itemprop="url">
-              
-                <span itemprop="name">Java多线程知识点（第二篇）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-04T19:36:35+08:00" content="2019-03-04">
-          03-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/03/Java多线程知识点（第一篇）/" itemprop="url">
-              
-                <span itemprop="name">Java多线程知识点（第一篇）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-03T09:34:44+08:00" content="2019-03-03">
-          03-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h2 id="知识点目录"><a href="#知识点目录" class="headerlink" title="知识点目录"></a>知识点目录</h2><ul>
+<li>什么是并发容器的实现？</li>
+<li>多线程同步和互斥实现方法</li>
+<li>什么是竞争条件</li>
+<li>为什么调用 start() 方法时会执行 run() 方法，为什么不直接调用 run() 方法</li>
+<li>Java 中怎样唤醒一个阻塞地线程</li>
+<li>CycliBarriar 和 CountdownLatch 有什么区别？</li>
+<li>什么是不可变对象，它对写并发应用有什么帮助？</li>
+</ul>
+<p><img src="/2019/03/06/Java多线程知识点（第三篇）/hello-i-m-nik-1399233-unsplash.jpg" alt="插图"></p>
+<blockquote>
+<p>图片来自第三方 <a href="https://unsplash.com/" target="_blank" rel="noopener">Unsplash</a></p>
+</blockquote>
+<a id="more"></a>
+<h3 id="什么是并发容器的实现？"><a href="#什么是并发容器的实现？" class="headerlink" title="什么是并发容器的实现？"></a>什么是并发容器的实现？</h3><p>何为同步容器：可以简单地理解为通过 synchronized 来实现同步的容器，如果有多个线程调用同步容器的方法，它们将会串行执行。比如 Vector、Hashtable、Collections.synchronizedSet、synchronizedList 等方法返回的容器。</p>
+<p>可以通过查看 Vector，Hashtable 等这些同步容器的实现代码，可以看到这些容器实现线程安全的方式就是将它们的状态封装起来，并在需要同步的方法上加上关键字synchronized。</p>
+<p>并发容器使用了与同步容器完全不同的加锁策略来提供更高的并发性和伸缩性，例如在 ConcurrentHashMap 中采用了一种粒度更细的加锁机制，可以称为分段锁，在这种锁机制下，允许任意数量的读线程并发地访问map，并且执行读操作的线程和写操作的线程也可以并发的访问 map，同时允许一定数量的写操作线程并发地修改 map，所以它可以在并发环境下实现更高的吞吐量。</p>
+<h3 id="多线程同步和互斥实现方法"><a href="#多线程同步和互斥实现方法" class="headerlink" title="多线程同步和互斥实现方法"></a>多线程同步和互斥实现方法</h3><p>线程同步是指线程之间所具有的一种制约关系，一个线程的执行依赖另一个线程的消息，当它没有得到另一个线程的消息时应等待，直到消息到达时才被唤醒。</p>
+<p>线程互斥是指对于共享的进程系统资源，在各单个线程访问时的排它性。当有若干个线程都要使用某一共享资源时，任何时刻最多只允许一个线程去使用，其它要使用该资源的线程必须等待，直到占用资源者释放该资源。线程互斥可以看成是一种特殊的线程同步。</p>
+<p>线程间的同步方法大体可分为两类：用户模式和内核模式。顾名思义，内核模式就是指利用系统内核对象的单一性来进行同步，使用时需要切换内核态与用户态，而用户模式就是不需要切换到内核态，只在用户态完成操作。</p>
+<p>用户模式下的方法有：原子操作、临界区。内核模式下的方法有：事件、信号量、互斥量。</p>
+<h3 id="什么是竞争条件"><a href="#什么是竞争条件" class="headerlink" title="什么是竞争条件"></a>什么是竞争条件</h3><p>当多个进程都企图对共享数据进行某种处理，而最后的结果又取决于进程运行的顺序时，则我们认为这发生了竞争条件。</p>
+<h3 id="为什么调用-start-方法时会执行-run-方法，为什么不直接调用-run-方法"><a href="#为什么调用-start-方法时会执行-run-方法，为什么不直接调用-run-方法" class="headerlink" title="为什么调用 start() 方法时会执行 run() 方法，为什么不直接调用 run() 方法"></a>为什么调用 start() 方法时会执行 run() 方法，为什么不直接调用 run() 方法</h3><p>当你调用start()方法时你将创建新的线程，并且执行在run()方法里的代码。</p>
+<p>但是如果你直接调用run()方法，它不会创建新的线程也不会执行调用线程的代码，只会把run方法当作普通方法去执行。</p>
+<h3 id="Java-中怎样唤醒一个阻塞地线程"><a href="#Java-中怎样唤醒一个阻塞地线程" class="headerlink" title="Java 中怎样唤醒一个阻塞地线程"></a>Java 中怎样唤醒一个阻塞地线程</h3><p>在 Java 发展史上曾经使用 suspend()、resume() 方法对于线程进行阻塞唤醒，但随之出现很多问题，比较典型的还是死锁问题。</p>
+<p>解决方案可以使用以对象为目标的阻塞，即利用 Object 类的 wait() 和 notify() 方法实现线程阻塞。</p>
+<p>首先，wait、notify 方法是针对对象的，调用任意对象的 wait() 方法都将导致线程阻塞，阻塞的同时也将释放该对象的锁，相应地，调用任意对象的 notify() 方法则将随机解除该对象阻塞的线程，但它需要重新获取改对象的锁，直到获取成功才能往下执行；其次，wait、notify 方法必须在 synchronized 块或方法中被调用，并且要保证同步块或方法的锁对象与调用 wait、notify 方法的对象是同一个，如此一来在调用 wait 之前当前线程就已经成功获取某对象的锁，执行 wait 阻塞后当前线程就将之前获取的对象锁释放。</p>
+<h3 id="CycliBarriar-和-CountdownLatch-有什么区别？"><a href="#CycliBarriar-和-CountdownLatch-有什么区别？" class="headerlink" title="CycliBarriar 和 CountdownLatch 有什么区别？"></a>CycliBarriar 和 CountdownLatch 有什么区别？</h3><p>CyclicBarrier 可以重复使用，而CountdownLatch不能重复使用。</p>
+<p>Java 的 concurrent 包里面的 CountDownLatch 其实可以把它看作一个计数器，只不过这个计数器的操作是原子操作，同时只能有一个线程去操作这个计数器，也就是同时只能有一个线程去减这个计数器里面的值。</p>
+<p>你可以向 CountDownLatch 对象设置一个初始的数字作为计数值，任何调用这个对象上的 await() 方法都会阻塞，直到这个计数器的计数值被其他的线程减为0为止。</p>
+<p>所以在当前计数到达零之前，await 方法会一直受阻塞。之后，会释放所有等待的线程，await 的所有后续调用都将立即返回。这种现象只出现一次——计数无法被重置。如果需要重置计数，请考虑使用 CyclicBarrier。</p>
+<p>CountDownLatch 的一个非常典型的应用场景是：有一个任务想要往下执行，但必须要等到其他的任务执行完毕后才可以继续往下执行。假如我们这个想要继续往下执行的任务调用一个 CountDownLatch 对象的 await ()方法，其他的任务执行完自己的任务后调用同一个 CountDownLatch 对象上的 countDown() 方法，这个调用 await() 方法的任务将一直阻塞等待，直到这个 CountDownLatch 对象的计数值减到0为止</p>
+<p>CyclicBarrier 一个同步辅助类，它允许一组线程互相等待，直到到达某个公共屏障点 。在涉及一组固定大小的线程的程序中，这些线程必须不时地互相等待，此时 CyclicBarrier 很有用。因为该 barrier 在释放等待线程后可以重用，所以称它为循环 的 barrier。</p>
+<h3 id="什么是不可变对象，它对写并发应用有什么帮助？"><a href="#什么是不可变对象，它对写并发应用有什么帮助？" class="headerlink" title="什么是不可变对象，它对写并发应用有什么帮助？"></a>什么是不可变对象，它对写并发应用有什么帮助？</h3><p>不可变对象即对象一旦被创建它的状态就不能改变，反之即为可变对象。 不可变对象的类即为不可变类。Java 平台类库中包含许多不可变类，如 String、基本类型的包装类、BigInteger 和 BigDecimal 等。</p>
+<p>不可变对象天生是线程安全的。它们的常量（域）是在构造函数中创建的。既然它们的状态无法修改，这些常量永远不会变。</p>
+<p>不可变对象永远是线程安全的。</p>
+<p>只有满足如下状态，一个对象才是不可变的；</p>
+<p>它的状态不能在创建后再被修改；</p>
+<p>所有域都是 final 类型；并且，</p>
+<p>它被正确创建（创建期间没有发生this引用的逸出）。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Chen Tianyi 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Chen Tianyi 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多线程/" rel="tag"><i class="fas fa-bookmark"></i> 多线程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/04/Java多线程知识点（第二篇）/" rel="next" title="Java多线程知识点（第二篇）">
+                <i class="fa fa-chevron-left"></i> Java多线程知识点（第二篇）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -403,6 +591,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -423,8 +618,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -524,6 +728,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点目录"><span class="nav-number">1.</span> <span class="nav-text">知识点目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是并发容器的实现？"><span class="nav-number">1.1.</span> <span class="nav-text">什么是并发容器的实现？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程同步和互斥实现方法"><span class="nav-number">1.2.</span> <span class="nav-text">多线程同步和互斥实现方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是竞争条件"><span class="nav-number">1.3.</span> <span class="nav-text">什么是竞争条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么调用-start-方法时会执行-run-方法，为什么不直接调用-run-方法"><span class="nav-number">1.4.</span> <span class="nav-text">为什么调用 start() 方法时会执行 run() 方法，为什么不直接调用 run() 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-中怎样唤醒一个阻塞地线程"><span class="nav-number">1.5.</span> <span class="nav-text">Java 中怎样唤醒一个阻塞地线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CycliBarriar-和-CountdownLatch-有什么区别？"><span class="nav-number">1.6.</span> <span class="nav-text">CycliBarriar 和 CountdownLatch 有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是不可变对象，它对写并发应用有什么帮助？"><span class="nav-number">1.7.</span> <span class="nav-text">什么是不可变对象，它对写并发应用有什么帮助？</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -691,6 +911,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
