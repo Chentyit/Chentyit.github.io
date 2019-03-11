@@ -95,7 +95,7 @@
 <meta property="og:description" content="面试题目录 找出数组中重复的数字 不修改数组找出重复的数字    摄影：Roberto Nickson，来自Unsplash">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/03/10/剑指Offer（二）/roberto-nickson-1424153-unsplash.jpg">
-<meta property="og:updated_time" content="2019-03-11T00:07:01.695Z">
+<meta property="og:updated_time" content="2019-03-11T00:08:49.462Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指Offer（二）">
 <meta name="twitter:description" content="面试题目录 找出数组中重复的数字 不修改数组找出重复的数字    摄影：Roberto Nickson，来自Unsplash">
@@ -503,11 +503,11 @@
 <blockquote>
 <p>在一个长度为 n+1 的数组里的所有数字都在 1~n 的范围内，所以数组中至少有一个数字是重复的，请找出数组中任意一个重复的数字，但不能修改输入的数组。例如，如果输入长度为 8 的数组 {2, 3, 5, 4, 3, 2, 6, 7}，那么对应的输出是重复的数字2或者3</p>
 </blockquote>
-<p><strong>解题思路</strong></p>
+<p><strong><em>解题思路</em></strong></p>
 <blockquote>
 <p>把从 1~n 的数字从中间的数字m分为两部分，前面一半为 1~m，后面一半为 m+1~n。如果 1~m 的数字的数目超过 m，那么这一班的区间里一定包含重复的数字；否则，另一半 m+1~n 的区间里一定包含重复的数字。</p>
 </blockquote>
-<p><strong>代码</strong></p>
+<p><strong><em>代码</em></strong></p>
 <pre><code>public class Test3_2 {
 
     private static int getDuplication(int[] arr) {
