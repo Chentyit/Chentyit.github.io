@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Maven的Web工程中获取相对路径无效]]></title>
+    <url>%2F2019%2F03%2F26%2FMaven%E7%9A%84Web%E5%B7%A5%E7%A8%8B%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E6%97%A0%E6%95%88%2F</url>
+    <content type="text"><![CDATA[Maven的Web工程中${pageContext.request.contextPath}获取相对路径无效 开发环境：Maven 3.6.0 || jdk 1.8 || Spring 4 摄影：Zahrin Lukman，来自Unsplash 解决方案一（亲测有效）将 web.xml 文件中的 标签的版本修改高一些 &lt;web-app version=&quot;3.0&quot; xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd&quot;&gt; &lt;/web-app&gt; 原 web.xml &lt;web-app&gt;&lt;/web-app&gt; 方案二（亲测无效且有毒）这种方法由于没成功我就不详细介绍了，大概说一下，因为用 maven 创建的 webapp 项目是模板的，这第二种方法直接就是去修改模板了，但是这个模板藏得很深，而且我修改了之后，我的 maven 直接用不了了，导致我直接重装的 maven，重装之后每次在命令行运行 mvn 命令就会报错，目前还无法解决，但还不至于影响我在 IDEA 中开发，说来也怪，在 IDEA 中一点事都没有，但是一旦执行 mvn -V 还是会报错，所以这个方法谨慎使用，最好别用，虽然每次都要改一次 web.xml 文件，但不至于把自己的软件搞坏，如果报错解决了再来更新]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>开发问题解决</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Maven项目加载不到Mybatis的xml文件报异常的解决方案]]></title>
     <url>%2F2019%2F03%2F24%2FMaven%E9%A1%B9%E7%9B%AE%E5%8A%A0%E8%BD%BD%E4%B8%8D%E5%88%B0Mybatis%E7%9A%84xml%E6%96%87%E4%BB%B6%E6%8A%A5%E5%BC%82%E5%B8%B8%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%2F</url>
     <content type="text"><![CDATA[Maven项目加载不到Mybatis的xml文件报异常的解决方案 这是第一篇解决开发问题的博客，以后也会按照这种格式来书写，并不断改进（这条仅本条博客存在） 开发环境：Maven 3.6 || jdk 1.8 || Spring 4 （解决方案亲测有效） 摄影：Christian Lambert，来自Unsplash 解决方案一&lt;build&gt; &lt;resources&gt; &lt;resource&gt; &lt;directory&gt;src/main/java&lt;/directory&gt; &lt;includes&gt; &lt;include&gt;**/*.xml&lt;/include&gt; &lt;/includes&gt; &lt;/resource&gt; &lt;/resources&gt; &lt;/build&gt; 在 Maven 的 pom.xml 配置文件下添加如上配置代码（用于 Mapper 自动扫描） 原因： Maven编译项目的时候只会把src/main/java下所有的.java和src/main/resources里的文件编译放入target/classes文件夹，所以位于src/main/java下的xml文件就被忽略了。此时只需要在项目的pom文件中加入resources，把src/main/java下所有的.xml也编译放入target/classes然后启动项目就可以了。 作者：暗夜黑光链接：https://www.jianshu.com/p/42725b277611来源：简书 解决方案二在工程中创建 resource 目录，将 ***Mapper.xml 文件放到该目录下，并在 sqlMapConfig.xml 文件中配置 &lt;mappers&gt; &lt;mapper resource=&quot;***Mapper.xml&quot; /&gt; &lt;/mappers&gt; 该方法用于指定 ***Mapper.xml 文件]]></content>
