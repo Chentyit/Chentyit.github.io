@@ -95,7 +95,7 @@
 <meta property="og:description" content="Maven的Web工程中${pageContext.request.contextPath}获取相对路径无效 开发环境：Maven 3.6.0 || jdk 1.8 || Spring 4     摄影：Zahrin Lukman，来自Unsplash">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/03/26/Maven的Web工程中获取相对路径无效/zahrin-lukman-1449925-unsplash.jpg">
-<meta property="og:updated_time" content="2019-03-26T11:27:42.608Z">
+<meta property="og:updated_time" content="2019-03-26T11:37:08.448Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven的Web工程中获取相对路径无效">
 <meta name="twitter:description" content="Maven的Web工程中${pageContext.request.contextPath}获取相对路径无效 开发环境：Maven 3.6.0 || jdk 1.8 || Spring 4     摄影：Zahrin Lukman，来自Unsplash">
@@ -413,7 +413,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  325
+                  366
                 </span>
               
 
@@ -469,6 +469,9 @@
 </code></pre><p>原 web.xml</p>
 <pre><code>&lt;web-app&gt;&lt;/web-app&gt;
 </code></pre><h3 id="方案二（亲测无效且有毒）"><a href="#方案二（亲测无效且有毒）" class="headerlink" title="方案二（亲测无效且有毒）"></a>方案二（亲测无效且有毒）</h3><p>这种方法由于没成功我就不详细介绍了，大概说一下，因为用 maven 创建的 webapp 项目是模板的，这第二种方法直接就是去修改模板了，但是这个模板藏得很深，而且我修改了之后，我的 maven 直接用不了了，导致我直接重装的 maven，重装之后每次在命令行运行 mvn 命令就会报错，目前还无法解决，但还不至于影响我在 IDEA 中开发，说来也怪，在 IDEA 中一点事都没有，但是一旦执行 mvn -V 还是会报错，所以这个方法谨慎使用，最好别用，虽然每次都要改一次 web.xml 文件，但不至于把自己的软件搞坏，如果报错解决了再来更新</p>
+<blockquote>
+<p>找到为什么出错了，不好意思，命令打错了，是 mvn -version 不是 mvn -V 丢脸丢大发了，但是这个方法任然不可用！！！</p>
+</blockquote>
 
       
     </div>
