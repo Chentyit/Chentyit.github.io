@@ -97,7 +97,7 @@
 <meta property="og:description" content="Photo by Chi Liu on Unsplash">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/05/03/Redis学习笔记（Day03）/chi-liu-1552956-unsplash.jpg">
-<meta property="og:updated_time" content="2019-05-03T04:10:04.513Z">
+<meta property="og:updated_time" content="2019-05-04T03:15:34.361Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis学习笔记（Day03）">
 <meta name="twitter:description" content="Photo by Chi Liu on Unsplash">
@@ -415,7 +415,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,227
+                  2,526
                 </span>
               
 
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  9
+                  10
                 </span>
               
             </div>
@@ -509,7 +509,15 @@
 <p>默认数据库的数量</p>
 </li>
 </ul>
-<h3 id="SNAPSHOTTING-快照"><a href="#SNAPSHOTTING-快照" class="headerlink" title="SNAPSHOTTING 快照"></a>SNAPSHOTTING 快照</h3><h3 id="REPLICATION-复制"><a href="#REPLICATION-复制" class="headerlink" title="REPLICATION 复制"></a>REPLICATION 复制</h3><h3 id="SECURITY-安全"><a href="#SECURITY-安全" class="headerlink" title="SECURITY 安全"></a>SECURITY 安全</h3><h3 id="LIMITS-限制"><a href="#LIMITS-限制" class="headerlink" title="LIMITS 限制"></a>LIMITS 限制</h3><ul>
+<h3 id="SNAPSHOTTING-快照"><a href="#SNAPSHOTTING-快照" class="headerlink" title="SNAPSHOTTING 快照"></a>SNAPSHOTTING 快照</h3><ul>
+<li>Save（save 秒钟 写操作次数）</li>
+<li>stop-writes-on-bgsave-error（如果配置成no，表示你不在乎数据不一致或者有其他的手段发现和控制）</li>
+<li>rdbcompression（rdbcompression：对于存储到磁盘中的快照，可以设置是否进行压缩存储。如果是的话，redis 会采用 LZF 算法进行压缩。如果你不想消耗 CPU 来进行压缩的话，可以设置为关闭此功能）</li>
+<li>rdbchecksum（rdbchecksum：在存储快照后，还可以让 redis 使用 CRC64 算法来进行数据校验，但是这样做会增加大约 10% 的性能消耗，如果希望获取到最大的性能提升，可以关闭此功能）</li>
+<li>dbfilename（备份文件名称）</li>
+<li>dir</li>
+</ul>
+<h3 id="REPLICATION-复制"><a href="#REPLICATION-复制" class="headerlink" title="REPLICATION 复制"></a>REPLICATION 复制</h3><h3 id="SECURITY-安全"><a href="#SECURITY-安全" class="headerlink" title="SECURITY 安全"></a>SECURITY 安全</h3><h3 id="LIMITS-限制"><a href="#LIMITS-限制" class="headerlink" title="LIMITS 限制"></a>LIMITS 限制</h3><ul>
 <li><p>Maxclients</p>
 </li>
 <li><p>Maxmemory</p>
@@ -528,7 +536,20 @@
 <p>设置样本数量，LRU 算法和最小 TTL 算法都并非是精确的算法，而是估算值，所以你可以设置样本的大小，redis 默认会检查这么多个 key 并选择其中 LRU 的那个</p>
 </li>
 </ul>
-<h3 id="APPEND-ONLY-MODE-追加"><a href="#APPEND-ONLY-MODE-追加" class="headerlink" title="APPEND ONLY MODE 追加"></a>APPEND ONLY MODE 追加</h3><h3 id="常见配置-redis-conf-介绍"><a href="#常见配置-redis-conf-介绍" class="headerlink" title="常见配置 redis.conf 介绍"></a>常见配置 redis.conf 介绍</h3><p>参数说明<br>redis.conf 配置项说明如下：</p>
+<h3 id="APPEND-ONLY-MODE-追加"><a href="#APPEND-ONLY-MODE-追加" class="headerlink" title="APPEND ONLY MODE 追加"></a>APPEND ONLY MODE 追加</h3><ul>
+<li>appendonly</li>
+<li>appendfilename</li>
+<li>appendfsync<ul>
+<li>always：同步持久化，每次发生数据变更会被立即记录到磁盘，性能较差但数据完整性比较好</li>
+<li>everysec：出厂默认推荐，异步操作，每秒记录，如果一秒内宕机，有数据丢失</li>
+<li>no</li>
+</ul>
+</li>
+<li>no-appendfsync-on-rewrite：重写时是否可以运用 Appendfsync，用默认 no 即可，保证数据安全性。</li>
+<li>auto-aof-rewrite-min-size：设置重写的基准值</li>
+<li>auto-aof-rewrite-percentage：设置重写的基准值</li>
+</ul>
+<h3 id="常见配置-redis-conf-介绍"><a href="#常见配置-redis-conf-介绍" class="headerlink" title="常见配置 redis.conf 介绍"></a>常见配置 redis.conf 介绍</h3><p>参数说明<br>redis.conf 配置项说明如下：</p>
 <ol>
 <li>Redis默认不是以守护进程的方式运行，可以通过该配置项修改，使用yes启用守护进程<br> daemonize no</li>
 <li>当Redis以守护进程方式运行时，Redis默认会把pid写入/var/run/redis.pid文件，可以通过pidfile指定<br> pidfile /var/run/redis.pid</li>
@@ -633,6 +654,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/05/04/Redis学习笔记（Day04）/" rel="prev" title="Redis学习笔记（Day04）">
+                Redis学习笔记（Day04） <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -719,7 +744,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
