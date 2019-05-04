@@ -97,7 +97,7 @@
 <meta property="og:description" content="Photo by Berti Benbanaste on Unsplash">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/05/04/Redis学习笔记（Day04）/berti-benbanaste-1550570-unsplash.jpg">
-<meta property="og:updated_time" content="2019-05-04T03:20:06.199Z">
+<meta property="og:updated_time" content="2019-05-04T03:25:44.430Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis学习笔记（Day04）">
 <meta name="twitter:description" content="Photo by Berti Benbanaste on Unsplash">
@@ -500,7 +500,7 @@
 <h4 id="rewrite"><a href="#rewrite" class="headerlink" title="rewrite"></a>rewrite</h4><ul>
 <li><strong>是什么：</strong>AOF 采用文件追加方式，文件会越来越大为避免出现此种情况，新增了重写机制,当 AOF 文件的大小超过所设定的阈值时，Redis 就会启动 AOF 文件的内容压缩，只保留可以恢复数据的最小指令集.可以使用命令 bgrewriteaof</li>
 <li><strong>重写原理：</strong>AOF 文件持续增长而过大时，会 fork 出一条新进程来将文件重写(也是先写临时文件最后再 rename)，遍历新进程的内存中数据，每条记录有一条的 Set 语句。重写 aof 文件的操作，并没有读取旧的 aof 文件，而是将整个内存中的数据库内容用命令的方式重写了一个新的 aof 文件，这点和快照有点类似</li>
-<li><strong>触发机制：</strong>Redis 会记录上次重写时的 AOF 大小，默认配置是当AOF文件大小是上次 rewrite 后大小的一倍且文件大于 64M 时触发</li>
+<li><strong>触发机制：</strong> <em>Redis 会记录上次重写时的 AOF 大小，默认配置是当AOF文件大小是上次 rewrite 后大小的一倍且文件大于 64M 时触发</em></li>
 </ul>
 <h4 id="优势-1"><a href="#优势-1" class="headerlink" title="优势"></a>优势</h4><ul>
 <li>每修改同步：appendfsync always——同步持久化 每次发生数据变更会被立即记录到磁盘  性能较差但数据完整性比较好</li>
