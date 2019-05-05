@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.chentyit.com/"/>
-  <updated>2019-05-04T03:25:44.430Z</updated>
+  <updated>2019-05-05T01:39:22.059Z</updated>
   <id>https://www.chentyit.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis学习笔记（Day05）</title>
+    <link href="https://www.chentyit.com/2019/05/05/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Day05%EF%BC%89/"/>
+    <id>https://www.chentyit.com/2019/05/05/Redis学习笔记（Day05）/</id>
+    <published>2019-05-05T00:26:02.000Z</published>
+    <updated>2019-05-05T01:39:22.059Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/2019/05/05/Redis学习笔记（Day05）/martin-adams-1557946-unsplash.jpg" alt="插图"></p><blockquote><p>Photo by <a href="https://unsplash.com/photos/RCx7eaBL8Io?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Martin Adams</a> on <a href="https://unsplash.com/t/nature?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Unsplash</a></p></blockquote><a id="more"></a><h2 id="Redis-事务"><a href="#Redis-事务" class="headerlink" title="Redis 事务"></a>Redis 事务</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>可以一次执行多个命令，本质是一组命令的集合。一个事务中的，所有命令都会序列化，<strong>按顺序地串行化执行而不会被其它命令插入，不许加塞</strong></p><h3 id="能干嘛"><a href="#能干嘛" class="headerlink" title="能干嘛"></a>能干嘛</h3><p>一个队列中，一次性，顺序性，排他性的执行一系列命令</p><h3 id="怎么玩"><a href="#怎么玩" class="headerlink" title="怎么玩"></a>怎么玩</h3><h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><p><strong>Case1：DISCARD —— 取消事务，放弃事务块内的所有命令</strong></p><p><strong>Case2：EXEC —— 执行所有事务块内的命令</strong></p><p><strong>Case3：MULTI —— 标记一个事务块的开始</strong></p><p><strong>Case4：UNWATCH —— 取消 WATCH 命令对所有 key 的监视</strong></p><p><strong>Case5：WATCH —— 监视一个（或多个）key，如果在事务执行之前，这个（或这些）key 被其他命令所改动，那么事务将被打断</strong></p><ul><li><p><strong>悲观锁</strong></p><p> 悲观锁（Pessimistic Lock）， 顾名思义，就是很悲观，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会block直到它拿到锁。传统的关系型数据库里边就用到了很多这种锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁</p></li><li><p><strong>乐观锁</strong></p><p>乐观锁（Optimistic Lock）， 顾名思义，就是很乐观，每次去拿数据的时候都认为别人不会修改，<strong>所以不会上锁</strong>，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机制。乐观锁适用于多读的应用类型，这样可以提高吞吐量，</p><p><strong>乐观锁策略：提交版本必须大于记录当前版本才能执行更新</strong></p></li><li><p><strong>CAS（Check And Set）</strong></p></li><li><p><strong>有加塞篡改</strong></p><p>监控了key，如果key被修改了，后面一个事务的执行失效</p></li></ul><p>一旦执行了 EXEC 之前加的监控锁都会被取消掉了</p><p>Watch 指令，类似乐观锁，事务提交时，如果 Key 的值已被别的客户端改变，比如某个 list 已被别的客户端 push / pop 过了，整个事务队列都不会被执行</p><p>通过 WATCH 命令在事务执行之前监控了多个 Keys，倘若在 WATCH 之后有任何 Key 的值发生了变化，EXEC 命令执行的事务都将被放弃，同时返回 Nullmulti-bulk 应答以通知调用者事务执行失败</p><h3 id="阶段"><a href="#阶段" class="headerlink" title="阶段"></a>阶段</h3><ol><li>开启：以MULTI开始一个事务</li><li>入队：将多个命令入队到事务中，接到这些命令并不会立即执行，而是放到等待执行的事务队列里面</li><li>执行：由EXEC命令触发事务</li></ol><h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ol><li>单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。</li><li>没有隔离级别的概念：队列中的命令没有提交之前都不会实际的被执行，因为事务提交前任何指令都不会被实际执行，也就不存在”事务内的查询要看到事务里的更新，在事务外查询不能看到”这个让人万分头痛的问题</li><li>不保证原子性：redis 同一个事务中如果有一条命令执行失败，其后的命令仍然会被执行，没有回滚</li></ol><h2 id="Redis-的发布订阅"><a href="#Redis-的发布订阅" class="headerlink" title="Redis 的发布订阅"></a>Redis 的发布订阅</h2><h3 id="是什么-1"><a href="#是什么-1" class="headerlink" title="是什么"></a>是什么</h3><p>进程间的一种消息通信模式：发送者(pub)发送消息，订阅者(sub)接收消息。</p><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><ul><li><p>PSUBSCRIBE pattern [pattern …]</p><p>订阅一个或多个符合给定模式的频道</p></li><li><p>PUBSUB subcommand [argument [argument …]]</p><p>查看订阅与发布信息</p></li><li><p>PUBLISH channel message</p><p>将信息发送到指定的频道</p></li><li><p>PUNSUBSCRIBE [pattern [pattern …]]</p><p>退订所有给定模式的频道</p></li><li><p>SUBSCRIBE channel [channel …]</p><p>订阅给定的一个或多个频道信息</p></li><li><p>UNSUBSCRIBE [channel [channel …]]</p><p>指退订给定的频道</p></li></ul><h3 id="案列"><a href="#案列" class="headerlink" title="案列"></a>案列</h3><p><strong>先订阅后发布</strong>后才能收到消息</p><ol><li>可以一次性订阅多个，SUBSCRIBE c1 c2 c3</li><li>消息发布，PUBLISH c2 hello-redis</li><li>订阅多个，通配符<em>，PSUBSCRIBE new</em></li><li>收取消息，PUBLISH new1 redis2015</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/2019/05/05/Redis学习笔记（Day05）/martin-adams-1557946-unsplash.jpg&quot; alt=&quot;插图&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/RCx7eaBL8Io?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Martin Adams&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/t/nature?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="数据库" scheme="https://www.chentyit.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="Redis - 自学笔记" scheme="https://www.chentyit.com/tags/Redis-%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>Redis学习笔记（Day04）</title>
@@ -547,33 +572,6 @@
     
     
       <category term="电影" scheme="https://www.chentyit.com/tags/%E7%94%B5%E5%BD%B1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>FirstBlog</title>
-    <link href="https://www.chentyit.com/2019/02/13/FirstBlog/"/>
-    <id>https://www.chentyit.com/2019/02/13/FirstBlog/</id>
-    <published>2019-02-13T06:42:28.000Z</published>
-    <updated>2019-02-28T00:46:16.306Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="FirstBlog"><a href="#FirstBlog" class="headerlink" title="FirstBlog"></a>FirstBlog</h1><h2 id="第一篇文章"><a href="#第一篇文章" class="headerlink" title="第一篇文章"></a>第一篇文章</h2><h3 id="这是三级标题"><a href="#这是三级标题" class="headerlink" title="这是三级标题"></a>这是三级标题</h3><ul><li>列表1</li><li>列表2<br>  a 子列表<br>  b 子列表</li><li>列表3</li></ul><hr><hr><p><a href="http://www.zealer.com/" target="_blank" rel="noopener">ZEALER</a></p><p><img src="http://i.loli.net/2019/02/14/5c657aef1fa74.jpg" alt="白蛇缘起"></p><p><em>倾斜字体</em></p><p><strong>加粗</strong></p><p><code>println(&quot;Hello World&quot;);</code></p><pre><code>for (int i = 0; i &lt; 10; i++) {    println(&quot;Hello World&quot;);}</code></pre><blockquote><p>引用文章</p></blockquote><h1 id="Markdown源码"><a href="#Markdown源码" class="headerlink" title="Markdown源码"></a>Markdown源码</h1><pre><code># FirstBlog## 第一篇文章### 这是三级标题- 列表1- 列表2    a 子列表    b 子列表- 列表3------------------------[ZEALER](http://www.zealer.com/)![白色缘起](https://img1.doubanio.com/view/photo/l/public/p2540374727.webp)*倾斜字体***加粗**`println(&quot;Hello World&quot;);`</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;FirstBlog&quot;&gt;&lt;a href=&quot;#FirstBlog&quot; class=&quot;headerlink&quot; title=&quot;FirstBlog&quot;&gt;&lt;/a&gt;FirstBlog&lt;/h1&gt;&lt;h2 id=&quot;第一篇文章&quot;&gt;&lt;a href=&quot;#第一篇文章&quot; class=&quot;header
-      
-    
-    </summary>
-    
-      <category term="前端" scheme="https://www.chentyit.com/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="导航" scheme="https://www.chentyit.com/tags/%E5%AF%BC%E8%88%AA/"/>
-    
-      <category term="分享" scheme="https://www.chentyit.com/tags/%E5%88%86%E4%BA%AB/"/>
     
   </entry>
   
