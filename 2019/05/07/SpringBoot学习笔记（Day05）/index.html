@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-corner-indicator.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Spring框架,自学笔记,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="翼叶知秋" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Photo by Ruud Luijten on Unsplash">
+<meta name="keywords" content="Spring框架,自学笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot学习笔记（Day05）">
+<meta property="og:url" content="https://www.chentyit.com/2019/05/07/SpringBoot学习笔记（Day05）/index.html">
+<meta property="og:site_name" content="翼叶知秋">
+<meta property="og:description" content="Photo by Ruud Luijten on Unsplash">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://www.chentyit.com/2019/05/07/SpringBoot学习笔记（Day05）/ruud-luijten-1551202-unsplash.jpg">
+<meta property="og:image" content="https://www.chentyit.com/2019/05/07/SpringBoot学习笔记（Day05）/RedisConnection关系图.jpg">
+<meta property="og:image" content="https://www.chentyit.com/2019/05/07/SpringBoot学习笔记（Day05）/Spring序列化器.jpg">
+<meta property="og:updated_time" content="2019-05-07T08:43:24.165Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringBoot学习笔记（Day05）">
+<meta name="twitter:description" content="Photo by Ruud Luijten on Unsplash">
+<meta name="twitter:image" content="https://www.chentyit.com/2019/05/07/SpringBoot学习笔记（Day05）/ruud-luijten-1551202-unsplash.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.chentyit.com/2019/05/07/SpringBoot学习笔记（Day05）/">
+
+
+
+
+
+  <title>SpringBoot学习笔记（Day05） | 翼叶知秋</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/Chentyit" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">翼叶知秋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.chentyit.com/2019/05/07/SpringBoot学习笔记（Day05）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chen Tianyi">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="翼叶知秋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SpringBoot学习笔记（Day05）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-07T08:30:22+08:00">
+                2019-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/07/SpringBoot学习笔记（Day05）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/07/SpringBoot学习笔记（Day05）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,016
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/2019/05/07/SpringBoot学习笔记（Day05）/ruud-luijten-1551202-unsplash.jpg" alt="插图"></p>
+<blockquote>
+<p>Photo by <a href="https://unsplash.com/photos/zFvZ1r7YjGc?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Ruud Luijten</a> on <a href="https://unsplash.com/t/nature?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Unsplash</a></p>
+</blockquote>
+<a id="more"></a>
+<h2 id="spring-data-redis-项目介绍"><a href="#spring-data-redis-项目介绍" class="headerlink" title="spring-data-redis 项目介绍"></a>spring-data-redis 项目介绍</h2><h3 id="spring-data-redis-项目设计"><a href="#spring-data-redis-项目设计" class="headerlink" title="spring-data-redis 项目设计"></a>spring-data-redis 项目设计</h3><p>Spring 提供了一个 RedisConnectionFactory 接口，通过它可以生成一个 RedisConnection 接口对象，而 RedisConnection 是 Redis 底层接口的封装，如使用 Jedis，Spring 就会提供 RedisConnection 接口的实现类 JedisConnection 去封装原有的 Jedis；</p>
+<p><img src="/2019/05/07/SpringBoot学习笔记（Day05）/RedisConnection关系图.jpg" alt="RedisConnection关系图"></p>
+<h3 id="RedisTemplate"><a href="#RedisTemplate" class="headerlink" title="RedisTemplate"></a>RedisTemplate</h3><p>RedisTemplate 是一个强大的类，首先他会自动从 RedisConnectionFactory 工厂中获取连接，执行对应的 Redis 命令，在最后还会关闭 Redis 的连接；</p>
+<h3 id="Spring-序列化器"><a href="#Spring-序列化器" class="headerlink" title="Spring 序列化器"></a>Spring 序列化器</h3><p>Spring 序列化器用于转储 Java 对象到 Redis 中，因为 Redis 是一种基于字符串存储的 NoSQL，对象无法存储到 Redis 中，只有通过序列化器转换为二进制字符串才能存储</p>
+<p><img src="/2019/05/07/SpringBoot学习笔记（Day05）/Spring序列化器.jpg" alt="RedisConnection关系图"></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">描述</th>
+<th style="text-align:left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">defaultSerializer</td>
+<td style="text-align:left">默认序列化器</td>
+<td style="text-align:left">如果没有配置，则使用 JdkSerializationRedisSerializer</td>
+</tr>
+<tr>
+<td style="text-align:left">keySerializer</td>
+<td style="text-align:left">Redis 键序列化器</td>
+<td style="text-align:left">如果没有配置，则使用默认序列化器</td>
+</tr>
+<tr>
+<td style="text-align:left">valueSerializer</td>
+<td style="text-align:left">Redis 值序列化器</td>
+<td style="text-align:left">如果没有配置，则使用默认序列化器</td>
+</tr>
+<tr>
+<td style="text-align:left">hashKeySerializer</td>
+<td style="text-align:left">Redis 散列结构 field 序列化器</td>
+<td style="text-align:left">如果没有配置，则使用默认序列化器</td>
+</tr>
+<tr>
+<td style="text-align:left">hashValueSerializer</td>
+<td style="text-align:left">Redis 散列结构 value 序列化器</td>
+<td style="text-align:left">如果没有配置，则使用默认序列化器</td>
+</tr>
+<tr>
+<td style="text-align:left">stringSerializer</td>
+<td style="text-align:left">字符串序列化器</td>
+<td style="text-align:left">RedisTemplate 自动赋值为 StringRedisSerializer 对象</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Spring-对-Redis-数据类型操作的封装"><a href="#Spring-对-Redis-数据类型操作的封装" class="headerlink" title="Spring 对 Redis 数据类型操作的封装"></a>Spring 对 Redis 数据类型操作的封装</h3><center>spring-data-redis 数据类型封装操作接口</center>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left">操作接口</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">GeoOperations</td>
+<td>地理位置操作接口</td>
+<td>使用不多</td>
+</tr>
+<tr>
+<td style="text-align:left">HashOperations</td>
+<td>散列操作接口</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">HyperLogLogOperations</td>
+<td>基数操作接口</td>
+<td>使用不多</td>
+</tr>
+<tr>
+<td style="text-align:left">ListOperations</td>
+<td>列表（链表）操作接口</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">SetOperations</td>
+<td>集合操作接口</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">ValueOperations</td>
+<td>字符串操作接口</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">ZSetOperations</td>
+<td>有序集合操作接口</td>
+</tr>
+</tbody>
+</table>
+<p>都可以通过 RedisTemplate 得到，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取地理位置操作接口</span></span><br><span class="line">redisTemplate.opsForGeo();</span><br><span class="line"><span class="comment">// 获取散列操作接口</span></span><br><span class="line">redisTemplate.opsForHash();</span><br><span class="line"><span class="comment">// 获取基数操作接口</span></span><br><span class="line">redisTemplate.opsForHyperLogLog();</span><br><span class="line"><span class="comment">// 获取列表操作接口</span></span><br><span class="line">redisTemplate.opsForList();</span><br><span class="line"><span class="comment">// 获取集合操作接口</span></span><br><span class="line">redisTemplate.opsForSet();</span><br><span class="line"><span class="comment">// 获取字符串操作接口</span></span><br><span class="line">redisTemplate.opsForValue();</span><br><span class="line"><span class="comment">// 获取有序集合操作接口</span></span><br><span class="line">redisTemplate.opsForZSet();</span><br></pre></td></tr></table></figure>
+<p>有事需要连续操作一个散列数据类型或者列表多次，这时 Spring 也提供支持，它提供了对应的 BoundXXXOperation 绑定接口：</p>
+<table>
+<thead>
+<tr>
+<th>接    口</th>
+<th>说    明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BoundGeoOperations</td>
+<td>绑定一个地理位置数据类型的键操作，不常用</td>
+</tr>
+<tr>
+<td>BoundHashOperations</td>
+<td>绑定一个散列数据类型的键操作</td>
+</tr>
+<tr>
+<td>BoundListOperations</td>
+<td>绑定一个列表（链表）数据类型的键操作</td>
+</tr>
+<tr>
+<td>BoundSetOperations</td>
+<td>绑定一个集合数据类型的键操作</td>
+</tr>
+<tr>
+<td>BoundValueOperations</td>
+<td>绑定一个字符串集合数据类型的键操作</td>
+</tr>
+<tr>
+<td>BoundZSetOperations</td>
+<td>绑定一个有序集合数据类型的键操作</td>
+</tr>
+</tbody>
+</table>
+<p>RedisTemplate 对获取它们提供了对应的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取地理位置绑定键操作接口</span></span><br><span class="line">redisTemplate.boundGeoOps();</span><br><span class="line"><span class="comment">// 获取散列绑定键操作接口</span></span><br><span class="line">redisTemplate.boundHashOps();</span><br><span class="line"><span class="comment">// 获取列表（链表）绑定键操作接口</span></span><br><span class="line">redisTemplate.boundListOps();</span><br><span class="line"><span class="comment">// 获取集合绑定键操作接口</span></span><br><span class="line">redisTemplate.boundSetOps();</span><br><span class="line"><span class="comment">// 获取字符串绑定键操作接口</span></span><br><span class="line">redisTemplate.boundValueOps();</span><br><span class="line"><span class="comment">// 获取有序集合绑定键操作接口</span></span><br><span class="line">redisTemplate.boundZSetOps();</span><br></pre></td></tr></table></figure>
+<h3 id="SessionCallback-和-RedisCallback-接口"><a href="#SessionCallback-和-RedisCallback-接口" class="headerlink" title="SessionCallback 和 RedisCallback 接口"></a>SessionCallback 和 RedisCallback 接口</h3><p>作用是让 RedisTemplate 进行回调，通过它们可以在同一条连接下执行多个 Redis 命令；</p>
+<h2 id="在-Spring-Boot-中配置和使用-Redis"><a href="#在-Spring-Boot-中配置和使用-Redis" class="headerlink" title="在 Spring Boot 中配置和使用 Redis"></a>在 Spring Boot 中配置和使用 Redis</h2><h3 id="在-Spring-Boot-中配置-Redis"><a href="#在-Spring-Boot-中配置-Redis" class="headerlink" title="在 Spring Boot 中配置 Redis"></a>在 Spring Boot 中配置 Redis</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 配置连接池属性</span><br><span class="line">spring.redis.jedis.pool.min-idle=5</span><br><span class="line">spring.redis.jedis.pool.max-active=10</span><br><span class="line">spring.redis.jedis.pool.max-idle=10</span><br><span class="line">spring.redis.jedis.pool.max-wait=2000</span><br><span class="line"># 配置 Redis 服务器属性</span><br><span class="line">spring.redis.port=6379</span><br><span class="line">spring.redis.host=192.168.11.154</span><br><span class="line"># 由于我的 Redis 服务器没有设置密码就没下下面的配置了</span><br><span class="line"># spring.redis.password</span><br><span class="line"># Redis 连接超时时间，单位毫秒</span><br><span class="line">spring.redis.timeout=1000</span><br></pre></td></tr></table></figure>
+<p><strong>操作 Redis 字符串和散列数据类型</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/redis"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> StringRedisTemplate stringRedisTemplate = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/stringAndHash"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">testStringAndHash</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        redisTemplate.opsForValue().set(<span class="string">"key1"</span>, <span class="string">"value1"</span>);</span><br><span class="line">        redisTemplate.opsForValue().set(<span class="string">"int_key"</span>, <span class="string">"1"</span>);</span><br><span class="line">        stringRedisTemplate.opsForValue().set(<span class="string">"int"</span>, <span class="string">"1"</span>);</span><br><span class="line">        <span class="comment">// 使用运算</span></span><br><span class="line">        stringRedisTemplate.opsForValue().increment(<span class="string">"int"</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 获取底层 Jedis 连接</span></span><br><span class="line">        Jedis jedis = (Jedis) stringRedisTemplate.getConnectionFactory().getConnection().getNativeConnection();</span><br><span class="line">        <span class="comment">// 减1操作，这个命令 RedisTemplate 不支持，所以先获取底层连接再操作</span></span><br><span class="line">        jedis.decr(<span class="string">"int"</span>);</span><br><span class="line">        Map&lt;String, String&gt; hash = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        hash.put(<span class="string">"field1"</span>, <span class="string">"value1"</span>);</span><br><span class="line">        hash.put(<span class="string">"field2"</span>, <span class="string">"value2"</span>);</span><br><span class="line">        <span class="comment">// 存入一个散列数据类型</span></span><br><span class="line">        stringRedisTemplate.opsForHash().putAll(<span class="string">"hash"</span>, hash);</span><br><span class="line">        <span class="comment">// 新增一个字段</span></span><br><span class="line">        stringRedisTemplate.opsForHash().put(<span class="string">"hash"</span>, <span class="string">"field3"</span>, <span class="string">"value3"</span>);</span><br><span class="line">        <span class="comment">// 绑定散列操作的key，这样可以连续对同一个散列数据类型进行操作</span></span><br><span class="line">        BoundHashOperations hashOps = stringRedisTemplate.boundHashOps(<span class="string">"hash"</span>);</span><br><span class="line">        <span class="comment">// 删除两个字段</span></span><br><span class="line">        hashOps.delete(<span class="string">"field1"</span>, <span class="string">"field2"</span>);</span><br><span class="line">        <span class="comment">// 新增一个字段</span></span><br><span class="line">        hashOps.put(<span class="string">"field5"</span>, <span class="string">"value5"</span>);</span><br><span class="line">        Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">"success"</span>, <span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>使用 Spring 操作列表（链表）</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/redis"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> StringRedisTemplate stringRedisTemplate = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/list"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">testList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 插入两个列表，注意它们在链表的顺序</span></span><br><span class="line">        <span class="comment">// 链表从左到右顺序为v10，v8，v6，v4，v2</span></span><br><span class="line">        stringRedisTemplate.opsForList().leftPushAll(</span><br><span class="line">                <span class="string">"list1"</span>, <span class="string">"v2"</span>, <span class="string">"v4"</span>, <span class="string">"v6"</span>, <span class="string">"v8"</span>, <span class="string">"v10"</span></span><br><span class="line">        );</span><br><span class="line">        <span class="comment">// 链表从左到右顺序为v1, v2, v3, v4, v5, v6</span></span><br><span class="line">        stringRedisTemplate.opsForList().rightPushAll(</span><br><span class="line">                <span class="string">"list2"</span>, <span class="string">"v1"</span>, <span class="string">"v2"</span>, <span class="string">"v3"</span>, <span class="string">"v4"</span>, <span class="string">"v5"</span>, <span class="string">"v6"</span></span><br><span class="line">        );</span><br><span class="line">        <span class="comment">// 绑定 list2 链表操作</span></span><br><span class="line">        BoundListOperations listOps = stringRedisTemplate.boundListOps(<span class="string">"list2"</span>);</span><br><span class="line">        <span class="comment">// 从右边弹出一个成员</span></span><br><span class="line">        Object result1 = listOps.rightPop();</span><br><span class="line">        <span class="comment">// 获取定位元素，Redis 从 0 开始计算，这里值为 v2</span></span><br><span class="line">        Object result2 = listOps.index(<span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 从左边插入链表</span></span><br><span class="line">        listOps.leftPush(<span class="string">"v0"</span>);</span><br><span class="line">        <span class="comment">// 求链表长度</span></span><br><span class="line">        Long size = listOps.size();</span><br><span class="line">        <span class="comment">// 求链表下标区间成员，整个链表下标范围为 0 到 size-1，这里不取最后一个元素</span></span><br><span class="line">        List elements = listOps.range(<span class="number">0</span>, size - <span class="number">2</span>);</span><br><span class="line">        Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">"success"</span>, <span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>使用 Spring 集合</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/redis"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> StringRedisTemplate stringRedisTemplate = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/set"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">testSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 请注意：这里 v1 重复两次，因为集合不允许重复，所以只是插入 5 个成员到集合中</span></span><br><span class="line">        stringRedisTemplate.opsForSet().add(</span><br><span class="line">                <span class="string">"set1"</span>, <span class="string">"v1"</span>, <span class="string">"v1"</span>, <span class="string">"v2"</span>, <span class="string">"v3"</span>, <span class="string">"v4"</span>, <span class="string">"v5"</span></span><br><span class="line">        );</span><br><span class="line">        stringRedisTemplate.opsForSet().add(</span><br><span class="line">                <span class="string">"set2"</span>, <span class="string">"v2"</span>, <span class="string">"v4"</span>, <span class="string">"v6"</span>, <span class="string">"v8"</span></span><br><span class="line">        );</span><br><span class="line">        <span class="comment">// 绑定 set1 集合操作</span></span><br><span class="line">        BoundSetOperations setOps = stringRedisTemplate.boundSetOps(<span class="string">"set1"</span>);</span><br><span class="line">        <span class="comment">// 增加两个元素</span></span><br><span class="line">        setOps.add(<span class="string">"v6"</span>, <span class="string">"v7"</span>);</span><br><span class="line">        <span class="comment">// 删除两个元素</span></span><br><span class="line">        setOps.remove(<span class="string">"v1"</span>, <span class="string">"v7"</span>);</span><br><span class="line">        <span class="comment">// 返回所有元素</span></span><br><span class="line">        Set set1 = setOps.members();</span><br><span class="line">        <span class="comment">// 求成员数</span></span><br><span class="line">        Long size = setOps.size();</span><br><span class="line">        <span class="comment">// 求交集</span></span><br><span class="line">        Set inter = setOps.intersect(<span class="string">"set2"</span>);</span><br><span class="line">        <span class="comment">// 求交集，并且用新集合 inter 保存</span></span><br><span class="line">        setOps.intersectAndStore(<span class="string">"set2"</span>, <span class="string">"inter"</span>);</span><br><span class="line">        <span class="comment">// 求差集</span></span><br><span class="line">        Set diff = setOps.diff(<span class="string">"set2"</span>);</span><br><span class="line">        <span class="comment">// 求差集，并且用新集合 diff 保存</span></span><br><span class="line">        setOps.diffAndStore(<span class="string">"set2"</span>, <span class="string">"diff"</span>);</span><br><span class="line">        <span class="comment">// 求并集</span></span><br><span class="line">        Set union = setOps.union(<span class="string">"set2"</span>);</span><br><span class="line">        <span class="comment">// 求并集，并且用新集合 union 保存</span></span><br><span class="line">        setOps.unionAndStore(<span class="string">"set2"</span>, <span class="string">"union"</span>);</span><br><span class="line">        Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">"success"</span>, <span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>操作 Redis 有序集合</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/redis"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> StringRedisTemplate stringRedisTemplate = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/zset"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">testZSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Set&lt;ZSetOperations.TypedTuple&lt;String&gt;&gt; typedTupleSet = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; i++) &#123;</span><br><span class="line">            <span class="comment">// 分数</span></span><br><span class="line">            <span class="keyword">double</span> score = i * <span class="number">0.1</span>;</span><br><span class="line">            <span class="comment">// 创建一个 TypeTuple 对象，存入值和分数</span></span><br><span class="line">            ZSetOperations.TypedTuple&lt;String&gt; typedTuple = <span class="keyword">new</span> DefaultTypedTuple&lt;&gt;(<span class="string">"value"</span> + i, score);</span><br><span class="line">            typedTupleSet.add(typedTuple);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 往有序集合插入元素</span></span><br><span class="line">        stringRedisTemplate.opsForZSet().add(<span class="string">"zset1"</span>, typedTupleSet);</span><br><span class="line">        <span class="comment">// 绑定 zset1 有序集合操作</span></span><br><span class="line">        BoundZSetOperations&lt;String, String&gt; zsetOps = stringRedisTemplate.boundZSetOps(<span class="string">"zset1"</span>);</span><br><span class="line">        <span class="comment">// 增加一个元素</span></span><br><span class="line">        zsetOps.add(<span class="string">"value10"</span>, <span class="number">0.26</span>);</span><br><span class="line">        Set&lt;String&gt; setRange = zsetOps.range(<span class="number">1</span>, <span class="number">6</span>);</span><br><span class="line">        <span class="comment">// 按分数排序获取有序集合</span></span><br><span class="line">        Set&lt;String&gt; setScore = zsetOps.rangeByScore(<span class="number">0.2</span>, <span class="number">0.6</span>);</span><br><span class="line">        <span class="comment">// 定义值范围</span></span><br><span class="line">        Range range = <span class="keyword">new</span> Range();</span><br><span class="line">        range.gt(<span class="string">"value3"</span>);</span><br><span class="line">        range.lte(<span class="string">"value8"</span>);</span><br><span class="line">        <span class="comment">// 按值排序，请注意这个排序是按字符串排序</span></span><br><span class="line">        Set&lt;String&gt;  setLex = zsetOps.rangeByLex(range);</span><br><span class="line">        <span class="comment">// 删除元素</span></span><br><span class="line">        zsetOps.remove(<span class="string">"value9"</span>, <span class="string">"value2"</span>);</span><br><span class="line">        <span class="comment">// 求分数</span></span><br><span class="line">        Double score = zsetOps.score(<span class="string">"value8"</span>);</span><br><span class="line">        <span class="comment">// 在下标区间下，按分数排序，同时返回 value 和 score</span></span><br><span class="line">        Set&lt;ZSetOperations.TypedTuple&lt;String&gt;&gt; rangeSet = zsetOps.rangeWithScores(<span class="number">1</span>, <span class="number">6</span>);</span><br><span class="line">        <span class="comment">// 在分数区间下，按分数排序，同时返回 value 和 score</span></span><br><span class="line">        Set&lt;ZSetOperations.TypedTuple&lt;String&gt;&gt; scoreSet = zsetOps.rangeByScoreWithScores(<span class="number">1</span>, <span class="number">6</span>);</span><br><span class="line">        <span class="comment">// 按从大到小排序</span></span><br><span class="line">        Set&lt;String&gt; reverseSet = zsetOps.reverseRange(<span class="number">2</span>, <span class="number">8</span>);</span><br><span class="line">        Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">"success"</span>, <span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Chen Tianyi 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Chen Tianyi 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring框架/" rel="tag"><i class="fas fa-bookmark"></i> Spring框架</a>
+          
+            <a href="/tags/自学笔记/" rel="tag"><i class="fas fa-bookmark"></i> 自学笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/06/Redis学习笔记（Day06）/" rel="next" title="Redis学习笔记（Day06）">
+                <i class="fa fa-chevron-left"></i> Redis学习笔记（Day06）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Chen Tianyi">
+            
+              <p class="site-author-name" itemprop="name">Chen Tianyi</p>
+              <p class="site-description motion-element" itemprop="description">通往牛逼的路上<br>风景差得只想让人说脏话</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+		  
+			<div id="music163player">
+				<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=478595816&auto=0&height=66"></iframe>
+			</div>
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Chentyit" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3730482475" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zidone.cn/" title="Zidone" target="_blank">Zidone</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mackxin.com/" title="Mackxin" target="_blank">Mackxin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://youchowmein.com/" title="YouChowMein" target="_blank">YouChowMein</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/douzujun/" title="DouZi" target="_blank">DouZi</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://rentianshen.com/" title="rentianshen" target="_blank">rentianshen</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-data-redis-项目介绍"><span class="nav-number">1.</span> <span class="nav-text">spring-data-redis 项目介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spring-data-redis-项目设计"><span class="nav-number">1.1.</span> <span class="nav-text">spring-data-redis 项目设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RedisTemplate"><span class="nav-number">1.2.</span> <span class="nav-text">RedisTemplate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-序列化器"><span class="nav-number">1.3.</span> <span class="nav-text">Spring 序列化器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-对-Redis-数据类型操作的封装"><span class="nav-number">1.4.</span> <span class="nav-text">Spring 对 Redis 数据类型操作的封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SessionCallback-和-RedisCallback-接口"><span class="nav-number">1.5.</span> <span class="nav-text">SessionCallback 和 RedisCallback 接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在-Spring-Boot-中配置和使用-Redis"><span class="nav-number">2.</span> <span class="nav-text">在 Spring Boot 中配置和使用 Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在-Spring-Boot-中配置-Redis"><span class="nav-number">2.1.</span> <span class="nav-text">在 Spring Boot 中配置 Redis</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chen Tianyi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数 <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量 <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'xFm6SyrxeObKacULiGwLSQq2-gzGzoHsz',
+        appKey: 'hlMILPENpOxWFGYChCAVAFJ7',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
