@@ -97,10 +97,10 @@
 <meta property="og:description" content="Photo by asoggetti on Unsplash">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/05/11/SpringBoot学习笔记（Day08）/asoggetti-1486419-unsplash.jpg">
-<meta property="og:image" content="https://www.chentyit.com/2019/05/11/SpringBoot学习笔记（Day08）/D:/Blog/myblog/source/_posts/SpringBoot学习笔记（Day08）/Spring%20MVC%20处理器%20HTTP%20请求体转换流程图.jpg">
-<meta property="og:image" content="https://www.chentyit.com/2019/05/11/SpringBoot学习笔记（Day08）/D:/Blog/myblog/source/_posts/SpringBoot学习笔记（Day08）/ConversionService转化机制设计.jpg">
-<meta property="og:image" content="https://www.chentyit.com/2019/05/11/SpringBoot学习笔记（Day08）/D:/Blog/myblog/source/_posts/SpringBoot学习笔记（Day08）/Spring%20MVC%20常用视图关系模型.jpg">
-<meta property="og:updated_time" content="2019-05-12T08:04:19.702Z">
+<meta property="og:image" content="https://www.chentyit.com/2019/05/11/SpringBoot学习笔记（Day08）/Spring%20MVC%20处理器%20HTTP%20请求体转换流程图.jpg">
+<meta property="og:image" content="https://www.chentyit.com/2019/05/11/SpringBoot学习笔记（Day08）/ConversionService转化机制设计.jpg">
+<meta property="og:image" content="https://www.chentyit.com/2019/05/11/SpringBoot学习笔记（Day08）/Spring%20MVC%20常用视图关系模型.jpg">
+<meta property="og:updated_time" content="2019-05-14T11:06:51.556Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot学习笔记（Day08）">
 <meta name="twitter:description" content="Photo by asoggetti on Unsplash">
@@ -479,13 +479,13 @@
 <p>处理器会从 HTTP 请求中读取数据，然后通过三类接口进行各类参数转换，分别是 Converter，Formatter 和 GenericConverter</p>
 <center>Spring MVC 处理器 HTTP 请求体转换流程图</center>
 
-<p><img src="/2019/05/11/SpringBoot学习笔记（Day08）/D:/Blog\myblog\source\_posts\SpringBoot学习笔记（Day08）\Spring MVC 处理器 HTTP 请求体转换流程图.jpg" alt="Spring MVC 处理器 HTTP 请求体转换流程图"></p>
+<p><img src="/2019/05/11/SpringBoot学习笔记（Day08）/Spring MVC 处理器 HTTP 请求体转换流程图.jpg" alt="Spring MVC 处理器 HTTP 请求体转换流程图"></p>
 <p>Convert：是一个普通的转换器</p>
 <p>Formatter：是一个格式转换器</p>
 <p>GenericConverter：将 HTTP 参数转换为数组</p>
 <center>ConversionService 转化机制设计</center>
 
-<p><img src="/2019/05/11/SpringBoot学习笔记（Day08）/D:/Blog\myblog\source\_posts\SpringBoot学习笔记（Day08）\ConversionService转化机制设计.jpg" alt="ConversionService转化机制设计"></p>
+<p><img src="/2019/05/11/SpringBoot学习笔记（Day08）/ConversionService转化机制设计.jpg" alt="ConversionService转化机制设计"></p>
 <p><strong>Spring Boot 的自动注册机制</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addFormatters</span><span class="params">(FormatterRegistry registry)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 遍历 IoC 容器，找到 Converter 类型的 Bean 注册到服务类中</span></span><br><span class="line">    <span class="keyword">for</span> (Converter&lt;?, ?&gt; converter : getBeansOfType(Converter.class)) &#123;</span><br><span class="line">        registry.addConverter(converter);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 遍历 IoC 容器，找到 GenericConverter 类型的 Bean 注册到服务类中</span></span><br><span class="line">    <span class="keyword">for</span> (GenericConverter converter : getBeansOfType(GenericConverter.class)) &#123;</span><br><span class="line">        registry.addConverter(converter);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 遍历 IoC 容器，找到 Formatter 类型的 Bean 注册到服务类中</span></span><br><span class="line">    <span class="keyword">for</span> (Formatter&lt;?&gt; formatter : getBeansOfType(Formatter.class)) &#123;</span><br><span class="line">        registry.addFormatter(formatter);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Spring Boot 初始化时，会将对应用户自定义的 Converter，Formatter 和 GenericConverter 的实现类所创建的 Spring Bean 自动的注册到 DefaultFormattingConversionService 对象中。</p>
@@ -507,7 +507,7 @@
 </ul>
 <center>Spring MVC 常用视图关系模型</center>
 
-<p><img src="/2019/05/11/SpringBoot学习笔记（Day08）/D:/Blog\myblog\source\_posts\SpringBoot学习笔记（Day08）\Spring MVC 常用视图关系模型.jpg" alt="Spring MVC 常用视图关系模型"></p>
+<p><img src="/2019/05/11/SpringBoot学习笔记（Day08）/Spring MVC 常用视图关系模型.jpg" alt="Spring MVC 常用视图关系模型"></p>
 
       
     </div>
@@ -578,6 +578,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/14/SpringBoot学习笔记（Day09）/" rel="prev" title="SpringBoot学习笔记（Day09）">
+                SpringBoot学习笔记（Day09） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -665,7 +669,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
