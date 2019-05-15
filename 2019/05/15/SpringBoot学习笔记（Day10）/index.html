@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="多线程,">
+  <meta name="keywords" content="Spring框架,自学笔记,">
 
 
 
@@ -88,20 +88,22 @@
 
 
 
-<meta name="description" content="知识点目录 什么是并发容器的实现？ 多线程同步和互斥实现方法 什么是竞争条件 为什么调用 start() 方法时会执行 run() 方法，为什么不直接调用 run() 方法 Java 中怎样唤醒一个阻塞地线程 CycliBarriar 和 CountdownLatch 有什么区别？ 什么是不可变对象，它对写并发应用有什么帮助？    图片来自第三方 Unsplash">
-<meta name="keywords" content="多线程">
+<meta name="description" content="Photo by Max Ducourneau on Unsplash">
+<meta name="keywords" content="Spring框架,自学笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java多线程知识点（第三篇）">
-<meta property="og:url" content="https://www.chentyit.com/2019/03/06/Java多线程知识点（第三篇）/index.html">
+<meta property="og:title" content="SpringBoot学习笔记（Day10）">
+<meta property="og:url" content="https://www.chentyit.com/2019/05/15/SpringBoot学习笔记（Day10）/index.html">
 <meta property="og:site_name" content="翼叶知秋">
-<meta property="og:description" content="知识点目录 什么是并发容器的实现？ 多线程同步和互斥实现方法 什么是竞争条件 为什么调用 start() 方法时会执行 run() 方法，为什么不直接调用 run() 方法 Java 中怎样唤醒一个阻塞地线程 CycliBarriar 和 CountdownLatch 有什么区别？ 什么是不可变对象，它对写并发应用有什么帮助？    图片来自第三方 Unsplash">
+<meta property="og:description" content="Photo by Max Ducourneau on Unsplash">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://www.chentyit.com/2019/03/06/Java多线程知识点（第三篇）/hello-i-m-nik-1399233-unsplash.jpg">
-<meta property="og:updated_time" content="2019-03-06T09:14:18.473Z">
+<meta property="og:image" content="https://www.chentyit.com/2019/05/15/SpringBoot学习笔记（Day10）/max-ducourneau-1580353-unsplash.jpg">
+<meta property="og:image" content="https://www.chentyit.com/2019/05/15/SpringBoot学习笔记（Day10）/@ResponseBody%20注解转换为%20JSON%20流程图.jpg">
+<meta property="og:image" content="https://www.chentyit.com/2019/05/15/SpringBoot学习笔记（Day10）/重定向传递对象的流程图.jpg">
+<meta property="og:updated_time" content="2019-05-15T09:48:47.199Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java多线程知识点（第三篇）">
-<meta name="twitter:description" content="知识点目录 什么是并发容器的实现？ 多线程同步和互斥实现方法 什么是竞争条件 为什么调用 start() 方法时会执行 run() 方法，为什么不直接调用 run() 方法 Java 中怎样唤醒一个阻塞地线程 CycliBarriar 和 CountdownLatch 有什么区别？ 什么是不可变对象，它对写并发应用有什么帮助？    图片来自第三方 Unsplash">
-<meta name="twitter:image" content="https://www.chentyit.com/2019/03/06/Java多线程知识点（第三篇）/hello-i-m-nik-1399233-unsplash.jpg">
+<meta name="twitter:title" content="SpringBoot学习笔记（Day10）">
+<meta name="twitter:description" content="Photo by Max Ducourneau on Unsplash">
+<meta name="twitter:image" content="https://www.chentyit.com/2019/05/15/SpringBoot学习笔记（Day10）/max-ducourneau-1580353-unsplash.jpg">
 
 
 
@@ -131,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="https://www.chentyit.com/2019/03/06/Java多线程知识点（第三篇）/">
+  <link rel="canonical" href="https://www.chentyit.com/2019/05/15/SpringBoot学习笔记（Day10）/">
 
 
 
 
 
-  <title>Java多线程知识点（第三篇） | 翼叶知秋</title>
+  <title>SpringBoot学习笔记（Day10） | 翼叶知秋</title>
   
 
 
@@ -317,7 +319,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.chentyit.com/2019/03/06/Java多线程知识点（第三篇）/">
+    <link itemprop="mainEntityOfPage" href="https://www.chentyit.com/2019/05/15/SpringBoot学习笔记（Day10）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Tianyi">
@@ -334,7 +336,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java多线程知识点（第三篇）</h1>
+          <h1 class="post-title" itemprop="name headline">SpringBoot学习笔记（Day10）</h1>
         
 
         <div class="post-meta">
@@ -346,8 +348,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-06T16:56:28+08:00">
-                2019-03-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-15T15:34:19+08:00">
+                2019-05-15
               </time>
             
 
@@ -387,8 +389,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/06/Java多线程知识点（第三篇）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/06/Java多线程知识点（第三篇）/" itemprop="commentCount"></span>
+                <a href="/2019/05/15/SpringBoot学习笔记（Day10）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/15/SpringBoot学习笔记（Day10）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -415,7 +417,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,828
+                  1,141
                 </span>
               
 
@@ -431,7 +433,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  5
                 </span>
               
             </div>
@@ -452,46 +454,42 @@
       
 
       
-        <h2 id="知识点目录"><a href="#知识点目录" class="headerlink" title="知识点目录"></a>知识点目录</h2><ul>
-<li>什么是并发容器的实现？</li>
-<li>多线程同步和互斥实现方法</li>
-<li>什么是竞争条件</li>
-<li>为什么调用 start() 方法时会执行 run() 方法，为什么不直接调用 run() 方法</li>
-<li>Java 中怎样唤醒一个阻塞地线程</li>
-<li>CycliBarriar 和 CountdownLatch 有什么区别？</li>
-<li>什么是不可变对象，它对写并发应用有什么帮助？</li>
-</ul>
-<p><img src="/2019/03/06/Java多线程知识点（第三篇）/hello-i-m-nik-1399233-unsplash.jpg" alt="插图"></p>
+        <p><img src="/2019/05/15/SpringBoot学习笔记（Day10）/max-ducourneau-1580353-unsplash.jpg" alt="插图"></p>
 <blockquote>
-<p>图片来自第三方 <a href="https://unsplash.com/" target="_blank" rel="noopener">Unsplash</a></p>
+<p>Photo by <a href="https://unsplash.com/photos/P_J3chFYwIU?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Max Ducourneau</a> on <a href="https://unsplash.com/t/nature?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Unsplash</a></p>
 </blockquote>
 <a id="more"></a>
-<h3 id="什么是并发容器的实现？"><a href="#什么是并发容器的实现？" class="headerlink" title="什么是并发容器的实现？"></a>什么是并发容器的实现？</h3><p>何为同步容器：可以简单地理解为通过 synchronized 来实现同步的容器，如果有多个线程调用同步容器的方法，它们将会串行执行。比如 Vector、Hashtable、Collections.synchronizedSet、synchronizedList 等方法返回的容器。</p>
-<p>可以通过查看 Vector，Hashtable 等这些同步容器的实现代码，可以看到这些容器实现线程安全的方式就是将它们的状态封装起来，并在需要同步的方法上加上关键字synchronized。</p>
-<p>并发容器使用了与同步容器完全不同的加锁策略来提供更高的并发性和伸缩性，例如在 ConcurrentHashMap 中采用了一种粒度更细的加锁机制，可以称为分段锁，在这种锁机制下，允许任意数量的读线程并发地访问map，并且执行读操作的线程和写操作的线程也可以并发的访问 map，同时允许一定数量的写操作线程并发地修改 map，所以它可以在并发环境下实现更高的吞吐量。</p>
-<h3 id="多线程同步和互斥实现方法"><a href="#多线程同步和互斥实现方法" class="headerlink" title="多线程同步和互斥实现方法"></a>多线程同步和互斥实现方法</h3><p>线程同步是指线程之间所具有的一种制约关系，一个线程的执行依赖另一个线程的消息，当它没有得到另一个线程的消息时应等待，直到消息到达时才被唤醒。</p>
-<p>线程互斥是指对于共享的进程系统资源，在各单个线程访问时的排它性。当有若干个线程都要使用某一共享资源时，任何时刻最多只允许一个线程去使用，其它要使用该资源的线程必须等待，直到占用资源者释放该资源。线程互斥可以看成是一种特殊的线程同步。</p>
-<p>线程间的同步方法大体可分为两类：用户模式和内核模式。顾名思义，内核模式就是指利用系统内核对象的单一性来进行同步，使用时需要切换内核态与用户态，而用户模式就是不需要切换到内核态，只在用户态完成操作。</p>
-<p>用户模式下的方法有：原子操作、临界区。内核模式下的方法有：事件、信号量、互斥量。</p>
-<h3 id="什么是竞争条件"><a href="#什么是竞争条件" class="headerlink" title="什么是竞争条件"></a>什么是竞争条件</h3><p>当多个进程都企图对共享数据进行某种处理，而最后的结果又取决于进程运行的顺序时，则我们认为这发生了竞争条件。</p>
-<h3 id="为什么调用-start-方法时会执行-run-方法，为什么不直接调用-run-方法"><a href="#为什么调用-start-方法时会执行-run-方法，为什么不直接调用-run-方法" class="headerlink" title="为什么调用 start() 方法时会执行 run() 方法，为什么不直接调用 run() 方法"></a>为什么调用 start() 方法时会执行 run() 方法，为什么不直接调用 run() 方法</h3><p>当你调用start()方法时你将创建新的线程，并且执行在run()方法里的代码。</p>
-<p>但是如果你直接调用run()方法，它不会创建新的线程也不会执行调用线程的代码，只会把run方法当作普通方法去执行。</p>
-<h3 id="Java-中怎样唤醒一个阻塞地线程"><a href="#Java-中怎样唤醒一个阻塞地线程" class="headerlink" title="Java 中怎样唤醒一个阻塞地线程"></a>Java 中怎样唤醒一个阻塞地线程</h3><p>在 Java 发展史上曾经使用 suspend()、resume() 方法对于线程进行阻塞唤醒，但随之出现很多问题，比较典型的还是死锁问题。</p>
-<p>解决方案可以使用以对象为目标的阻塞，即利用 Object 类的 wait() 和 notify() 方法实现线程阻塞。</p>
-<p>首先，wait、notify 方法是针对对象的，调用任意对象的 wait() 方法都将导致线程阻塞，阻塞的同时也将释放该对象的锁，相应地，调用任意对象的 notify() 方法则将随机解除该对象阻塞的线程，但它需要重新获取改对象的锁，直到获取成功才能往下执行；其次，wait、notify 方法必须在 synchronized 块或方法中被调用，并且要保证同步块或方法的锁对象与调用 wait、notify 方法的对象是同一个，如此一来在调用 wait 之前当前线程就已经成功获取某对象的锁，执行 wait 阻塞后当前线程就将之前获取的对象锁释放。</p>
-<h3 id="CycliBarriar-和-CountdownLatch-有什么区别？"><a href="#CycliBarriar-和-CountdownLatch-有什么区别？" class="headerlink" title="CycliBarriar 和 CountdownLatch 有什么区别？"></a>CycliBarriar 和 CountdownLatch 有什么区别？</h3><p>CyclicBarrier 可以重复使用，而CountdownLatch不能重复使用。</p>
-<p>Java 的 concurrent 包里面的 CountDownLatch 其实可以把它看作一个计数器，只不过这个计数器的操作是原子操作，同时只能有一个线程去操作这个计数器，也就是同时只能有一个线程去减这个计数器里面的值。</p>
-<p>你可以向 CountDownLatch 对象设置一个初始的数字作为计数值，任何调用这个对象上的 await() 方法都会阻塞，直到这个计数器的计数值被其他的线程减为0为止。</p>
-<p>所以在当前计数到达零之前，await 方法会一直受阻塞。之后，会释放所有等待的线程，await 的所有后续调用都将立即返回。这种现象只出现一次——计数无法被重置。如果需要重置计数，请考虑使用 CyclicBarrier。</p>
-<p>CountDownLatch 的一个非常典型的应用场景是：有一个任务想要往下执行，但必须要等到其他的任务执行完毕后才可以继续往下执行。假如我们这个想要继续往下执行的任务调用一个 CountDownLatch 对象的 await ()方法，其他的任务执行完自己的任务后调用同一个 CountDownLatch 对象上的 countDown() 方法，这个调用 await() 方法的任务将一直阻塞等待，直到这个 CountDownLatch 对象的计数值减到0为止</p>
-<p>CyclicBarrier 一个同步辅助类，它允许一组线程互相等待，直到到达某个公共屏障点 。在涉及一组固定大小的线程的程序中，这些线程必须不时地互相等待，此时 CyclicBarrier 很有用。因为该 barrier 在释放等待线程后可以重用，所以称它为循环 的 barrier。</p>
-<h3 id="什么是不可变对象，它对写并发应用有什么帮助？"><a href="#什么是不可变对象，它对写并发应用有什么帮助？" class="headerlink" title="什么是不可变对象，它对写并发应用有什么帮助？"></a>什么是不可变对象，它对写并发应用有什么帮助？</h3><p>不可变对象即对象一旦被创建它的状态就不能改变，反之即为可变对象。 不可变对象的类即为不可变类。Java 平台类库中包含许多不可变类，如 String、基本类型的包装类、BigInteger 和 BigDecimal 等。</p>
-<p>不可变对象天生是线程安全的。它们的常量（域）是在构造函数中创建的。既然它们的状态无法修改，这些常量永远不会变。</p>
-<p>不可变对象永远是线程安全的。</p>
-<p>只有满足如下状态，一个对象才是不可变的；</p>
-<p>它的状态不能在创建后再被修改；</p>
-<p>所有域都是 final 类型；并且，</p>
-<p>它被正确创建（创建期间没有发生this引用的逸出）。</p>
+<h2 id="Spring-MVC-补充知识"><a href="#Spring-MVC-补充知识" class="headerlink" title="Spring MVC 补充知识"></a>Spring MVC 补充知识</h2><h3 id="ResponseBody-转换为-JSON-的原理"><a href="#ResponseBody-转换为-JSON-的原理" class="headerlink" title="@ResponseBody 转换为 JSON 的原理"></a>@ResponseBody 转换为 JSON 的原理</h3><p><center>@ResponseBody 注解转换为 JSON 流程图</center></p>
+<p><img src="/2019/05/15/SpringBoot学习笔记（Day10）/@ResponseBody 注解转换为 JSON 流程图.jpg" alt="@ResponseBody 注解转换为 JSON 流程图"></p>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><p>废话不多说，直接上代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 显示用户</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> model</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/show"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">showUser</span><span class="params">(Long id, Model model)</span> </span>&#123;</span><br><span class="line">    User user = userService.getUser(id);</span><br><span class="line">    model.addAttribute(<span class="string">"user"</span>, user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"data/user"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用字符串指定跳转</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> userName</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> note</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/redirect1"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">redirect1</span><span class="params">(String userName, String note)</span> </span>&#123;</span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    user.setNote(note);</span><br><span class="line">    user.setUserName(userName);</span><br><span class="line">    <span class="comment">// 插入数据库后，回填 user 的 id</span></span><br><span class="line">    userService.insertUser(user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"redirect:/user/show?id="</span> + user.getId();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用模型和视图指定跳转</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> userName</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> note</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/redirect2"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">redirect2</span><span class="params">(String userName, String note)</span> </span>&#123;</span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    user.setNote(note);</span><br><span class="line">    user.setUserName(userName);</span><br><span class="line">    <span class="comment">// 插入数据库后，回填 user 的 id</span></span><br><span class="line">    userService.insertUser(user);</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">    mv.setViewName(<span class="string">"redirect:/user/show?id="</span> + user.getId());</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>改进版本</p>
+<p><strong>重定向传递 Java 对象</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 显示用户</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> user 直接从数据模型 RedirectAttributes 对象中取出</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> model</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/showUser"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">showUser</span><span class="params">(User user, Model model)</span> </span>&#123;</span><br><span class="line">    System.out.println(user.getId());</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"data/user"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用字符串指定跳转</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> userName</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> note</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ra</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/redirect1"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">redirect1</span><span class="params">(String userName, String note, RedirectAttributes ra)</span> </span>&#123;</span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    user.setNote(note);</span><br><span class="line">    user.setUserName(userName);</span><br><span class="line">    <span class="comment">// 插入数据库后，回填 user 的 id</span></span><br><span class="line">    userService.insertUser(user);</span><br><span class="line">    <span class="comment">// 保存需要传递给重定向的对象</span></span><br><span class="line">    ra.addFlashAttribute(<span class="string">"user"</span>, user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"redirect:/user/showUser"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用模型和视图指定跳转</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> userName</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> note</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ra</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/redirect2"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">redirect2</span><span class="params">(String userName, String note, RedirectAttributes ra)</span> </span>&#123;</span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    user.setNote(note);</span><br><span class="line">    user.setUserName(userName);</span><br><span class="line">    <span class="comment">// 插入数据库后，回填 user 的 id</span></span><br><span class="line">    userService.insertUser(user);</span><br><span class="line">    <span class="comment">// 保存需要传递给重定向的对象</span></span><br><span class="line">    ra.addFlashAttribute(<span class="string">"user"</span>, user);</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">    mv.setViewName(<span class="string">"redirect:/user/showUser"</span>);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码中给方法中加入了 RedirectAttributes 对象参数，然后将 redirect1 和 redirect2 方法的用户信息通过 addFlashAttribute 保存起来，在执行重定向的时候，再将 user 对象传递</p>
+<p>被 addFlashAttribute 保存的参数，在控制器执行完之后，会被保存到 Session 对象中；</p>
+<p>执行重定向的时候，进入重定向前首先把 Session 中的参数取出，用以填充重定向方法的参数和数据模型，之后删除 Session 中的数据，执行重定向方法，并传递对象</p>
+<center>重定向传递对象的流程图</center>
+
+<p><img src="/2019/05/15/SpringBoot学习笔记（Day10）/重定向传递对象的流程图.jpg" alt="重定向传递对象的流程图"></p>
+<h3 id="操作会话对象"><a href="#操作会话对象" class="headerlink" title="操作会话对象"></a>操作会话对象</h3><ul>
+<li>@SessionAttribute 应用于参数，将 HTTPSession 中的属性读出</li>
+<li>@SessionAttributes 只能用于类的注解，将相关数据模型的属性保存到 Session 中</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SessionAttributes</span>(names = &#123;<span class="string">"user"</span>&#125;, types = Long.class)</span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/session"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SessionController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id <span class="doctag">@SessionAttribute</span> 从 HttpSession 中取出数据，填充控制器方法参数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> model</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/test"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test</span><span class="params">(@SessionAttribute(<span class="string">"id"</span>)</span> Long id, Model model) </span>&#123;</span><br><span class="line">        <span class="comment">// 根据类型保存到 Session 中</span></span><br><span class="line">        model.addAttribute(<span class="string">"id_new"</span>, id);</span><br><span class="line">        User user = userService.getUser(id);</span><br><span class="line">        <span class="comment">// 根据名称保存到 Session 中</span></span><br><span class="line">        model.addAttribute(<span class="string">"user"</span>, user);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"session/test"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="给控制器增加通知"><a href="#给控制器增加通知" class="headerlink" title="给控制器增加通知"></a>给控制器增加通知</h3><ul>
+<li>@ControllerAdvice：定义一个控制器的通知类，允许定义一些关于增强控制器的各类通知和限定增强哪些控制器功能等；</li>
+<li>@InitBinder：定义控制器参数绑定规则，如转换规则，格式化等，他会在参数转换之前执行；</li>
+<li>@ExceptionHandler：定义控制器发生异常后的操作。发生异常后转跳到指定的友好页面；</li>
+<li>@ModelAttribute：可以在控制器方法前执行，对数据模型进行操作；</li>
+</ul>
+<p><strong><em>（这里有点复杂，笔记没法描述清楚，请看《SpringBoot 深入浅出》第 245 页）</em></strong></p>
+<h3 id="获取请求头参数"><a href="#获取请求头参数" class="headerlink" title="获取请求头参数"></a>获取请求头参数</h3><p><strong>带请求头的 HTTP 请求</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$.post(&#123;</span><br><span class="line">    url : <span class="string">"$&#123;pageContext.request.contextPath&#125;/user/header/user"</span>,</span><br><span class="line">    <span class="comment">// 设置请求头参数</span></span><br><span class="line">    headers : &#123;<span class="attr">id</span> : <span class="string">'1'</span>&#125;,</span><br><span class="line">    <span class="comment">// 成功后的方法</span></span><br><span class="line">    success : <span class="function"><span class="keyword">function</span>(<span class="params">user</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (user == <span class="literal">null</span> || user.id == <span class="literal">null</span>) &#123;</span><br><span class="line">            alert(<span class="string">"获取失败"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 弹出请求返回的用户信息</span></span><br><span class="line">        alert(<span class="string">"id="</span> + user.id +<span class="string">", user_name="</span></span><br><span class="line">              +user.userName+<span class="string">", note="</span>+ user.note);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>代码中的 “headers : {id : ‘1’}” 设置了一个请求头，是一个键为 id 而值为 1 的请求头</p>
+<p><strong>使用 @RequestHeader 接收请求头参数</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过 <span class="doctag">@RequestHeader</span> 接收请求头参数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/header/user"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">headerUser</span><span class="params">(@RequestHeader(<span class="string">"id"</span>)</span> Long id) </span>&#123;</span><br><span class="line">        User user = userService.getUser(id);</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>通过注解 @RequestHeader(“id”) 获取请求请求头中的的 id 键值</p>
 
       
     </div>
@@ -538,7 +536,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/多线程/" rel="tag"><i class="fas fa-bookmark"></i> 多线程</a>
+            <a href="/tags/Spring框架/" rel="tag"><i class="fas fa-bookmark"></i> Spring框架</a>
+          
+            <a href="/tags/自学笔记/" rel="tag"><i class="fas fa-bookmark"></i> 自学笔记</a>
           
         </div>
       
@@ -551,8 +551,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/04/Java多线程知识点（第二篇）/" rel="next" title="Java多线程知识点（第二篇）">
-                <i class="fa fa-chevron-left"></i> Java多线程知识点（第二篇）
+              <a href="/2019/05/14/SpringBoot学习笔记（Day09）/" rel="next" title="SpringBoot学习笔记（Day09）">
+                <i class="fa fa-chevron-left"></i> SpringBoot学习笔记（Day09）
               </a>
             
           </div>
@@ -560,10 +560,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/09/剑指Offer（一）/" rel="prev" title="剑指Offer（一）">
-                剑指Offer（一） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -763,7 +759,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点目录"><span class="nav-number">1.</span> <span class="nav-text">知识点目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是并发容器的实现？"><span class="nav-number">1.1.</span> <span class="nav-text">什么是并发容器的实现？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程同步和互斥实现方法"><span class="nav-number">1.2.</span> <span class="nav-text">多线程同步和互斥实现方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是竞争条件"><span class="nav-number">1.3.</span> <span class="nav-text">什么是竞争条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么调用-start-方法时会执行-run-方法，为什么不直接调用-run-方法"><span class="nav-number">1.4.</span> <span class="nav-text">为什么调用 start() 方法时会执行 run() 方法，为什么不直接调用 run() 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-中怎样唤醒一个阻塞地线程"><span class="nav-number">1.5.</span> <span class="nav-text">Java 中怎样唤醒一个阻塞地线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CycliBarriar-和-CountdownLatch-有什么区别？"><span class="nav-number">1.6.</span> <span class="nav-text">CycliBarriar 和 CountdownLatch 有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是不可变对象，它对写并发应用有什么帮助？"><span class="nav-number">1.7.</span> <span class="nav-text">什么是不可变对象，它对写并发应用有什么帮助？</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-MVC-补充知识"><span class="nav-number">1.</span> <span class="nav-text">Spring MVC 补充知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ResponseBody-转换为-JSON-的原理"><span class="nav-number">1.1.</span> <span class="nav-text">@ResponseBody 转换为 JSON 的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向"><span class="nav-number">1.2.</span> <span class="nav-text">重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作会话对象"><span class="nav-number">1.3.</span> <span class="nav-text">操作会话对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给控制器增加通知"><span class="nav-number">1.4.</span> <span class="nav-text">给控制器增加通知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取请求头参数"><span class="nav-number">1.5.</span> <span class="nav-text">获取请求头参数</span></a></li></ol></li></ol></div>
             
 
           </div>
