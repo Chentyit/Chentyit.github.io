@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.chentyit.com/"/>
-  <updated>2019-05-15T09:48:47.199Z</updated>
+  <updated>2019-05-19T04:04:09.610Z</updated>
   <id>https://www.chentyit.com/</id>
   
   <author>
@@ -15,6 +15,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Oracle学习笔记01</title>
+    <link href="https://www.chentyit.com/2019/05/18/Oracle%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/"/>
+    <id>https://www.chentyit.com/2019/05/18/Oracle学习笔记01/</id>
+    <published>2019-05-18T00:26:13.000Z</published>
+    <updated>2019-05-19T04:04:09.610Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a><ol><li>count() 如果字段为空，则不统计，* 全部统计</li><li>排序 asc 升序，desc 降序</li><li>通过其他表创建一个新表</li></ol><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> EMP3 <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> EMP_NO, EMP_NAME</span><br><span class="line"><span class="keyword">FROM</span> EMP</span><br><span class="line"><span class="keyword">WHERE</span> EMP_NO &lt;= <span class="number">10</span></span><br></pre></td></tr></table></figure><ol start="4"><li>左连接和右连接的主表信息全部显示：左连接的左表示主表，右连接的右表是主表</li><li>full join 全连接，有无关联都显示</li><li>左连接简写</li></ol><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> e.EMP_NO, e.EMP_NAME, d.DEPT_NAME</span><br><span class="line"><span class="keyword">FROM</span> EMP e, DEPT d</span><br><span class="line"><span class="keyword">WHERE</span> e.DEPTNO = d.DEPT_NO(+)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> e.EMP_NO</span><br></pre></td></tr></table></figure><ol start="7"><li>右连接简写</li></ol><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> e.EMP_NO, e.EMP_NAME, d.DEPT_NAME</span><br><span class="line"><span class="keyword">FROM</span> EMP e, DEPT d</span><br><span class="line"><span class="keyword">WHERE</span> e.DEPTNO(+) = d.DEPT_NO</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> e.EMP_NO</span><br></pre></td></tr></table></figure><ol start="8"><li><p>all 表示必须满足所有及结果集，any 表示满足其中一个结果集就可以</p></li><li><p>ROWID 获取物理地址</p></li><li><p>ROWNUM 在查询的列前面，添加序号</p></li><li><p>intersect 放在两个查询之间，表示取交集</p></li><li><p>union 表示取并集</p></li><li><p>minus 表示取差集</p></li><li><p>单行函数 / 聚合函数</p><p>单行函数：对每一个函数应用在表的记录中时，只能输入一行结果，返回一个结果.</p><p>聚合函数：聚合函数同时可以对多行数据进行操作，并返回一个结果.</p></li><li><p>decode函数</p><p><strong>decode</strong>(条件,值1,返回值1,值2,返回值2,…值n,返回值n,缺省值)</p></li><li><p>case </p></li></ol><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> e.EMP_NO, e.EMP_NAME, (</span><br><span class="line"><span class="keyword">CASE</span> </span><br><span class="line"><span class="keyword">WHEN</span> e.SALARY &gt;= <span class="number">900</span> <span class="keyword">THEN</span> <span class="string">'A'</span></span><br><span class="line"><span class="keyword">WHEN</span> e.SALARY &gt;= <span class="number">700</span> <span class="keyword">AND</span> e.SALARY &lt; <span class="number">900</span> <span class="keyword">THEN</span> <span class="string">'B'</span></span><br><span class="line"><span class="keyword">WHEN</span> e.SALARY &gt;= <span class="number">300</span> <span class="keyword">AND</span> e.SALARY &lt; <span class="number">700</span> <span class="keyword">THEN</span> <span class="string">'C'</span></span><br><span class="line"><span class="keyword">ELSE</span> <span class="string">'D'</span></span><br><span class="line"><span class="keyword">END</span></span><br><span class="line">) lvl</span><br><span class="line"><span class="keyword">FROM</span> EMP e</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> lvl</span><br></pre></td></tr></table></figure><ol start="17"><li>恢复数据库</li></ol><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 获取当前时间</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> NTUCTY.EMP</span><br><span class="line"><span class="keyword">as</span> <span class="keyword">of</span> <span class="keyword">scn</span> <span class="number">12156162</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span></span><br><span class="line"><span class="keyword">FROM</span> EMP e</span><br><span class="line"><span class="keyword">WHERE</span> e.EMP_NO = <span class="number">15</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 先运行这一条命令 启用行移动功能</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> NTUCTY.EMP <span class="keyword">enable</span> <span class="keyword">row</span> <span class="keyword">movement</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 在运行这一条 恢复数据</span></span><br><span class="line">flashback table NTUCTY.EMP to scn 12156162;</span><br></pre></td></tr></table></figure><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;ol&gt;
+&lt;li&gt;count() 如果字段为空，则不统计，* 全部统计&lt;/li&gt;
+&lt;li&gt;排序 asc 升序，desc 降序&lt;/li&gt;
+&lt;li&gt;通过其他表创建一个新表&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight sq
+      
+    
+    </summary>
+    
+      <category term="数据库" scheme="https://www.chentyit.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="Oracle - 自学笔记" scheme="https://www.chentyit.com/tags/Oracle-%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpringBoot学习笔记（Day11）</title>
+    <link href="https://www.chentyit.com/2019/05/16/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Day11%EF%BC%89/"/>
+    <id>https://www.chentyit.com/2019/05/16/SpringBoot学习笔记（Day11）/</id>
+    <published>2019-05-16T05:41:01.000Z</published>
+    <updated>2019-05-20T01:47:14.870Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/2019/05/16/SpringBoot学习笔记（Day11）/erik-kaha-1575002-unsplash.jpg" alt="插图"></p><blockquote><p>Photo by <a href="https://unsplash.com/photos/9Nok_iZEgLk?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Erik Kaha</a> on <a href="https://unsplash.com/t/nature?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Unsplash</a></p></blockquote><a id="more"></a><h2 id="REST-风格网站"><a href="#REST-风格网站" class="headerlink" title="REST 风格网站"></a>REST 风格网站</h2><h3 id="HTTP-动作"><a href="#HTTP-动作" class="headerlink" title="HTTP 动作"></a>HTTP 动作</h3><ul><li>GET（VISIT）：访问服务器资源（一个或多个资源）</li><li>POST（CREATE）：提交服务器资源信息，用来创建新的资源</li><li>PUT（UPDATE）：修改服务器已经存在的资源，使用 PUT 时需要把资源的所有属性一并提交</li><li>PATCH（UPDATE）：修改服务器已经存在的资源，使用 PATCH 时只需要将部分资源属性提交</li><li>DELETE（DELETE）：从服务器将资源删除</li></ul><h3 id="Spring-MVC-整合-REST"><a href="#Spring-MVC-整合-REST" class="headerlink" title="Spring MVC 整合 REST"></a>Spring MVC 整合 REST</h3><p>如果是简单参数，往往直接通过 URL 直接传递，在 Spring MVC 中可以使用注解 @PathVariable 进行获取。<strong>（动点脑子，复杂的你确定你会用 URL 传吗，肯定 JSON 啊）</strong></p><p><strong>@RequestBody</strong> 可以将请求体为 JSON 的数据转化为复杂的 Java 对象。</p><h3 id="处理-HTTP-状态码、异常和响应头"><a href="#处理-HTTP-状态码、异常和响应头" class="headerlink" title="处理 HTTP 状态码、异常和响应头"></a>处理 HTTP 状态码、异常和响应头</h3><p>Spring 提供了实体封装类 ResponseEntity 和注解 @ResponseStatus</p><ul><li>ResponseEntity 封装错误消息和状态码</li><li>@ResponseStatus 配置指定的响应码给客户端</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/2019/05/16/SpringBoot学习笔记（Day11）/erik-kaha-1575002-unsplash.jpg&quot; alt=&quot;插图&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/9Nok_iZEgLk?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Erik Kaha&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/t/nature?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="Java" scheme="https://www.chentyit.com/categories/Java/"/>
+    
+    
+      <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringBoot学习笔记（Day10）</title>
@@ -37,9 +95,9 @@
       <category term="Java" scheme="https://www.chentyit.com/categories/Java/"/>
     
     
-      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
-    
       <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
@@ -64,9 +122,9 @@
       <category term="Java" scheme="https://www.chentyit.com/categories/Java/"/>
     
     
-      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
-    
       <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
@@ -91,9 +149,9 @@
       <category term="Java" scheme="https://www.chentyit.com/categories/Java/"/>
     
     
-      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
-    
       <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
@@ -118,9 +176,9 @@
       <category term="Java" scheme="https://www.chentyit.com/categories/Java/"/>
     
     
-      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
-    
       <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
@@ -145,9 +203,9 @@
       <category term="Java" scheme="https://www.chentyit.com/categories/Java/"/>
     
     
-      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
-    
       <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
@@ -172,9 +230,9 @@
       <category term="Java" scheme="https://www.chentyit.com/categories/Java/"/>
     
     
-      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
-    
       <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
@@ -183,7 +241,7 @@
     <link href="https://www.chentyit.com/2019/05/06/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Day06%EF%BC%89/"/>
     <id>https://www.chentyit.com/2019/05/06/Redis学习笔记（Day06）/</id>
     <published>2019-05-06T02:46:29.000Z</published>
-    <updated>2019-05-06T08:32:28.419Z</updated>
+    <updated>2019-05-19T01:11:56.328Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2019/05/06/Redis学习笔记（Day06）/sid-verma-1387706-unsplash.jpg" alt="插图"></p><blockquote><p>Photo by <a href="https://unsplash.com/photos/Xvlc79bu9MA?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Sid Verma</a> on <a href="https://unsplash.com/t/nature?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Unsplash</a></p></blockquote><a id="more"></a><h2 id="Jedis"><a href="#Jedis" class="headerlink" title="Jedis"></a>Jedis</h2><p>所需 jar 包：</p><ul><li>commons-pool</li><li>jedis</li></ul><h3 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h3><p>测试代码：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPing</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">"192.168.11.154"</span>, <span class="number">6379</span>);</span><br><span class="line">        System.out.println(jedis.ping());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>如果不是在 Linux 上直接运行代码，而是在 Windows 上远程连接，就会报错，解决方案：</p><ol><li>注释配置文件的 bind 127.0.0.1</li><li>将保护模式后面的 yea 改为 no</li></ol><p>如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># JUST COMMENT THE FOLLOWING LINE.</span><br><span class="line"># ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line"># 把这里的 bind 注释掉</span><br><span class="line"># bind 127.0.0.1</span><br><span class="line"></span><br><span class="line"># Protected mode is a layer of security protection, in order to avoid that</span><br><span class="line"># Redis instances left open on the internet are accessed and exploited.</span><br><span class="line">#</span><br><span class="line"># When protected mode is on and if:</span><br><span class="line">#</span><br><span class="line"># 1) The server is not binding explicitly to a set of addresses using the</span><br><span class="line">#    &quot;bind&quot; directive.</span><br><span class="line"># 2) No password is configured.</span><br><span class="line">#</span><br><span class="line"># The server only accepts connections from clients connecting from the</span><br><span class="line"># IPv4 and IPv6 loopback addresses 127.0.0.1 and ::1, and from Unix domain</span><br><span class="line"># sockets.</span><br><span class="line">#</span><br><span class="line"># By default protected mode is enabled. You should disable it only if</span><br><span class="line"># you are sure you want clients from other hosts to connect to Redis</span><br><span class="line"># even if no authentication is configured, nor a specific set of interfaces</span><br><span class="line"># are explicitly listed using the &quot;bind&quot; directive.</span><br><span class="line"># 把保护模式关掉或者添加密码 测试的话直接关掉 省得麻烦</span><br><span class="line">protected-mode no</span><br></pre></td></tr></table></figure><h3 id="Jedis-操作数据"><a href="#Jedis-操作数据" class="headerlink" title="Jedis  操作数据"></a>Jedis  操作数据</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestAPI</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">"192.168.11.154"</span>, <span class="number">6379</span>);</span><br><span class="line">        jedis.set(<span class="string">"k1"</span>, <span class="string">"v1"</span>);</span><br><span class="line">        jedis.set(<span class="string">"k2"</span>, <span class="string">"v2"</span>);</span><br><span class="line">        jedis.set(<span class="string">"k3"</span>, <span class="string">"v3"</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(jedis.get(<span class="string">"k1"</span>));</span><br><span class="line"></span><br><span class="line">        Set&lt;String&gt; sets = jedis.keys(<span class="string">"*"</span>);</span><br><span class="line">        System.out.println(sets.size());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="Jedis-事务"><a href="#Jedis-事务" class="headerlink" title="Jedis 事务"></a>Jedis 事务</h3><p>测试代码：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestTX</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">"192.168.11.154"</span>, <span class="number">6379</span>);</span><br><span class="line"></span><br><span class="line">        Transaction transaction = jedis.multi();</span><br><span class="line">        transaction.set(<span class="string">"k44"</span>, <span class="string">"v44"</span>);</span><br><span class="line">        transaction.set(<span class="string">"k55"</span>, <span class="string">"v55"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// transaction.exec();</span></span><br><span class="line">        transaction.discard();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>事务案例代码：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestTX</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">transMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">"192.168.11.154"</span>, <span class="number">6379</span>);</span><br><span class="line">        <span class="keyword">int</span> balance;    <span class="comment">// 可用余额</span></span><br><span class="line">        <span class="keyword">int</span> debt;       <span class="comment">// 欠额</span></span><br><span class="line">        <span class="keyword">int</span> amtToSubtract = <span class="number">10</span>;  <span class="comment">// 实刷额度</span></span><br><span class="line"></span><br><span class="line">        jedis.watch(<span class="string">"balance"</span>);</span><br><span class="line">        balance = Integer.parseInt(jedis.get(<span class="string">"balance"</span>));</span><br><span class="line">        <span class="keyword">if</span> (balance &lt; amtToSubtract) &#123;</span><br><span class="line">            jedis.unwatch();</span><br><span class="line">            System.out.println(<span class="string">"modify"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"*******************transaction"</span>);</span><br><span class="line">            Transaction transaction = jedis.multi();</span><br><span class="line">            transaction.decrBy(<span class="string">"balance"</span>, amtToSubtract);</span><br><span class="line">            transaction.incrBy(<span class="string">"debt"</span>, amtToSubtract);</span><br><span class="line">            transaction.exec();</span><br><span class="line">            balance = Integer.parseInt(jedis.get(<span class="string">"balance"</span>));</span><br><span class="line">            debt = Integer.parseInt(jedis.get(<span class="string">"debt"</span>));</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">"*************"</span> + balance);</span><br><span class="line">            System.out.println(<span class="string">"*************"</span> + debt);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * watch 命令就是标记一个键，如果标记了一个键</span></span><br><span class="line"><span class="comment">     * 在提交事务前，如果别比人修改过，那事务就会失败</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TestTX testTX = <span class="keyword">new</span> TestTX();</span><br><span class="line">        <span class="keyword">boolean</span> retValue = testTX.transMethod();</span><br><span class="line">        System.out.println(<span class="string">"main retValue ----------- : "</span> + retValue);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="JedisPool"><a href="#JedisPool" class="headerlink" title="JedisPool"></a>JedisPool</h3><ul><li>获取 Jedis 实例需要从 JedisPool 中获取</li><li>用完 Jedis 实例需要返还给 JedisPool</li><li>如果 Jedis 在使用过程中出错，则也需要还给 JedisPool</li></ul><p>演示代码：</p><p>JedisPoolUtil.java</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JedisPoolUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> JedisPool jedisPool = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">JedisPoolUtil</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> JedisPool <span class="title">getJedisPoolInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (jedisPool == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (JedisPoolUtil.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">null</span> == jedisPool) &#123;</span><br><span class="line">                    JedisPoolConfig poolConfig = <span class="keyword">new</span> JedisPoolConfig();</span><br><span class="line">                    poolConfig.setMaxActive(<span class="number">1000</span>);</span><br><span class="line">                    poolConfig.setMaxIdle(<span class="number">32</span>);</span><br><span class="line">                    poolConfig.setMaxWait(<span class="number">100</span> * <span class="number">1000</span>);</span><br><span class="line">                    poolConfig.setTestOnBorrow(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">                    jedisPool = <span class="keyword">new</span> JedisPool(poolConfig, <span class="string">"192.168.11.154"</span>, <span class="number">6379</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> jedisPool;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">release</span><span class="params">(JedisPool jedisPool, Jedis jedis)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (jedis != <span class="keyword">null</span>) &#123;</span><br><span class="line">            jedisPool.returnResourceObject(jedis);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>TestPool.java</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPool</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        JedisPool jedisPool = JedisPoolUtil.getJedisPoolInstance();</span><br><span class="line"></span><br><span class="line">        Jedis jedis = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            jedis = jedisPool.getResource();</span><br><span class="line">            jedis.set(<span class="string">"aa"</span>, <span class="string">"bb"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            JedisPoolUtil.release(jedisPool, jedis);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>总结</strong>：</p><p>JedisPool 的配置参数大部分是由 JedisPoolConfig 的对应项来赋值的。</p><p><strong>maxActive</strong>：控制一个pool可分配多少个jedis实例，通过 pool.getResource() 来获取；如果赋值为 -1，则表示不限制；如果 pool 已经分配了 maxActive 个 jedis 实例，则此时 pool 的状态为 exhausted；</p><p><strong>maxIdle</strong>：控制一个 pool 最多有多少个状态为 idle（空闲）的 jedis 实例；</p><p>whenExhaustedAction：表示当 pool 中的 jedis 实例都被 allocated 完时，pool 要采取的操作；默认有三种：</p><ul><li>WHEN_EXHAUSTED_FAIL –&gt; 表示无 jedis 实例时，直接抛出 NoSuchElementException；</li><li>WHEN_EXHAUSTED_BLOCK –&gt; 则表示阻塞住，或者达到 maxWait 时抛出 JedisConnectionException；</li><li>WHEN_EXHAUSTED_GROW –&gt; 则表示新建一个 jedis 实例，也就说设置的 maxActive 无用；</li></ul><p><strong>maxWait</strong>：表示当borrow一个 jedis 实例时，最大的等待时间，如果超过等待时间，则直接抛 JedisConnectionException；</p><p><strong>testOnBorrow</strong>：获得一个 jedis 实例的时候是否检查连接可用性（ ping() ）；如果为true，则得到的 jedis 实例均是可用的；</p><p>testOnReturn：return 一个 jedis 实例给pool时，是否检查连接可用性（ping() ）；</p><p>testWhileIdle：如果为 true，表示有一个 idle object evitor 线程对 idle object 进行扫描，如果 validate 失败，此 object 会被从 pool 中 drop 掉；这一项只有在 timeBetweenEvictionRunsMillis 大于 0 时才有意义；</p><p>timeBetweenEvictionRunsMillis：表示 idle object evitor 两次扫描之间要 sleep 的毫秒数；</p><p>numTestsPerEvictionRun：表示 idle object evitor 每次扫描的最多的对象数；</p><p>minEvictableIdleTimeMillis：表示一个对象至少停留在 idle 状态的最短时间，然后才能被 idle object evitor 扫描并驱逐；这一项只有在 timeBetweenEvictionRunsMillis 大于0时才有意义；</p><p>softMinEvictableIdleTimeMillis：在 minEvictableIdleTimeMillis 基础上，加入了至少 minIdle 个对象已经在pool里面了。如果为 -1，evicted 不会根据 idle time 驱逐任何对象。如果 minEvictableIdleTimeMillis&gt;0，则此项设置无意义，且只有在 timeBetweenEvictionRunsMillis 大于 0 时才有意义；</p><p>lifo：borrowObject返回对象时，是采用 DEFAULT_LIFO（last in first out，即类似cache的最频繁使用队列），如果为 False，则表示 FIFO 队列；</p><p>==================================================================================================================<br>其中 JedisPoolConfig 对一些参数的默认设置如下：<br>testWhileIdle=true<br>minEvictableIdleTimeMills=60000<br>timeBetweenEvictionRunsMillis=30000<br>numTestsPerEvictionRun=-1</p>]]></content>
     
@@ -199,7 +257,9 @@
       <category term="数据库" scheme="https://www.chentyit.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-      <category term="Redis - 自学笔记" scheme="https://www.chentyit.com/tags/Redis-%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="Redis" scheme="https://www.chentyit.com/tags/Redis/"/>
+    
+      <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -208,7 +268,7 @@
     <link href="https://www.chentyit.com/2019/05/05/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Day05%EF%BC%89/"/>
     <id>https://www.chentyit.com/2019/05/05/Redis学习笔记（Day05）/</id>
     <published>2019-05-05T00:26:02.000Z</published>
-    <updated>2019-05-05T01:39:22.059Z</updated>
+    <updated>2019-05-19T01:12:06.009Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2019/05/05/Redis学习笔记（Day05）/martin-adams-1557946-unsplash.jpg" alt="插图"></p><blockquote><p>Photo by <a href="https://unsplash.com/photos/RCx7eaBL8Io?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Martin Adams</a> on <a href="https://unsplash.com/t/nature?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Unsplash</a></p></blockquote><a id="more"></a><h2 id="Redis-事务"><a href="#Redis-事务" class="headerlink" title="Redis 事务"></a>Redis 事务</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>可以一次执行多个命令，本质是一组命令的集合。一个事务中的，所有命令都会序列化，<strong>按顺序地串行化执行而不会被其它命令插入，不许加塞</strong></p><h3 id="能干嘛"><a href="#能干嘛" class="headerlink" title="能干嘛"></a>能干嘛</h3><p>一个队列中，一次性，顺序性，排他性的执行一系列命令</p><h3 id="怎么玩"><a href="#怎么玩" class="headerlink" title="怎么玩"></a>怎么玩</h3><h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><p><strong>Case1：DISCARD —— 取消事务，放弃事务块内的所有命令</strong></p><p><strong>Case2：EXEC —— 执行所有事务块内的命令</strong></p><p><strong>Case3：MULTI —— 标记一个事务块的开始</strong></p><p><strong>Case4：UNWATCH —— 取消 WATCH 命令对所有 key 的监视</strong></p><p><strong>Case5：WATCH —— 监视一个（或多个）key，如果在事务执行之前，这个（或这些）key 被其他命令所改动，那么事务将被打断</strong></p><ul><li><p><strong>悲观锁</strong></p><p> 悲观锁（Pessimistic Lock）， 顾名思义，就是很悲观，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会block直到它拿到锁。传统的关系型数据库里边就用到了很多这种锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁</p></li><li><p><strong>乐观锁</strong></p><p>乐观锁（Optimistic Lock）， 顾名思义，就是很乐观，每次去拿数据的时候都认为别人不会修改，<strong>所以不会上锁</strong>，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机制。乐观锁适用于多读的应用类型，这样可以提高吞吐量，</p><p><strong>乐观锁策略：提交版本必须大于记录当前版本才能执行更新</strong></p></li><li><p><strong>CAS（Check And Set）</strong></p></li><li><p><strong>有加塞篡改</strong></p><p>监控了key，如果key被修改了，后面一个事务的执行失效</p></li></ul><p>一旦执行了 EXEC 之前加的监控锁都会被取消掉了</p><p>Watch 指令，类似乐观锁，事务提交时，如果 Key 的值已被别的客户端改变，比如某个 list 已被别的客户端 push / pop 过了，整个事务队列都不会被执行</p><p>通过 WATCH 命令在事务执行之前监控了多个 Keys，倘若在 WATCH 之后有任何 Key 的值发生了变化，EXEC 命令执行的事务都将被放弃，同时返回 Nullmulti-bulk 应答以通知调用者事务执行失败</p><h3 id="阶段"><a href="#阶段" class="headerlink" title="阶段"></a>阶段</h3><ol><li>开启：以MULTI开始一个事务</li><li>入队：将多个命令入队到事务中，接到这些命令并不会立即执行，而是放到等待执行的事务队列里面</li><li>执行：由EXEC命令触发事务</li></ol><h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ol><li>单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。</li><li>没有隔离级别的概念：队列中的命令没有提交之前都不会实际的被执行，因为事务提交前任何指令都不会被实际执行，也就不存在”事务内的查询要看到事务里的更新，在事务外查询不能看到”这个让人万分头痛的问题</li><li>不保证原子性：redis 同一个事务中如果有一条命令执行失败，其后的命令仍然会被执行，没有回滚</li></ol><h2 id="Redis-的发布订阅"><a href="#Redis-的发布订阅" class="headerlink" title="Redis 的发布订阅"></a>Redis 的发布订阅</h2><h3 id="是什么-1"><a href="#是什么-1" class="headerlink" title="是什么"></a>是什么</h3><p>进程间的一种消息通信模式：发送者(pub)发送消息，订阅者(sub)接收消息。</p><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><ul><li><p>PSUBSCRIBE pattern [pattern …]</p><p>订阅一个或多个符合给定模式的频道</p></li><li><p>PUBSUB subcommand [argument [argument …]]</p><p>查看订阅与发布信息</p></li><li><p>PUBLISH channel message</p><p>将信息发送到指定的频道</p></li><li><p>PUNSUBSCRIBE [pattern [pattern …]]</p><p>退订所有给定模式的频道</p></li><li><p>SUBSCRIBE channel [channel …]</p><p>订阅给定的一个或多个频道信息</p></li><li><p>UNSUBSCRIBE [channel [channel …]]</p><p>指退订给定的频道</p></li></ul><h3 id="案列"><a href="#案列" class="headerlink" title="案列"></a>案列</h3><p><strong>先订阅后发布</strong>后才能收到消息</p><ol><li>可以一次性订阅多个，SUBSCRIBE c1 c2 c3</li><li>消息发布，PUBLISH c2 hello-redis</li><li>订阅多个，通配符<em>，PSUBSCRIBE new</em></li><li>收取消息，PUBLISH new1 redis2015</li></ol>]]></content>
     
@@ -224,7 +284,9 @@
       <category term="数据库" scheme="https://www.chentyit.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-      <category term="Redis - 自学笔记" scheme="https://www.chentyit.com/tags/Redis-%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="Redis" scheme="https://www.chentyit.com/tags/Redis/"/>
+    
+      <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -233,7 +295,7 @@
     <link href="https://www.chentyit.com/2019/05/04/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Day04%EF%BC%89/"/>
     <id>https://www.chentyit.com/2019/05/04/Redis学习笔记（Day04）/</id>
     <published>2019-05-04T01:25:34.000Z</published>
-    <updated>2019-05-04T03:25:44.430Z</updated>
+    <updated>2019-05-19T01:12:12.374Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2019/05/04/Redis学习笔记（Day04）/berti-benbanaste-1550570-unsplash.jpg" alt="插图"></p><blockquote><p>Photo by <a href="https://unsplash.com/photos/O6vaYviRDoo?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Berti Benbanaste</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Unsplash</a></p></blockquote><a id="more"></a><h2 id="Redis-持久化"><a href="#Redis-持久化" class="headerlink" title="Redis 持久化"></a>Redis 持久化</h2><h3 id="RDB（Redis-DataBase）"><a href="#RDB（Redis-DataBase）" class="headerlink" title="RDB（Redis DataBase）"></a>RDB（Redis DataBase）</h3><h4 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h4><p>在指定的时间间隔内将内存中的数据集快照写入磁盘，也就是行话讲的 Snapshot 快照，它恢复时是将快照文件直接读到内存里</p><p>Redis 会单独创建（fork）一个子进程来进行持久化，会先将数据写入到一个临时文件中，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。整个过程中，主进程是不进行任何 IO 操作的，这就确保了极高的性能，如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那 RDB 方式要比 AOF 方式更加的高效。</p><p>RDB 的缺点是最后一次持久化后的数据可能丢失。</p><h4 id="Fork"><a href="#Fork" class="headerlink" title="Fork"></a>Fork</h4><p>fork 的作用是复制一个与当前进程一样的进程。新进程的所有数据（变量、环境变量、程序计数器等）数值都和原进程一致，但是是一个全新的进程，并作为原进程的子进程</p><h4 id="rdb-保存的是dump-rdb文件"><a href="#rdb-保存的是dump-rdb文件" class="headerlink" title="rdb 保存的是dump.rdb文件"></a>rdb 保存的是dump.rdb文件</h4><h4 id="如何触发RDB快照"><a href="#如何触发RDB快照" class="headerlink" title="如何触发RDB快照"></a>如何触发RDB快照</h4><ul><li><p>配置文件中默认的快照配置</p><p>冷拷贝后重新使用（可以cp dump.rdb dump_new.rdb）</p></li><li><p>命令 save 或者是 bgsave</p><ul><li>save：save时只管保存，其它不管，全部阻塞</li><li>bgsave：Redis 会在后台异步进行快照操作，快照同时还可以响应客户端请求。可以通过 lastsave 命令获取最后一次成功执行快照的时间</li></ul></li><li><p>执行flushall命令，也会产生dump.rdb文件，但里面是空的，无意义</p></li></ul><h4 id="如何恢复"><a href="#如何恢复" class="headerlink" title="如何恢复"></a>如何恢复</h4><p>将备份文件 (dump.rdb) 移动到 redis 安装目录并启动服务即可</p><p>CONFIG GET dir获取目录</p><h4 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h4><ul><li>适合大规模的数据恢复</li><li>对数据完整性和一致性要求不高</li></ul><h4 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h4><ul><li>在一定间隔时间做一次备份，所以如果redis意外down掉的话，就会丢失最后一次快照后的所有修改</li><li>fork的时候，内存中的数据被克隆了一份，大致2倍的膨胀性需要考虑</li></ul><h4 id="如何停止"><a href="#如何停止" class="headerlink" title="如何停止"></a>如何停止</h4><p>动态所有停止RDB保存规则的方法：redis-cli config set save “”</p><h3 id="AOF（Append-Only-File）"><a href="#AOF（Append-Only-File）" class="headerlink" title="AOF（Append Only File）"></a>AOF（Append Only File）</h3><h4 id="是什么-1"><a href="#是什么-1" class="headerlink" title="是什么"></a>是什么</h4><p><strong>以日志的形式来记录每个<em>写操作</em></strong>，将 Redis 执行过的所有写指令记录下来(读操作不记录)，只许追加文件但不可以改写文件，redis 启动之初会读取该文件重新构建数据，换言之，redis 重启的话就根据日志文件的内容将写指令从前到后执行一次以完成数据的恢复工作</p><h4 id="AOF-保存的是-appendonly-aof-文件"><a href="#AOF-保存的是-appendonly-aof-文件" class="headerlink" title="AOF 保存的是 appendonly.aof 文件"></a>AOF 保存的是 appendonly.aof 文件</h4><h4 id="AOF启动-修复-恢复"><a href="#AOF启动-修复-恢复" class="headerlink" title="AOF启动/修复/恢复"></a>AOF启动/修复/恢复</h4><h5 id="正常恢复"><a href="#正常恢复" class="headerlink" title="正常恢复"></a>正常恢复</h5><ol><li>修改默认的appendonly no，改为yes</li><li>将有数据的aof文件复制一份保存到对应目录(config get dir)</li><li>恢复：重启redis然后重新加载</li></ol><h5 id="异常恢复"><a href="#异常恢复" class="headerlink" title="异常恢复"></a>异常恢复</h5><ol><li>修改默认的appendonly no，改为yes</li><li>备份被写坏的AOF文件</li><li>redis-check-aof –fix进行修复</li><li>恢复：重启redis然后重新加载</li></ol><h4 id="rewrite"><a href="#rewrite" class="headerlink" title="rewrite"></a>rewrite</h4><ul><li><strong>是什么：</strong>AOF 采用文件追加方式，文件会越来越大为避免出现此种情况，新增了重写机制,当 AOF 文件的大小超过所设定的阈值时，Redis 就会启动 AOF 文件的内容压缩，只保留可以恢复数据的最小指令集.可以使用命令 bgrewriteaof</li><li><strong>重写原理：</strong>AOF 文件持续增长而过大时，会 fork 出一条新进程来将文件重写(也是先写临时文件最后再 rename)，遍历新进程的内存中数据，每条记录有一条的 Set 语句。重写 aof 文件的操作，并没有读取旧的 aof 文件，而是将整个内存中的数据库内容用命令的方式重写了一个新的 aof 文件，这点和快照有点类似</li><li><strong>触发机制：</strong> <em>Redis 会记录上次重写时的 AOF 大小，默认配置是当AOF文件大小是上次 rewrite 后大小的一倍且文件大于 64M 时触发</em></li></ul><h4 id="优势-1"><a href="#优势-1" class="headerlink" title="优势"></a>优势</h4><ul><li>每修改同步：appendfsync always——同步持久化 每次发生数据变更会被立即记录到磁盘  性能较差但数据完整性比较好</li><li>每秒同步：appendfsync everysec——异步操作，每秒记录   如果一秒内宕机，有数据丢失</li><li>不同步：appendfsync no——从不同步</li></ul><h4 id="劣势-1"><a href="#劣势-1" class="headerlink" title="劣势"></a>劣势</h4><ul><li>相同数据集的数据而言aof文件要远大于rdb文件，恢复速度慢于rdb</li><li>aof运行效率要慢于rdb,每秒同步策略效率较好，不同步效率和rdb相同</li></ul>]]></content>
     
@@ -249,7 +311,9 @@
       <category term="数据库" scheme="https://www.chentyit.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-      <category term="Redis - 自学笔记" scheme="https://www.chentyit.com/tags/Redis-%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="Redis" scheme="https://www.chentyit.com/tags/Redis/"/>
+    
+      <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -258,7 +322,7 @@
     <link href="https://www.chentyit.com/2019/05/03/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Day03%EF%BC%89/"/>
     <id>https://www.chentyit.com/2019/05/03/Redis学习笔记（Day03）/</id>
     <published>2019-05-03T02:55:45.000Z</published>
-    <updated>2019-05-04T03:15:34.361Z</updated>
+    <updated>2019-05-19T01:12:19.659Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2019/05/03/Redis学习笔记（Day03）/chi-liu-1552956-unsplash.jpg" alt="插图"></p><blockquote><p>Photo by <a href="https://unsplash.com/photos/Bj_MIJ3vpT4?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Chi Liu</a> on <a href="https://unsplash.com/t/nature?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Unsplash</a></p></blockquote><a id="more"></a><h2 id="Redis-配置文件"><a href="#Redis-配置文件" class="headerlink" title="Redis 配置文件"></a>Redis 配置文件</h2><h3 id="在哪"><a href="#在哪" class="headerlink" title="在哪"></a>在哪</h3><p>拷贝出来单独执行，原文件在 redis 解压文件目录下</p><h3 id="Units-单位"><a href="#Units-单位" class="headerlink" title="Units 单位"></a>Units 单位</h3><ol><li>配置大小单位，开头定义了一些基本的度量单位，只支持 bytes，不支持 bit</li><li>对大小写不敏感</li></ol><h3 id="INCLUDES-包含"><a href="#INCLUDES-包含" class="headerlink" title="INCLUDES 包含"></a>INCLUDES 包含</h3><p>和 Strust2 配置文件类似，可以通过 includes 包含，redis.conf 可以作为总闸，包含其他</p><h3 id="GENERAL-通用"><a href="#GENERAL-通用" class="headerlink" title="GENERAL 通用"></a>GENERAL 通用</h3><ul><li><p>Daemonlize</p><p>默认为 no，需要改成 yes</p></li><li><p>Pidfile</p><p>进程管道 ID 文件，运行起来如果没指定路径，就使用默认的路径</p></li><li><p>Port</p><p>配置的端口号</p></li><li><p>Tcp-backlog</p><p>设置 tcp 的 backlog，backlog其实是一个连接队列，backlog队列总和 = 未完成三次握手 + 已经完成三次握手队列</p><p>在高并发环境下，需要一个高 backlog 值来避免慢客户端连接问题，Linux 内核会将这个值减小到 /proc/sys/net/core/somaxconn 的值，所以需要确认增大 somaxconn 和 tcp_max_syn_backlog 两个值来达到想要的效果</p></li><li><p>Timeout</p></li><li><p>Bind</p></li><li><p>Tcp-keepalive</p><p>单位为秒，如果设置为 0，则不会进行 Keepalive 检测，建议设置成 60</p></li><li><p>Loglevel</p><p>日志级别：</p><ul><li>debug</li><li>verbose</li><li>notice</li><li>warning</li></ul></li><li><p>Logfile</p><p>日志名字</p></li><li><p>Syslog-enabled</p><p>是否把日志输出到 Syslog（默认关）</p></li><li><p>Syslog-ident</p><p>指定 Syslog 里的日志标志</p></li><li><p>Syslog-facility</p><p>指定 syslog 设备，只可以是 USER 或 LOCAL0 - LOCAL7（默认LOCAL0）</p></li><li><p>Databases</p><p>默认数据库的数量</p></li></ul><h3 id="SNAPSHOTTING-快照"><a href="#SNAPSHOTTING-快照" class="headerlink" title="SNAPSHOTTING 快照"></a>SNAPSHOTTING 快照</h3><ul><li>Save（save 秒钟 写操作次数）</li><li>stop-writes-on-bgsave-error（如果配置成no，表示你不在乎数据不一致或者有其他的手段发现和控制）</li><li>rdbcompression（rdbcompression：对于存储到磁盘中的快照，可以设置是否进行压缩存储。如果是的话，redis 会采用 LZF 算法进行压缩。如果你不想消耗 CPU 来进行压缩的话，可以设置为关闭此功能）</li><li>rdbchecksum（rdbchecksum：在存储快照后，还可以让 redis 使用 CRC64 算法来进行数据校验，但是这样做会增加大约 10% 的性能消耗，如果希望获取到最大的性能提升，可以关闭此功能）</li><li>dbfilename（备份文件名称）</li><li>dir</li></ul><h3 id="REPLICATION-复制"><a href="#REPLICATION-复制" class="headerlink" title="REPLICATION 复制"></a>REPLICATION 复制</h3><h3 id="SECURITY-安全"><a href="#SECURITY-安全" class="headerlink" title="SECURITY 安全"></a>SECURITY 安全</h3><h3 id="LIMITS-限制"><a href="#LIMITS-限制" class="headerlink" title="LIMITS 限制"></a>LIMITS 限制</h3><ul><li><p>Maxclients</p></li><li><p>Maxmemory</p></li><li><p>Maxmemory-policy</p><ul><li>Volatile-lru -&gt; remove the key with an expire set using an LRU algorithm（使用 LRU 算法移除 key， 只对设置了过期时间的键）</li><li>Allkeys-lru -&gt; remove any key according to the LRU algorithm（使用 LRU 算法移除 key）</li><li>Volatile-random -&gt; remove a random key with an expire set（在过期集合中移除随机的 key，只对设置了过期时间的键）</li><li>Allkeys-random -&gt; remoce a random key, any key（移除随机的 key）</li><li>Volatile-ttl -&gt; remove the key with the nearest expire time(minor TTL)（移除那些 TTL 值最小的 key，即那些最近要过期的 key）</li><li>Noeviction -&gt; don’t expire at all, just return an error on write operations（不进行移除，针对写操作，只是返回错误信息）</li></ul></li><li><p>Maxmemory-samples</p><p>设置样本数量，LRU 算法和最小 TTL 算法都并非是精确的算法，而是估算值，所以你可以设置样本的大小，redis 默认会检查这么多个 key 并选择其中 LRU 的那个</p></li></ul><h3 id="APPEND-ONLY-MODE-追加"><a href="#APPEND-ONLY-MODE-追加" class="headerlink" title="APPEND ONLY MODE 追加"></a>APPEND ONLY MODE 追加</h3><ul><li>appendonly</li><li>appendfilename</li><li>appendfsync<ul><li>always：同步持久化，每次发生数据变更会被立即记录到磁盘，性能较差但数据完整性比较好</li><li>everysec：出厂默认推荐，异步操作，每秒记录，如果一秒内宕机，有数据丢失</li><li>no</li></ul></li><li>no-appendfsync-on-rewrite：重写时是否可以运用 Appendfsync，用默认 no 即可，保证数据安全性。</li><li>auto-aof-rewrite-min-size：设置重写的基准值</li><li>auto-aof-rewrite-percentage：设置重写的基准值</li></ul><h3 id="常见配置-redis-conf-介绍"><a href="#常见配置-redis-conf-介绍" class="headerlink" title="常见配置 redis.conf 介绍"></a>常见配置 redis.conf 介绍</h3><p>参数说明<br>redis.conf 配置项说明如下：</p><ol><li>Redis默认不是以守护进程的方式运行，可以通过该配置项修改，使用yes启用守护进程<br> daemonize no</li><li>当Redis以守护进程方式运行时，Redis默认会把pid写入/var/run/redis.pid文件，可以通过pidfile指定<br> pidfile /var/run/redis.pid</li><li>指定Redis监听端口，默认端口为6379，作者在自己的一篇博文中解释了为什么选用6379作为默认端口，因为6379在手机按键上MERZ对应的号码，而MERZ取自意大利歌女Alessia Merz的名字<br> port 6379</li><li>绑定的主机地址<br> bind 127.0.0.1<br>5.当 客户端闲置多长时间后关闭连接，如果指定为0，表示关闭该功能<br> timeout 300</li><li>指定日志记录级别，Redis总共支持四个级别：debug、verbose、notice、warning，默认为verbose<br> loglevel verbose</li><li>日志记录方式，默认为标准输出，如果配置Redis为守护进程方式运行，而这里又配置为日志记录方式为标准输出，则日志将会发送给/dev/null<br> logfile stdout</li><li>设置数据库的数量，默认数据库为0，可以使用SELECT <dbid>命令在连接上指定数据库id<br> databases 16</dbid></li><li><p>指定在多长时间内，有多少次更新操作，就将数据同步到数据文件，可以多个条件配合<br> save <seconds> <changes><br> Redis默认配置文件中提供了三个条件：<br> save 900 1<br> save 300 10<br> save 60 10000<br> 分别表示900秒（15分钟）内有1个更改，300秒（5分钟）内有10个更改以及60秒内有10000个更改。</changes></seconds></p></li><li><p>指定存储至本地数据库时是否压缩数据，默认为yes，Redis采用LZF压缩，如果为了节省CPU时间，可以关闭该选项，但会导致数据库文件变的巨大<br>rdbcompression yes</p></li><li>指定本地数据库文件名，默认值为dump.rdb<br>dbfilename dump.rdb</li><li>指定本地数据库存放目录<br>dir ./</li><li>设置当本机为slav服务时，设置master服务的IP地址及端口，在Redis启动时，它会自动从master进行数据同步<br>slaveof <masterip> <masterport></masterport></masterip></li><li>当master服务设置了密码保护时，slav服务连接master的密码<br>masterauth <master-password></master-password></li><li>设置Redis连接密码，如果配置了连接密码，客户端在连接Redis时需要通过AUTH <password>命令提供密码，默认关闭<br>requirepass foobared</password></li><li>设置同一时间最大客户端连接数，默认无限制，Redis可以同时打开的客户端连接数为Redis进程可以打开的最大文件描述符数，如果设置 maxclients 0，表示不作限制。当客户端连接数到达限制时，Redis会关闭新的连接并向客户端返回max number of clients reached错误信息<br>maxclients 128</li><li>指定Redis最大内存限制，Redis在启动时会把数据加载到内存中，达到最大内存后，Redis会先尝试清除已到期或即将到期的Key，当此方法处理 后，仍然到达最大内存设置，将无法再进行写入操作，但仍然可以进行读取操作。Redis新的vm机制，会把Key存放内存，Value会存放在swap区<br>maxmemory <bytes></bytes></li><li>指定是否在每次更新操作后进行日志记录，Redis在默认情况下是异步的把数据写入磁盘，如果不开启，可能会在断电时导致一段时间内的数据丢失。因为 redis本身同步数据文件是按上面save条件来同步的，所以有的数据会在一段时间内只存在于内存中。默认为no<br>appendonly no</li><li>指定更新日志文件名，默认为appendonly.aof<br>  appendfilename appendonly.aof</li><li><p>指定更新日志条件，共有3个可选值：<br>no：表示等操作系统进行数据缓存同步到磁盘（快）<br>always：表示每次更新操作后手动调用fsync()将数据写到磁盘（慢，安全）<br>everysec：表示每秒同步一次（折衷，默认值）<br>appendfsync everysec</p></li><li><p>指定是否启用虚拟内存机制，默认值为no，简单的介绍一下，VM机制将数据分页存放，由Redis将访问量较少的页即冷数据swap到磁盘上，访问多的页面由磁盘自动换出到内存中（在后面的文章我会仔细分析Redis的VM机制）<br>  vm-enabled no</p></li><li>虚拟内存文件路径，默认值为/tmp/redis.swap，不可多个Redis实例共享<br>  vm-swap-file /tmp/redis.swap</li><li>将所有大于vm-max-memory的数据存入虚拟内存,无论vm-max-memory设置多小,所有索引数据都是内存存储的(Redis的索引数据 就是keys),也就是说,当vm-max-memory设置为0的时候,其实是所有value都存在于磁盘。默认值为0<br>  vm-max-memory 0</li><li>Redis swap文件分成了很多的page，一个对象可以保存在多个page上面，但一个page上不能被多个对象共享，vm-page-size是要根据存储的 数据大小来设定的，作者建议如果存储很多小对象，page大小最好设置为32或者64bytes；如果存储很大大对象，则可以使用更大的page，如果不 确定，就使用默认值<br>  vm-page-size 32</li><li>设置swap文件中的page数量，由于页表（一种表示页面空闲或使用的bitmap）是在放在内存中的，，在磁盘上每8个pages将消耗1byte的内存。<br>  vm-pages 134217728</li><li>设置访问swap文件的线程数,最好不要超过机器的核数,如果设置为0,那么所有对swap文件的操作都是串行的，可能会造成比较长时间的延迟。默认值为4<br>  vm-max-threads 4</li><li>设置在向客户端应答时，是否把较小的包合并为一个包发送，默认为开启<br>glueoutputbuf yes</li><li>指定在超过一定的数量或者最大的元素超过某一临界值时，采用一种特殊的哈希算法<br>hash-max-zipmap-entries 64<br>hash-max-zipmap-value 512</li><li>指定是否激活重置哈希，默认为开启（后面在介绍Redis的哈希算法时具体介绍）<br>activerehashing yes</li><li>指定包含其它的配置文件，可以在同一主机上多个Redis实例之间使用同一份配置文件，而同时各个实例又拥有自己的特定配置文件<br>include /path/to/local.conf</li></ol>]]></content>
     
@@ -274,7 +338,9 @@
       <category term="数据库" scheme="https://www.chentyit.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-      <category term="Redis - 自学笔记" scheme="https://www.chentyit.com/tags/Redis-%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="Redis" scheme="https://www.chentyit.com/tags/Redis/"/>
+    
+      <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -283,7 +349,7 @@
     <link href="https://www.chentyit.com/2019/05/02/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Day02%EF%BC%89/"/>
     <id>https://www.chentyit.com/2019/05/02/Redis学习笔记（Day02）/</id>
     <published>2019-05-02T00:05:13.000Z</published>
-    <updated>2019-05-03T02:47:56.478Z</updated>
+    <updated>2019-05-19T01:12:25.329Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2019/05/02/Redis学习笔记（Day02）/john-hoang-1553942-unsplash.jpg" alt="插图"></p><blockquote><p>Photo by <a href="https://unsplash.com/photos/sf7TIaIwbjs?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">John Hoang</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Unsplash</a></p></blockquote><a id="more"></a><h2 id="入门概述"><a href="#入门概述" class="headerlink" title="入门概述"></a>入门概述</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>Redis：<strong>Re</strong>mote <strong>Di</strong>ctionary <strong>S</strong>erver（远程字典服务器）</p><p>是完全开源免费的，用 C 语言编写，遵循 BSD 协议，是一个高性能的（key / value）分布式内存数据库，基于内存运行并支持持久化的 NoSQL 数据库，是当前最热门的 NoSQL 数据库之一，也被称为数据结构服务器</p><p>特点：</p><ul><li>Redis 支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用</li><li>Redis 不仅仅支持简单的 key - value 类型的数据，同时还提供 list，set，zset，hash 等数据结构的存储</li><li>Redis 支持数据的备份，即 master - slave 模式的数据备份</li></ul><h3 id="能干嘛"><a href="#能干嘛" class="headerlink" title="能干嘛"></a>能干嘛</h3><p>内存存储和持久化：redis 支持异步将内存中的数据写到硬盘上，同时不影响继续服务</p><p>取最新 N 个数据的操作，如：可以将最新的10条评论的 ID 放在 Redis 的 List 集合里面</p><p>模拟类似于 HttpSession 这种需要设定过期时间的功能</p><p>发布、订阅消息系统</p><p>定时器、计数器</p><h2 id="Redis安装及启动"><a href="#Redis安装及启动" class="headerlink" title="Redis安装及启动"></a>Redis安装及启动</h2><p>将 tar.gz 包发送到 Linux 下，解压，进入目录，make &amp;&amp; make install，如果报没有 gcc 错误，就执行 <strong>yum install -y gcc</strong></p><p>安装完成之后可以在 /usr/local/bin 下面发现有以下命令</p><p><img src="/2019/05/02/Redis学习笔记（Day02）/Rediscmd.png" alt="插图"></p><p>将 <strong>redis</strong> 解压目录下的 redis.conf 复制到自定义目录中（我的是/myredis/）</p><p>启动 redis 服务器：redis-server /myredis/redis.conf</p><p>查看 redis 服务是否启动：ps -ef | grep redis</p><p>启动 redis-cli：redis-cli -p 6379（6379 为默认端口）</p><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><ul><li><p>单进程</p><p>单进程模型来处理客户端请求，对读写等事件的响应，是通过对 epoll 函数的包装来做到的，Redis 的实际处理速度完全依靠主进程的执行效率</p><p>Epoll 是 Linux 内核为处理大批量文件描述符二做了改进的 epoll，是 Linux 下多路复用 IO 接口 select / poll 的增强版本，它能显著提高程序在大量并发连接中只有少量活跃的情况下的系统 CPU 利用率</p></li><li><p>默认 16 个数据库，类似数组下标从 0 开始，初始默认使用零号数据库</p></li><li>Select 命令切换数据库</li><li>Dbsize 查看当前数据库的 key 的数量</li><li>FLUSHDB：清空当前库</li><li>FLUSHALL：通杀全部库</li><li>统一密码管理，16 个库都是同样的密码，要么都连接，要么都连不上</li><li>Redis 索引都是从零开始</li><li>默认端口 6379</li></ul><h2 id="Redis-数据类型"><a href="#Redis-数据类型" class="headerlink" title="Redis 数据类型"></a>Redis 数据类型</h2><h3 id="Redis-五大数据类型"><a href="#Redis-五大数据类型" class="headerlink" title="Redis 五大数据类型"></a>Redis 五大数据类型</h3><ul><li>String（字符串，最多可以是 512M）</li><li>Hash（哈希，类似于 Java 里的 Map）</li><li>List（列表）</li><li>Set（集合）</li><li>Zset（sorted set：有序集合 每个元素都会关联一个double类型的分数，分数可重复）</li></ul><h3 id="Redis-常见数据类型操作命令"><a href="#Redis-常见数据类型操作命令" class="headerlink" title="Redis 常见数据类型操作命令"></a>Redis 常见数据类型操作命令</h3><p><strong><a href="https://redis.io/commands" target="_blank" rel="noopener">https://redis.io/commands</a></strong></p><h3 id="Redis-键（key）"><a href="#Redis-键（key）" class="headerlink" title="Redis 键（key）"></a>Redis 键（key）</h3><ul><li>keys * –&gt; 查看当前数据库所有的 key</li><li>exists key的名字 –&gt; 判断某个 key 是否存在</li><li>move key名 db序号 –&gt; 将一个 key 值移动到指定的数据库中，当前数据库就没有了</li><li>expire key名 –&gt; 为给定的 key 设置过期时间</li><li>ttl key –&gt; 查看还有多少秒过期，-1 表示永不过期，-2 表示已过期</li><li>type key –&gt; 查看 key 是什么类型</li></ul><h3 id="Redis-字符串（String）"><a href="#Redis-字符串（String）" class="headerlink" title="Redis 字符串（String）"></a>Redis 字符串（String）</h3><ul><li><p>set / get / del / append / strlen</p></li><li><p>incr / decr / incrby / decrby，一定一要是数字才能进行加减（前面两个是递增或者递减，后面两个带值加减）</p></li><li><p>getrange / setrange</p><p>getrange：获取指定区间内的值，类似于 between …… and 的关系</p><p>setrange：设置指定区间内的值，格式是：setrange key值 具体值</p></li><li><p>setex（set with expire）键 秒 值 / setnx（set if not exist）</p></li><li><p>mset / mget / msetnx 批量设置 key-value</p></li><li><p>getset（先 get 再 set）</p></li></ul><h3 id="Redis-列表（List）"><a href="#Redis-列表（List）" class="headerlink" title="Redis 列表（List）"></a>Redis 列表（List）</h3><ul><li>lpush / rpush / lrange</li><li>lpop / rpop</li><li>lindex，按照索引下标获得元素（从上到下）</li><li>lrem list名 N value（从 list 中删除 N 个值为 value 的元素）</li><li>ltrim list名 index index（截取指定范围的值后再赋给 key）</li><li>rpoplpush 源列表 目的列表</li><li>linsert list名 before / after 值1 值2（在 list 中的值1前/后插入值2）</li></ul><h3 id="Redis-集合（Set）"><a href="#Redis-集合（Set）" class="headerlink" title="Redis 集合（Set）"></a>Redis 集合（Set）</h3><ul><li>sadd / smembers / sismember</li><li>scard（获取集合里面的元素个数）</li><li>srem key value （删除集合中元素）</li><li>srandmember key 某个整数（随机出几个数）</li><li>spop key （随机出栈）</li><li>smove key1 key2 在 key1 里的某个值（作用是将 key1 里的某个值赋给 key2）</li><li>数学集合类<ul><li>差集：sdiff</li><li>交集：sinter</li><li>并集：sunion</li></ul></li></ul><h3 id="Redis-哈希（Hash）"><a href="#Redis-哈希（Hash）" class="headerlink" title="Redis 哈希（Hash）"></a>Redis 哈希（Hash）</h3><p><strong>KV 模式不变，但是 V 是一个键值对</strong></p><ul><li>hset / hget / hmset / hmget / hgetall / hdel</li><li>hlen</li><li>hexist key（在 key 里面的某个值的 key）</li><li>hkeys / hvals</li><li>hincrby / hincrbyfloat</li><li>hsetnx</li></ul><h3 id="Redis-有序集合（Zset-——-sorted-set）"><a href="#Redis-有序集合（Zset-——-sorted-set）" class="headerlink" title="Redis 有序集合（Zset —— sorted set）"></a>Redis 有序集合（Zset —— sorted set）</h3><ul><li>zadd / zrange（zrange 最后可以带一个 withscores 顺便输出 key 值）</li><li>zrangebyscore key 开始score 结束score<ul><li>withscores</li><li>( 不包含</li><li>Limit i num 作用是返回限制（从 i 开始截取 num 个）</li></ul></li><li>zrem key 某个 score 下对应的 value 值（作用是删除元素）</li><li>zcard / zcount / key score区间 / zrank key values值（作用是获得下标值 / zscore key 对应值，获得分数）</li><li>zrevrank key values值（作用是逆序获得下标值）</li><li>zrevrange</li><li>zrevrangebyscore key 结束score 开始score</li></ul>]]></content>
     
@@ -299,7 +365,9 @@
       <category term="数据库" scheme="https://www.chentyit.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-      <category term="Redis - 自学笔记" scheme="https://www.chentyit.com/tags/Redis-%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="Redis" scheme="https://www.chentyit.com/tags/Redis/"/>
+    
+      <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -308,7 +376,7 @@
     <link href="https://www.chentyit.com/2019/05/01/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Day01%EF%BC%89/"/>
     <id>https://www.chentyit.com/2019/05/01/Redis学习笔记（Day01）/</id>
     <published>2019-05-01T01:29:12.000Z</published>
-    <updated>2019-05-02T00:07:05.405Z</updated>
+    <updated>2019-05-19T01:12:30.572Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/2019/05/01/Redis学习笔记（Day01）/kellen-riggin-1452245-unsplash.jpg" alt="插图"></p><blockquote><p>摄影：<a href="https://unsplash.com/photos/hlvtJ4JkVfc?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Kellen Riggin</a>，来自<a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Unsplash</a></p></blockquote><a id="more"></a><h2 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h2><p>NoSQL（NoSQL = Not Only SQL）泛指非关系型的数据库，这些类型的数据存储不需要固定的模式，无需多余操作就可以横向扩展</p><h3 id="易扩展"><a href="#易扩展" class="headerlink" title="易扩展"></a>易扩展</h3><p>NoSQL 数据库种类繁多，共同德天是去掉关系数据库的关系型特性</p><p>数据之间无关系，非常容易扩展，在架构的层面带来了可扩展的能力</p><h3 id="大数据量高性能"><a href="#大数据量高性能" class="headerlink" title="大数据量高性能"></a>大数据量高性能</h3><p>具有非常高的读写性能，尤其是在大数据量下，同样表现优秀</p><h2 id="3V-3高"><a href="#3V-3高" class="headerlink" title="3V + 3高"></a>3V + 3高</h2><p>3V：</p><ul><li>海量 Volume</li><li>多样 Variety</li><li>实时 Velocity</li></ul><p>3高：</p><ul><li>高并发</li><li>高可扩</li><li>高性能</li></ul><h2 id="NoSQL-数据模型"><a href="#NoSQL-数据模型" class="headerlink" title="NoSQL 数据模型"></a>NoSQL 数据模型</h2><h3 id="聚合模型"><a href="#聚合模型" class="headerlink" title="聚合模型"></a>聚合模型</h3><ul><li>KV 键值对</li><li>BSON</li><li>列族</li><li>图形</li></ul><h2 id="NoSQL-数据库的四大分类"><a href="#NoSQL-数据库的四大分类" class="headerlink" title="NoSQL 数据库的四大分类"></a>NoSQL 数据库的四大分类</h2><p><strong>KV 键值</strong>：</p><ul><li>新浪</li><li>美团</li><li>阿里</li><li>百度</li></ul><p><strong>文档型数据库（BSON格式较多）</strong>：</p><ul><li>CouchDB</li><li>MongoDB：是一个基于分布式存储的数据库，由 C++ 语言编写，结余关系数据库和非关系数据库之间的产品</li></ul><p><strong>列存储数据库</strong>：</p><ul><li>Cassandra</li><li>HBase</li><li>分布式文件系统</li></ul><p><strong>图关系数据库</strong></p><p>不是放图形的，放的是关系，比如：朋友圈社交网络、广告推荐系统，社交网络、推荐系统等，专注于构建关系图谱</p><ul><li>Neo4j</li><li>InfoGrid</li></ul><p><strong>四者对比</strong></p><table><thead><tr><th>分类</th><th>Example 举例</th><th>典型应用场景</th><th>数据模型</th><th>优点</th><th>缺点</th></tr></thead><tbody><tr><td>键值（key - value）</td><td>Tokyo，Cabinet/Tyrant，Redis，Voldemort，Oracle BDB</td><td>内容缓存，主要用于处理大量数据的高访问负载，也用于一些日志系统等等</td><td>Key 指向 Value的键值对，通常用 hash table 来实现</td><td>查找熟读快</td><td>数据无机构化，通常只被当做字符串或者二进制数据</td></tr><tr><td>列存储数据库</td><td>Cassandra，HBase，Riak</td><td>分布式的文件系统</td><td>以列簇式存储，将同一列数据存在一起</td><td>查找速度快，可扩展性强，更容易进行分布式扩展</td><td>功能相对有限</td></tr><tr><td>文档型数据库</td><td>CouchDB，MongoDB</td><td>Web 应用（与 key - value 类似，value 是结构化的，不同的是数据库能够了解 value 的内容</td><td>key - value对应的键值对，value 为结构化数据</td><td>数据结构要求不严格，表结构可变，不需要像关系型数据库一样需要预先定义表结构</td><td>查询性能不高，而且缺乏统一的查询语法</td></tr><tr><td>图形（Graph）数据库</td><td>Noe4J，InfoGrid，Infinite Graph</td><td>社交网络，推荐系统，专注于构建关系图谱</td><td>图结构</td><td>利用图结构相关算法，比如最短路径寻址，N 度关系查找等</td><td>很多时候需要对整个图做计算才能得出需要的信息，而且这种结构不太好做分布式的集群方案</td></tr></tbody></table><h2 id="分布式数据库中-CAP-原理-CAP-BASE"><a href="#分布式数据库中-CAP-原理-CAP-BASE" class="headerlink" title="分布式数据库中 CAP 原理 CAP + BASE"></a>分布式数据库中 CAP 原理 CAP + BASE</h2><h3 id="传统的ACID"><a href="#传统的ACID" class="headerlink" title="传统的ACID"></a>传统的ACID</h3><ul><li>A（Atomicity）原子性</li><li>C（Consistency）一致性</li><li>I（Isolation）独立性</li><li>D（Durability）持久性</li></ul><h3 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h3><ul><li>C（Consistency）强一致性</li><li>A（Availability）可用性</li><li>P（Partition tolerance）分区容错性</li></ul><p>CAP 理论的核心：一个分布式系统不可能同时很好满足一致性，可用性和分区容错性这三个需求，<strong>最多只能同时<em>较好的</em>满足两个</strong></p><p>根据 CAP 原理将 NoSQL 数据库分成了 满足 CA 原则，满足 CP 原则和满足 AP 原则三大类：</p><ul><li>CA – 单点集群：满足一致性，可用性的系统，通常在可扩展性上不太强大；（Oracle）</li><li>CP – 满足一致性，分区容错性的系统，通常性能不是特别高；（Redis，MongoDB）</li><li>AP – 满足可用性，分区容错性的系统，通常可能对一致性要求低一些（大多数网站架构选择）</li></ul><h3 id="BASE"><a href="#BASE" class="headerlink" title="BASE"></a>BASE</h3><p>是为了结局关系数据库强一致性引起的问题而引起的可用性降低突出的解决方案</p><ul><li>BA（Basically Available）基本可用</li><li>S（Soft state）软状态</li><li>E（Eventually consistent）最终一致</li></ul><p>它的思想是通过让系统放松对某一时刻数据一致性的要求来换取系统整体伸缩性和性能上改观。</p>]]></content>
     
@@ -324,7 +392,9 @@
       <category term="数据库" scheme="https://www.chentyit.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-      <category term="Redis - 自学笔记" scheme="https://www.chentyit.com/tags/Redis-%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="Redis" scheme="https://www.chentyit.com/tags/Redis/"/>
+    
+      <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -349,9 +419,9 @@
       <category term="Java" scheme="https://www.chentyit.com/categories/Java/"/>
     
     
-      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
-    
       <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
@@ -376,9 +446,9 @@
       <category term="Java" scheme="https://www.chentyit.com/categories/Java/"/>
     
     
-      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
-    
       <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
@@ -403,9 +473,9 @@
       <category term="Java" scheme="https://www.chentyit.com/categories/Java/"/>
     
     
-      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
-    
       <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
@@ -430,9 +500,9 @@
       <category term="Java" scheme="https://www.chentyit.com/categories/Java/"/>
     
     
-      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
-    
       <category term="自学笔记" scheme="https://www.chentyit.com/tags/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
@@ -486,65 +556,6 @@
     
     
       <category term="Spring框架" scheme="https://www.chentyit.com/tags/Spring%E6%A1%86%E6%9E%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>苏州Vlog（01）</title>
-    <link href="https://www.chentyit.com/2019/04/05/%E8%8B%8F%E5%B7%9EVlog%EF%BC%8801%EF%BC%89/"/>
-    <id>https://www.chentyit.com/2019/04/05/苏州Vlog（01）/</id>
-    <published>2019-04-05T12:38:32.000Z</published>
-    <updated>2019-04-05T14:12:45.410Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="清明苏州游Vlog（第一弹）"><a href="#清明苏州游Vlog（第一弹）" class="headerlink" title="清明苏州游Vlog（第一弹）"></a>清明苏州游Vlog（第一弹）</h2><p>游玩景点：</p><ul><li>诚品书店</li><li>桃花眷村</li><li>月光码头</li></ul><p><img src="/2019/04/05/苏州Vlog（01）/金鸡湖.jpg" alt="插图"></p><blockquote><p>拍摄于月光码头</p></blockquote><a id="more"></a><p><strong>难得一次节假日，溜出来和同学来苏州游玩一番，大学三年，我差不多宅了三年，在毕业之前，蹭着这次机会出来看看世界，看看祖国的大好河山（强行升华主题）</strong></p><h3 id="从学校出发"><a href="#从学校出发" class="headerlink" title="从学校出发"></a>从学校出发</h3><p>话说过节真的很难打车，我用滴滴等了好久没来车，就直接坐了学校北门的私家车（极不推荐）毕竟不安全，但是赶时间，就上车了，等到了车站，进了候车厅，我服了</p><p><img src="/2019/04/05/苏州Vlog（01）/车站.jpg" alt="插图"></p><p>这人，太！多！了！我想起来我去年去北京在地铁站等地铁的时候看到的情景</p><p><img src="/2019/04/05/苏州Vlog（01）/北京.jpg" alt="插图"></p><p>我更坚定了以后节假日要少出来，好好宅起来（真香警告）</p><p>我坐车做了一个半小时终于到苏州了，同学从南京出发，比我先到一个小时，后面还堵车缓行，磨磨蹭蹭最后还是落脚苏州，可是除了车站后才发现我们两个的车站离了差不多20分钟车程的距离，原本商量直接去原先定好的民宿，可是司机说那个民宿的地方都快出苏州了，我就凌乱了，果断退掉然后重新定了酒店，其中各种烦心事就懒得说了。到了新酒店，入住放包，休息了一下就出去玩了。</p><h3 id="第一站：诚品书店"><a href="#第一站：诚品书店" class="headerlink" title="第一站：诚品书店"></a>第一站：诚品书店</h3><p>关于诚品书店，我今天也才知道，不知道的请参照下图（手动滑稽）</p><p><img src="/2019/04/05/苏州Vlog（01）/百度.jpg" alt="插图"></p><p>发现诚品书店里面的书真多，但是吧，没有能够吸引我的，不是我眼光太高，实在是提不起兴趣，这里面的书大多数都是和艺术，设计，美学有关的，像我这种写个 APP 界面都要被吐槽的，逗比细胞反噬艺术细胞的直男，真心无感。。。。。。</p><p>但是感觉这个书店真的很不错的，也建议大家来看看，就算没有看上的书，来感受一波也是极好的</p><p><img src="/2019/04/05/苏州Vlog（01）/诚品书店1.jpg" alt="插图"></p><p><img src="/2019/04/05/苏州Vlog（01）/诚品书店2.jpg" alt="插图"></p><p><img src="/2019/04/05/苏州Vlog（01）/诚品书店3.jpg" alt="插图"></p><p><img src="/2019/04/05/苏州Vlog（01）/诚品书店4.jpg" alt="插图"></p><p><img src="/2019/04/05/苏州Vlog（01）/诚品书店5.jpg" alt="插图"></p><p><img src="/2019/04/05/苏州Vlog（01）/诚品书店6.jpg" alt="插图"></p><p><img src="/2019/04/05/苏州Vlog（01）/诚品书店7.jpg" alt="插图"></p><p><img src="/2019/04/05/苏州Vlog（01）/诚品书店8.jpg" alt="插图"></p><p><img src="/2019/04/05/苏州Vlog（01）/诚品书店9.jpg" alt="插图"></p><h3 id="第二站：桃花眷村"><a href="#第二站：桃花眷村" class="headerlink" title="第二站：桃花眷村"></a>第二站：桃花眷村</h3><p>逛完书店后，嘴馋了，就到楼下的 “桃花眷村” 吃了一小顿，点了一个豆花（不是我吃的），点了一个饭团和一份冷豆浆，一不小心就吃的有点饱了</p><p><img src="/2019/04/05/苏州Vlog（01）/小吃.jpg" alt="插图"></p><h3 id="第三站：月光码头"><a href="#第三站：月光码头" class="headerlink" title="第三站：月光码头"></a>第三站：月光码头</h3><p>第三站我们走到了金鸡湖边的一个广场，拍了点照片，这篇博客首页的图片就是在那拍的，逛了绕着湖边，我们走了半圈就返程了，回到酒店休息了一下，就点了份外卖（毕竟太累就不想出去吃了）然后写了这篇博客。</p><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>今天的的日志也差不多就是这些了，没什么可以在多描述的了，明天再去玩玩新的地方，再去看看风景，OK 收工，睡觉了，在发一张买的东西</p><p><img src="/2019/04/05/苏州Vlog（01）/商品.jpg" alt="插图"></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;清明苏州游Vlog（第一弹）&quot;&gt;&lt;a href=&quot;#清明苏州游Vlog（第一弹）&quot; class=&quot;headerlink&quot; title=&quot;清明苏州游Vlog（第一弹）&quot;&gt;&lt;/a&gt;清明苏州游Vlog（第一弹）&lt;/h2&gt;&lt;p&gt;游玩景点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;诚品书店&lt;/li&gt;
-&lt;li&gt;桃花眷村&lt;/li&gt;
-&lt;li&gt;月光码头&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&quot;/2019/04/05/苏州Vlog（01）/金鸡湖.jpg&quot; alt=&quot;插图&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;拍摄于月光码头&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="生活" scheme="https://www.chentyit.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="旅游" scheme="https://www.chentyit.com/tags/%E6%97%85%E6%B8%B8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Maven的Web工程中获取相对路径无效</title>
-    <link href="https://www.chentyit.com/2019/03/26/Maven%E7%9A%84Web%E5%B7%A5%E7%A8%8B%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E6%97%A0%E6%95%88/"/>
-    <id>https://www.chentyit.com/2019/03/26/Maven的Web工程中获取相对路径无效/</id>
-    <published>2019-03-26T11:14:57.000Z</published>
-    <updated>2019-03-26T11:37:08.448Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Maven的Web工程中-pageContext-request-contextPath-获取相对路径无效"><a href="#Maven的Web工程中-pageContext-request-contextPath-获取相对路径无效" class="headerlink" title="Maven的Web工程中${pageContext.request.contextPath}获取相对路径无效"></a>Maven的Web工程中${pageContext.request.contextPath}获取相对路径无效</h2><blockquote><p>开发环境：Maven 3.6.0 || jdk 1.8 || Spring 4 </p></blockquote><p><img src="/2019/03/26/Maven的Web工程中获取相对路径无效/zahrin-lukman-1449925-unsplash.jpg" alt="插图"></p><blockquote><p>摄影：<a href="https://unsplash.com/photos/VSNoQdimlQQ?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Zahrin Lukman</a>，来自<a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Unsplash</a></p></blockquote><a id="more"></a><h3 id="解决方案一（亲测有效）"><a href="#解决方案一（亲测有效）" class="headerlink" title="解决方案一（亲测有效）"></a>解决方案一（亲测有效）</h3><p>将 web.xml 文件中的 <web-app> 标签的版本修改高一些</web-app></p><pre><code>&lt;web-app version=&quot;3.0&quot;    xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;    xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee    http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd&quot;&gt;&lt;/web-app&gt;</code></pre><p>原 web.xml</p><pre><code>&lt;web-app&gt;&lt;/web-app&gt;</code></pre><h3 id="方案二（亲测无效且有毒）"><a href="#方案二（亲测无效且有毒）" class="headerlink" title="方案二（亲测无效且有毒）"></a>方案二（亲测无效且有毒）</h3><p>这种方法由于没成功我就不详细介绍了，大概说一下，因为用 maven 创建的 webapp 项目是模板的，这第二种方法直接就是去修改模板了，但是这个模板藏得很深，而且我修改了之后，我的 maven 直接用不了了，导致我直接重装的 maven，重装之后每次在命令行运行 mvn 命令就会报错，目前还无法解决，但还不至于影响我在 IDEA 中开发，说来也怪，在 IDEA 中一点事都没有，但是一旦执行 mvn -V 还是会报错，所以这个方法谨慎使用，最好别用，虽然每次都要改一次 web.xml 文件，但不至于把自己的软件搞坏，如果报错解决了再来更新</p><blockquote><p>找到为什么出错了，不好意思，命令打错了，是 mvn -version 不是 mvn -V 丢脸丢大发了，但是这个方法任然不可用！！！</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Maven的Web工程中-pageContext-request-contextPath-获取相对路径无效&quot;&gt;&lt;a href=&quot;#Maven的Web工程中-pageContext-request-contextPath-获取相对路径无效&quot; class=&quot;headerlink&quot; title=&quot;Maven的Web工程中${pageContext.request.contextPath}获取相对路径无效&quot;&gt;&lt;/a&gt;Maven的Web工程中${pageContext.request.contextPath}获取相对路径无效&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;开发环境：Maven 3.6.0 || jdk 1.8 || Spring 4 &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;/2019/03/26/Maven的Web工程中获取相对路径无效/zahrin-lukman-1449925-unsplash.jpg&quot; alt=&quot;插图&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;摄影：&lt;a href=&quot;https://unsplash.com/photos/VSNoQdimlQQ?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Zahrin Lukman&lt;/a&gt;，来自&lt;a href=&quot;https://unsplash.com/?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="Java" scheme="https://www.chentyit.com/categories/Java/"/>
-    
-    
-      <category term="开发问题解决" scheme="https://www.chentyit.com/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"/>
     
   </entry>
   
