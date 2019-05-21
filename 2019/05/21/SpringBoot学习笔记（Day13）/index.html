@@ -88,19 +88,16 @@
 
 
 
-<meta name="description" content="限制请求抽象类 WebSecurityConfigurerAdapter 提供了一个方法 configure(HttpSecurity)，通过它能够实现对于不同角色（用户）赋予不同权限的功能 configure(HttpSecurity) 源码 123456789101112131415protected void configure(HttpSecurity http) throws Exce">
 <meta name="keywords" content="自学笔记,Spring框架">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot学习笔记（Day13）">
 <meta property="og:url" content="https://www.chentyit.com/2019/05/21/SpringBoot学习笔记（Day13）/index.html">
 <meta property="og:site_name" content="翼叶知秋">
-<meta property="og:description" content="限制请求抽象类 WebSecurityConfigurerAdapter 提供了一个方法 configure(HttpSecurity)，通过它能够实现对于不同角色（用户）赋予不同权限的功能 configure(HttpSecurity) 源码 123456789101112131415protected void configure(HttpSecurity http) throws Exce">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/05/21/SpringBoot学习笔记（Day13）/小白.png">
-<meta property="og:updated_time" content="2019-05-21T08:36:22.268Z">
+<meta property="og:updated_time" content="2019-05-21T08:49:48.621Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot学习笔记（Day13）">
-<meta name="twitter:description" content="限制请求抽象类 WebSecurityConfigurerAdapter 提供了一个方法 configure(HttpSecurity)，通过它能够实现对于不同角色（用户）赋予不同权限的功能 configure(HttpSecurity) 源码 123456789101112131415protected void configure(HttpSecurity http) throws Exce">
 <meta name="twitter:image" content="https://www.chentyit.com/2019/05/21/SpringBoot学习笔记（Day13）/小白.png">
 
 
@@ -453,6 +450,7 @@
 
       
         <p><img src="/2019/05/21/SpringBoot学习笔记（Day13）/小白.png" alt="插图"></p>
+<a id="more"></a>
 <h2 id="限制请求"><a href="#限制请求" class="headerlink" title="限制请求"></a>限制请求</h2><p>抽象类 WebSecurityConfigurerAdapter 提供了一个方法 configure(HttpSecurity)，通过它能够实现对于不同角色（用户）赋予不同权限的功能</p>
 <p><strong>configure(HttpSecurity) 源码</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.logger.debug(<span class="string">"Using default configure(HttpSecurity). If subclassed this will potentially override subclass configure(HttpSecurity)."</span>);</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 只要通过验证就可以访问所有的请求</span></span><br><span class="line"><span class="comment">     * authorizeRequests 方法限定只对签名成功的用户请求</span></span><br><span class="line"><span class="comment">     * anyRequest 方法限定所有请求</span></span><br><span class="line"><span class="comment">     * authenticated 方法对所有签名成功的用户允许方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    ((HttpSecurity)((HttpSecurity)((AuthorizedUrl)http.authorizeRequests().anyRequest())</span><br><span class="line">                    .authenticated()</span><br><span class="line">                    <span class="comment">// and 方法是连接词，formLogin 代表使用 Spring Security 默认的登录界面</span></span><br><span class="line">                    .and()).formLogin()</span><br><span class="line">     			   <span class="comment">// httpBasic 方法说明启用 HTTP 认证</span></span><br><span class="line">     			   .and()).httpBasic();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
