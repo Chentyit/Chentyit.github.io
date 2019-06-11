@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://www.chentyit.com/2019/06/10/Android复习提纲/活动声明周期.png">
 <meta property="og:image" content="https://www.chentyit.com/2019/06/10/Android复习提纲/进程优先级.jpg">
 <meta property="og:image" content="https://www.chentyit.com/2019/06/10/Android复习提纲/Activity%20事件回调函数的调用顺序.jpg">
-<meta property="og:updated_time" content="2019-06-10T08:17:41.969Z">
+<meta property="og:updated_time" content="2019-06-11T01:18:26.403Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android复习提纲">
 <meta name="twitter:description" content="Android复习提纲12345678910111213141516171819202122232425/*** * * *                                                    __----~~~~~~~~~~~------___ *                                   .  .   ~~//====......">
@@ -394,7 +394,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,632
+                  6,140
                 </span>
               
 
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  14
+                  24
                 </span>
               
             </div>
@@ -765,6 +765,225 @@
 <p>（5）（6）获取历史事件的相对坐标</p>
 <p>（7）获取历史事件的触点尺寸</p>
 <p>（8）返回历史数据的数量，用于用户显示</p>
+<h3 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h3><h4 id="6-1节-P145-148-所有内容掌握"><a href="#6-1节-P145-148-所有内容掌握" class="headerlink" title="6.1节 P145-148 所有内容掌握"></a>6.1节 P145-148 所有内容掌握</h4><h5 id="（1）什么是Intent，作用是什么"><a href="#（1）什么是Intent，作用是什么" class="headerlink" title="（1）什么是Intent，作用是什么"></a>（1）什么是Intent，作用是什么</h5><p>Intent是一个动作的完整描述，包含了动作的产生组件、接收组件和传递的数据信息。Intent为Activity、Service和BroadcastReceiver等组件提供交互能力，将一个组件的数据和动作传递给另一个组件</p>
+<p>用途：</p>
+<ol>
+<li>Intent可以非常方便的启动Activity和Service</li>
+<li>在Android系统上发布广播信息。</li>
+</ol>
+<h5 id="（2）什么是显示启动，如何编程"><a href="#（2）什么是显示启动，如何编程" class="headerlink" title="（2）什么是显示启动，如何编程"></a>（2）什么是显示启动，如何编程</h5><p>显示启动必须在Intent中指明启动的Activity所在的类。</p>
+<p>使用Intent来显示启动Activity，首先需要创建一个Intent，并为他指定当前得应用程序上下文以及要启动的Activity，把创建好的Intent作为参数传递给startActivity()方法</p>
+<h5 id="（3）什么是隐式启动，如何编程"><a href="#（3）什么是隐式启动，如何编程" class="headerlink" title="（3）什么是隐式启动，如何编程"></a>（3）什么是隐式启动，如何编程</h5><p>隐式启动由Android系统根据Intent的动作和数据来决定启动哪一个Activity</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_VIEW, Uri.parse(<span class="string">"http://www.baidu.com"</span>));</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
+<h5 id="（4）两种启动方式区别是什么"><a href="#（4）两种启动方式区别是什么" class="headerlink" title="（4）两种启动方式区别是什么"></a>（4）两种启动方式区别是什么</h5><p>隐式启动无需指明具体的类，只要提供需要处理的数据或动作即可；显示启动需要指明加载组件的类</p>
+<h5 id="（5）隐式启动时如何匹配到调度对象和类的"><a href="#（5）隐式启动时如何匹配到调度对象和类的" class="headerlink" title="（5）隐式启动时如何匹配到调度对象和类的"></a>（5）隐式启动时如何匹配到调度对象和类的</h5><p>Intent 的动作是 Intent.ACTION_VIE，数据是 Web 地址，使用 Uri.parse(urlString) 方法，可以简单地把一个字符串解释成 Uri 对象。Android 系统在匹配 Intent 时，首先根据动作 Intent.ACTION_VIEW，得知启动那个具备浏览功能的 Activity，但具体是浏览电话还是浏览网页，还需亚奥根据 URI 的数据类型进行判断</p>
+<h5 id="（6）Intent传递参数的代码编程"><a href="#（6）Intent传递参数的代码编程" class="headerlink" title="（6）Intent传递参数的代码编程"></a>（6）Intent传递参数的代码编程</h5><ul>
+<li>向下一个 Activity 传递参数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传数据</span></span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent(FirstActivity.<span class="keyword">this</span>, SecondActivity.class);</span><br><span class="line">intent.putExtra(<span class="string">"extra_data"</span>, data);</span><br><span class="line">startActivity(intent);</span><br><span class="line"><span class="comment">// 收数据</span></span><br><span class="line">Intent intent = getIntent();</span><br><span class="line">String data = intent.getStringExtra(<span class="string">"extra_data"</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>向上一个 Activity 传递参</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// FirstActivity 先传一个数据过</span></span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent(FirstActivity.<span class="keyword">this</span>, SecondActivity.class);</span><br><span class="line">startActivityForResult(intent, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 SecondActivity 中传数据</span></span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">intent.putExtra(<span class="string">"data_return"</span>, <span class="string">"Hello FirstActivity"</span>);</span><br><span class="line">setResult(RESULT_OK, intent);</span><br><span class="line">finish();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 FirstActivity 中接收传递回来的值</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (requestCode) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">if</span> (resultCode == RESULT_OK) &#123;</span><br><span class="line">                String returnedDaata = data.getStringExtra(<span class="string">"data_return"</span>);</span><br><span class="line">                Log.d(<span class="string">"FirstActivity"</span>, returnedData);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="P151-所有程序都要会"><a href="#P151-所有程序都要会" class="headerlink" title="P151 所有程序都要会"></a>P151 所有程序都要会</h4><h4 id="P155-6-2节-过滤器"><a href="#P155-6-2节-过滤器" class="headerlink" title="P155 6.2节 过滤器"></a>P155 6.2节 过滤器</h4><h5 id="（1）什么是Intent过滤器，机制是什么"><a href="#（1）什么是Intent过滤器，机制是什么" class="headerlink" title="（1）什么是Intent过滤器，机制是什么"></a>（1）什么是Intent过滤器，机制是什么</h5><p>Intent过滤器是一种根据Intent中的动作（Action）、类别（Categorie）和数据（Data）等内容，对适合接收该Intent的组件进行匹配和筛选的机制。Intent过滤器的作用是匹配数据类型、路径和协议，还包括可以用来确定多个匹配项顺序的优先级。每个Intent过滤器可以定义多个<category>标签，程序开发人员可以使用自定义的类别，或使用Android系统提供的类别</category></p>
+<h5 id="（2）怎么在android配置文档中配置过滤器"><a href="#（2）怎么在android配置文档中配置过滤器" class="headerlink" title="（2）怎么在android配置文档中配置过滤器"></a>（2）怎么在android配置文档中配置过滤器</h5><ul>
+<li>这个是用来设置默认用户界，动作是 android.intent.action.MAIN，类别是 android.intent.category.LAUNCHER</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.LAUNCHER"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>以浏览的方式启动相应的 Activity，动作是 android.intent.action.VIEW，类别是 android.intent.category.DEFAULT，协议是 schemodemo，主机名称部分是 edu.hrbeu</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.VIEW"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">data</span> <span class="attr">anndroid:scheme</span>=<span class="string">"schemodemo"</span> <span class="attr">android:host</span>=<span class="string">"edu.hrbeu"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="（3）-Intent解析的匹配规则是什么-P156"><a href="#（3）-Intent解析的匹配规则是什么-P156" class="headerlink" title="（3） Intent解析的匹配规则是什么 P156"></a>（3） Intent解析的匹配规则是什么 P156</h5><p>Intent解析的匹配规则是：</p>
+<ol>
+<li>Android系统把所有应用程序包中的Intent过滤器集合在一起，形成一个完整的Intent过滤器列表；</li>
+<li>在Intent与Intent过滤器进行匹配时，Android系统会将列表中所有Intent过滤器的“动作”和“类别”与Intent进行匹配，没有指定“动作”的Intent过滤器可以匹配任何的Intent，但是没有指定“类别”的Intent过滤器只能匹配没有“类别”的Intent；</li>
+<li>把Intent数据Uri的每个子部与Intent过滤器的<data>标签中的属性进行匹配；</data></li>
+<li>如果Intent过滤器的匹配结果多于一个，则可以根据在<intent-filter>标签中定义的优先级标签来对Intent过滤器进行排序，优先级最高的Intent过滤器将被选择。以上每步中不匹配的都将被过滤掉。</intent-filter></li>
+</ol>
+<h4 id="6-3-节-什么是广播消息"><a href="#6-3-节-什么是广播消息" class="headerlink" title="6.3 节 什么是广播消息"></a>6.3 节 什么是广播消息</h4><p>广播信息的内容可以是应用程序密切相关的数据信息，也可以是Android的系统信息，例如网络连接变化、电池电量变化、接收到短信或系统设置变化等</p>
+<h4 id="P158-Demo所有程序都要要"><a href="#P158-Demo所有程序都要要" class="headerlink" title="P158 Demo所有程序都要要"></a>P158 Demo所有程序都要要</h4><h3 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h3><h4 id="7-1-全都要，用启动方式使用Service，启动和终止分别使用什么函数，有什么特点"><a href="#7-1-全都要，用启动方式使用Service，启动和终止分别使用什么函数，有什么特点" class="headerlink" title="7.1 全都要，用启动方式使用Service，启动和终止分别使用什么函数，有什么特点"></a>7.1 全都要，用启动方式使用Service，启动和终止分别使用什么函数，有什么特点</h4><ul>
+<li><p>启动方式</p>
+<p>启动函数：Context.startService()</p>
+<p>终止函数：Context.stopService()</p>
+<p> 特点：在启动方式中，启动Service的组件不能够获取Service的对象实例，因此无法调用Service中的任何函数，也不能够获取Service中的任何状态和数据信息</p>
+</li>
+<li><p>绑定方式</p>
+<p>通过Context.bindService()建立服务链接，通过Context.unbindService()停止服务链接</p>
+<p>特点：绑定Service的组件可以调用Service中实现的函数，或直接获取Service中状态和数据信息。如果在绑定过程中Service没有启动，Context.bindService()会自动启动Service，而且同一个Service可以绑定多个服务链接，这样可以同时为多个不同的组件提供服务</p>
+</li>
+</ul>
+<h4 id="Service两种生命周期的含义，以及起始和终止函数"><a href="#Service两种生命周期的含义，以及起始和终止函数" class="headerlink" title="Service两种生命周期的含义，以及起始和终止函数"></a>Service两种生命周期的含义，以及起始和终止函数</h4><p>完全生命周期从 onCreate() 开始到 onDestory() 结束，在 onCreate() 中完成Service的初始化工作，在 onDestory() 中释放所有占用的资源</p>
+<p>活动生命周期从 onStart() 开始，但没有与之对应的“停止”函数，因此可以粗略地认为活动生命周期是以 onDestory() 标志结束</p>
+<h4 id="启动过程当中隐式调用和显示调用"><a href="#启动过程当中隐式调用和显示调用" class="headerlink" title="启动过程当中隐式调用和显示调用"></a>启动过程当中隐式调用和显示调用</h4><h4 id="P165-Demo都要要"><a href="#P165-Demo都要要" class="headerlink" title="P165 Demo都要要"></a>P165 Demo都要要</h4><h4 id="P175-Demo都要要"><a href="#P175-Demo都要要" class="headerlink" title="P175 Demo都要要"></a>P175 Demo都要要</h4><h4 id="P178-什么是需要使用远程服务，什么是AIDL，AIDL传递的参数类型有哪几种，创建与使用AIDL的步骤是什么（不需要代码）"><a href="#P178-什么是需要使用远程服务，什么是AIDL，AIDL传递的参数类型有哪几种，创建与使用AIDL的步骤是什么（不需要代码）" class="headerlink" title="P178 什么是需要使用远程服务，什么是AIDL，AIDL传递的参数类型有哪几种，创建与使用AIDL的步骤是什么（不需要代码）"></a>P178 什么是需要使用远程服务，什么是AIDL，AIDL传递的参数类型有哪几种，创建与使用AIDL的步骤是什么（不需要代码）</h4><p>AIDL 是 Android 系统自定义的接口描述语言，可以简化进程间数据格式转换和数据交换的代码，通过定义 Service 内部的公共方法，允许在不同进程间的调用者和 Service 之间相互传递数据</p>
+<center>AIDL 支持的数据类型</center>
+
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+<th>需要引入</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Java 语言的基本类型</td>
+<td>包括 boolean，byte，short，int，float 和 double 等</td>
+<td>否</td>
+</tr>
+<tr>
+<td>String</td>
+<td>java.util.String</td>
+<td>否</td>
+</tr>
+<tr>
+<td>CharSequence</td>
+<td>java.lang.CharSquence</td>
+<td>否</td>
+</tr>
+<tr>
+<td>List</td>
+<td>其中所有元素都必须是 AIDL 支持的数据类型</td>
+<td>否</td>
+</tr>
+<tr>
+<td>Map</td>
+<td>其中所有的键和元素都必须是 AIDL 支持的数据类型</td>
+<td>否</td>
+</tr>
+<tr>
+<td>其他 AIDL 接口</td>
+<td>任何其他使用 AIDL 语言生成的类型接口</td>
+<td>是</td>
+</tr>
+<tr>
+<td>Parcelable</td>
+<td>实现 Pracelable 接口的对象</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p>步骤：</p>
+<ol>
+<li>使用AIDL语言定义远程服务的接口；</li>
+<li>通过继承Service类实现远程服务；</li>
+<li>绑定和使用远程服务</li>
+</ol>
+<h3 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h3><h4 id="SharePreference-以什么格式保存文件"><a href="#SharePreference-以什么格式保存文件" class="headerlink" title="SharePreference 以什么格式保存文件"></a>SharePreference 以什么格式保存文件</h4><p>使用 XMl 文件保存 NVP 格式的文件</p>
+<h4 id="三种访问模式是哪三种，对应的查看名是什么（P196）"><a href="#三种访问模式是哪三种，对应的查看名是什么（P196）" class="headerlink" title="三种访问模式是哪三种，对应的查看名是什么（P196）"></a>三种访问模式是哪三种，对应的查看名是什么（P196）</h4><p>私有（MODE_PRIVATE）</p>
+<p>全局读（MODE_WORLD_READABLE）</p>
+<p>全局写（MODE_WORLD_WRITEABLE）</p>
+<h4 id="SimplePreferenceDemo-代码都要（P197）"><a href="#SimplePreferenceDemo-代码都要（P197）" class="headerlink" title="SimplePreferenceDemo 代码都要（P197）"></a>SimplePreferenceDemo 代码都要（P197）</h4><h4 id="8-2节-内部文件存储放在什么地方"><a href="#8-2节-内部文件存储放在什么地方" class="headerlink" title="8.2节 内部文件存储放在什么地方"></a>8.2节 内部文件存储放在什么地方</h4><p>保存在设备的内部存储器上，在 Android系 统下的 /data/data/<package name>/files 目录中</package></p>
+<h4 id="内部文件操作模式"><a href="#内部文件操作模式" class="headerlink" title="内部文件操作模式"></a>内部文件操作模式</h4><center>4 种文件的操作模式</center>
+
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MODE_PRIVATE</td>
+<td>私有模式，缺陷模式，文件仅能够被创建文件的程序访问，或具有相同 UID 的程序访问</td>
+</tr>
+<tr>
+<td>MODE_APPEND</td>
+<td>追加模式，如果文件已经存在，则在文件的结尾处添加新数据</td>
+</tr>
+<tr>
+<td>MODE_WORLD_READABLE</td>
+<td>全局读模式，允许任何程序读取私有文件</td>
+</tr>
+<tr>
+<td>MODE_WORLD_WRITEABLE</td>
+<td>全局写模式，允许任何程序写入私有文件</td>
+</tr>
+</tbody>
+</table>
+<h4 id="P201-InternalFIleDemo"><a href="#P201-InternalFIleDemo" class="headerlink" title="P201 InternalFIleDemo"></a>P201 InternalFIleDemo</h4><h4 id="P206-8-2-3-资源文件当中RAW文件夹，XML文件夹区别"><a href="#P206-8-2-3-资源文件当中RAW文件夹，XML文件夹区别" class="headerlink" title="P206 8.2.3 资源文件当中RAW文件夹，XML文件夹区别"></a>P206 8.2.3 资源文件当中RAW文件夹，XML文件夹区别</h4><p>在应用程序编译和打包时，/res/raw 目录下的所有文件都会保留原有格式不变。而 /res/xml 目录下一般用来保存格式化数据的 XML 文件，则会在编译和打包时将 XML 文件转换为二进制格式，用以降低存储器空间占用率和提高访问效率，在应用程序运行时会以特殊的方式访问</p>
+<h4 id="8-3-数据库存储"><a href="#8-3-数据库存储" class="headerlink" title="8.3 数据库存储"></a>8.3 数据库存储</h4><h5 id="打开Sqllite命令"><a href="#打开Sqllite命令" class="headerlink" title="打开Sqllite命令"></a>打开Sqllite命令</h5><p>adb shell</p>
+<h5 id="sqlite3-常用命令"><a href="#sqlite3-常用命令" class="headerlink" title="sqlite3 常用命令"></a>sqlite3 常用命令</h5><p>P213 表8.4 database，exit，quit，tables，schema</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.databases</td>
+<td>显示数据库名称和文件位置</td>
+</tr>
+<tr>
+<td>.exit</td>
+<td>退出</td>
+</tr>
+<tr>
+<td>.quit</td>
+<td>退出</td>
+</tr>
+<tr>
+<td>.tables ?PATTERN?</td>
+<td>显示符合匹配模式的表名</td>
+</tr>
+<tr>
+<td>.schema ?TABLE?</td>
+<td>显示表的创建语句</td>
+</tr>
+</tbody>
+</table>
+<h4 id="数据库编程P215-221所有代码都需要-P221-SQLliteDemo"><a href="#数据库编程P215-221所有代码都需要-P221-SQLliteDemo" class="headerlink" title="数据库编程P215-221所有代码都需要 P221 SQLliteDemo"></a>数据库编程P215-221所有代码都需要 P221 SQLliteDemo</h4><h4 id="表8-5-1-2-4-9-10"><a href="#表8-5-1-2-4-9-10" class="headerlink" title="表8.5 1 2 4 9 10"></a>表8.5 1 2 4 9 10</h4><center>Cursor 类的共有方法</center>
+
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>moveToFirst</td>
+<td>将指针移动到第一条数据上</td>
+</tr>
+<tr>
+<td>moveToNext</td>
+<td>将指针移动到下一条数据上</td>
+</tr>
+<tr>
+<td>getCount</td>
+<td>获取集合的数据数量</td>
+</tr>
+<tr>
+<td>moveToPosition</td>
+<td>将指针移动到指定的数据上</td>
+</tr>
+<tr>
+<td>getPosition</td>
+<td>返回当前指针的位置</td>
+</tr>
+</tbody>
+</table>
+<h4 id="8-4节-数据共享-什么是ConnectProvider特点，作用，创建步骤需要重载哪六个方法名称"><a href="#8-4节-数据共享-什么是ConnectProvider特点，作用，创建步骤需要重载哪六个方法名称" class="headerlink" title="8.4节 数据共享 什么是ConnectProvider特点，作用，创建步骤需要重载哪六个方法名称"></a>8.4节 数据共享 什么是ConnectProvider特点，作用，创建步骤需要重载哪六个方法名称</h4><p>ContentProvider（数据提供者）是应用程序之间共享数据的一种接口机制</p>
+<p>作用：进程间进行<strong>数据交互 &amp; 共享</strong>，即跨进程通信</p>
+<p>六个方法名称：</p>
+<ol>
+<li>delete()</li>
+<li>insert()</li>
+<li>query()</li>
+<li>update()</li>
+<li>getType()</li>
+<li>onCreate()</li>
+</ol>
+<p>前四个用来对shujj进行删除，添加，查询，修改</p>
+<p>第 5 个用来返回指定 URI 的 MIME 数据类型</p>
+<p>第 6 个一般用来初始化底层数据集合简历数据连接等工作</p>
+<h4 id="P227-查询操作"><a href="#P227-查询操作" class="headerlink" title="P227 查询操作"></a>P227 查询操作</h4><p>查询 ID 为 2 的数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String KEY_ID = <span class="string">"_id"</span>;</span><br><span class="line">String KEY_NAME = <span class="string">"name"</span>;</span><br><span class="line">String KEY_AGE = <span class="string">"age"</span>;</span><br><span class="line">String KEY_HEIGHT = <span class="string">"height"</span>;</span><br><span class="line"></span><br><span class="line">Uri uri = Uri.parse(CONTENT_URI_STRING + <span class="string">"/"</span> + <span class="number">2</span>);</span><br><span class="line">Cursor cursor = </span><br><span class="line">    resolver.query(uri, <span class="keyword">new</span> String[] &#123;KEY_ID, KEY_NAME, KEY_AGE, KEY_HEIGHT&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1026,7 +1245,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android复习提纲"><span class="nav-number">1.</span> <span class="nav-text">Android复习提纲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安卓体系结构，每一层的功能和作用（1-4）"><span class="nav-number">1.1.</span> <span class="nav-text">安卓体系结构，每一层的功能和作用（1.4）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安卓平台eclipse开发环境搭建步骤"><span class="nav-number">1.2.</span> <span class="nav-text">安卓平台eclipse开发环境搭建步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-SDK包含哪些内容（P29）"><span class="nav-number">1.3.</span> <span class="nav-text">Android SDK包含哪些内容（P29）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDK-中英文全称，AVD中英文全称"><span class="nav-number">1.4.</span> <span class="nav-text">SDK 中英文全称，AVD中英文全称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-调试桥的作用，英文全称及英文简称"><span class="nav-number">1.5.</span> <span class="nav-text">Android 调试桥的作用，英文全称及英文简称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安卓程序结构中，每个文件夹作用，每个文件夹存放什么（P46-47）"><span class="nav-number">1.6.</span> <span class="nav-text">安卓程序结构中，每个文件夹作用，每个文件夹存放什么（P46-47）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安卓的配置文件作用，基本组成标签（P48）"><span class="nav-number">1.7.</span> <span class="nav-text">安卓的配置文件作用，基本组成标签（P48）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-R-java-文件，作用是什么（P49）"><span class="nav-number">1.8.</span> <span class="nav-text">什么是 R.java 文件，作用是什么（P49）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-程序生命周期，重点：安卓生命周期中包含哪五种生命进程，分别在什么时候执行或者产生，5种进程优先级是什么"><span class="nav-number">1.9.</span> <span class="nav-text">4.1 程序生命周期，重点：安卓生命周期中包含哪五种生命进程，分别在什么时候执行或者产生，5种进程优先级是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安卓系统中4大组件作用，哪四个（P67）"><span class="nav-number">1.10.</span> <span class="nav-text">安卓系统中4大组件作用，哪四个（P67）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-节"><span class="nav-number">1.11.</span> <span class="nav-text">4.3 节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P72-代码（整个程序）-启动-》隐藏-》再启动-》消亡-执行了什么回调函数，执行顺序是什么"><span class="nav-number">1.12.</span> <span class="nav-text">P72 代码（整个程序） 启动-》隐藏 -》再启动 -》消亡 执行了什么回调函数，执行顺序是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LogCat有哪几种日志类型，级别是什么，具体使用代码是什么（P77-倒数第二段）"><span class="nav-number">1.13.</span> <span class="nav-text">LogCat有哪几种日志类型，级别是什么，具体使用代码是什么（P77 倒数第二段）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P86-96-涉及到组件都需要掌握，代码编程，响应事件方法名，常用属性、"><span class="nav-number">1.14.</span> <span class="nav-text">P86-96 涉及到组件都需要掌握，代码编程，响应事件方法名，常用属性、</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P102-116-涉及到Android所有常用布局都需要掌握"><span class="nav-number">1.15.</span> <span class="nav-text">P102-116 涉及到Android所有常用布局都需要掌握</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4节-菜单-选项菜单再哪一个函数中创建，如何创建，在哪一个函数中响应用户的操作"><span class="nav-number">1.16.</span> <span class="nav-text">5.4节 菜单 选项菜单再哪一个函数中创建，如何创建，在哪一个函数中响应用户的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快捷菜单再哪一个函数创建，怎么创建，在哪个函数中响应用户的操作"><span class="nav-number">1.17.</span> <span class="nav-text">快捷菜单再哪一个函数创建，怎么创建，在哪个函数中响应用户的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快捷菜单与其他菜单有什么不同"><span class="nav-number">1.18.</span> <span class="nav-text">快捷菜单与其他菜单有什么不同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#界面事件的返回值对消息传递的影响机制（5-6-1节）"><span class="nav-number">1.19.</span> <span class="nav-text">界面事件的返回值对消息传递的影响机制（5.6.1节）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo所有程序掌握-P139-第四行结合代码一起看（0-按下-1-抬起）（P138）"><span class="nav-number">1.20.</span> <span class="nav-text">Demo所有程序掌握 P139 第四行结合代码一起看（0 按下 1 抬起）（P138）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（最后一段）-触点压力和触点大小描述（P143）"><span class="nav-number">1.21.</span> <span class="nav-text">（最后一段） 触点压力和触点大小描述（P143）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android复习提纲"><span class="nav-number">1.</span> <span class="nav-text">Android复习提纲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安卓体系结构，每一层的功能和作用（1-4）"><span class="nav-number">1.1.</span> <span class="nav-text">安卓体系结构，每一层的功能和作用（1.4）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安卓平台eclipse开发环境搭建步骤"><span class="nav-number">1.2.</span> <span class="nav-text">安卓平台eclipse开发环境搭建步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-SDK包含哪些内容（P29）"><span class="nav-number">1.3.</span> <span class="nav-text">Android SDK包含哪些内容（P29）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDK-中英文全称，AVD中英文全称"><span class="nav-number">1.4.</span> <span class="nav-text">SDK 中英文全称，AVD中英文全称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-调试桥的作用，英文全称及英文简称"><span class="nav-number">1.5.</span> <span class="nav-text">Android 调试桥的作用，英文全称及英文简称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安卓程序结构中，每个文件夹作用，每个文件夹存放什么（P46-47）"><span class="nav-number">1.6.</span> <span class="nav-text">安卓程序结构中，每个文件夹作用，每个文件夹存放什么（P46-47）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安卓的配置文件作用，基本组成标签（P48）"><span class="nav-number">1.7.</span> <span class="nav-text">安卓的配置文件作用，基本组成标签（P48）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-R-java-文件，作用是什么（P49）"><span class="nav-number">1.8.</span> <span class="nav-text">什么是 R.java 文件，作用是什么（P49）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-程序生命周期，重点：安卓生命周期中包含哪五种生命进程，分别在什么时候执行或者产生，5种进程优先级是什么"><span class="nav-number">1.9.</span> <span class="nav-text">4.1 程序生命周期，重点：安卓生命周期中包含哪五种生命进程，分别在什么时候执行或者产生，5种进程优先级是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安卓系统中4大组件作用，哪四个（P67）"><span class="nav-number">1.10.</span> <span class="nav-text">安卓系统中4大组件作用，哪四个（P67）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-节"><span class="nav-number">1.11.</span> <span class="nav-text">4.3 节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P72-代码（整个程序）-启动-》隐藏-》再启动-》消亡-执行了什么回调函数，执行顺序是什么"><span class="nav-number">1.12.</span> <span class="nav-text">P72 代码（整个程序） 启动-》隐藏 -》再启动 -》消亡 执行了什么回调函数，执行顺序是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LogCat有哪几种日志类型，级别是什么，具体使用代码是什么（P77-倒数第二段）"><span class="nav-number">1.13.</span> <span class="nav-text">LogCat有哪几种日志类型，级别是什么，具体使用代码是什么（P77 倒数第二段）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P86-96-涉及到组件都需要掌握，代码编程，响应事件方法名，常用属性、"><span class="nav-number">1.14.</span> <span class="nav-text">P86-96 涉及到组件都需要掌握，代码编程，响应事件方法名，常用属性、</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P102-116-涉及到Android所有常用布局都需要掌握"><span class="nav-number">1.15.</span> <span class="nav-text">P102-116 涉及到Android所有常用布局都需要掌握</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4节-菜单-选项菜单再哪一个函数中创建，如何创建，在哪一个函数中响应用户的操作"><span class="nav-number">1.16.</span> <span class="nav-text">5.4节 菜单 选项菜单再哪一个函数中创建，如何创建，在哪一个函数中响应用户的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快捷菜单再哪一个函数创建，怎么创建，在哪个函数中响应用户的操作"><span class="nav-number">1.17.</span> <span class="nav-text">快捷菜单再哪一个函数创建，怎么创建，在哪个函数中响应用户的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快捷菜单与其他菜单有什么不同"><span class="nav-number">1.18.</span> <span class="nav-text">快捷菜单与其他菜单有什么不同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#界面事件的返回值对消息传递的影响机制（5-6-1节）"><span class="nav-number">1.19.</span> <span class="nav-text">界面事件的返回值对消息传递的影响机制（5.6.1节）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo所有程序掌握-P139-第四行结合代码一起看（0-按下-1-抬起）（P138）"><span class="nav-number">1.20.</span> <span class="nav-text">Demo所有程序掌握 P139 第四行结合代码一起看（0 按下 1 抬起）（P138）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（最后一段）-触点压力和触点大小描述（P143）"><span class="nav-number">1.21.</span> <span class="nav-text">（最后一段） 触点压力和触点大小描述（P143）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第六章"><span class="nav-number">1.22.</span> <span class="nav-text">第六章</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1节-P145-148-所有内容掌握"><span class="nav-number">1.22.1.</span> <span class="nav-text">6.1节 P145-148 所有内容掌握</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（1）什么是Intent，作用是什么"><span class="nav-number">1.22.1.1.</span> <span class="nav-text">（1）什么是Intent，作用是什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（2）什么是显示启动，如何编程"><span class="nav-number">1.22.1.2.</span> <span class="nav-text">（2）什么是显示启动，如何编程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（3）什么是隐式启动，如何编程"><span class="nav-number">1.22.1.3.</span> <span class="nav-text">（3）什么是隐式启动，如何编程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（4）两种启动方式区别是什么"><span class="nav-number">1.22.1.4.</span> <span class="nav-text">（4）两种启动方式区别是什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（5）隐式启动时如何匹配到调度对象和类的"><span class="nav-number">1.22.1.5.</span> <span class="nav-text">（5）隐式启动时如何匹配到调度对象和类的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（6）Intent传递参数的代码编程"><span class="nav-number">1.22.1.6.</span> <span class="nav-text">（6）Intent传递参数的代码编程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P151-所有程序都要会"><span class="nav-number">1.22.2.</span> <span class="nav-text">P151 所有程序都要会</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P155-6-2节-过滤器"><span class="nav-number">1.22.3.</span> <span class="nav-text">P155 6.2节 过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（1）什么是Intent过滤器，机制是什么"><span class="nav-number">1.22.3.1.</span> <span class="nav-text">（1）什么是Intent过滤器，机制是什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（2）怎么在android配置文档中配置过滤器"><span class="nav-number">1.22.3.2.</span> <span class="nav-text">（2）怎么在android配置文档中配置过滤器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（3）-Intent解析的匹配规则是什么-P156"><span class="nav-number">1.22.3.3.</span> <span class="nav-text">（3） Intent解析的匹配规则是什么 P156</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-节-什么是广播消息"><span class="nav-number">1.22.4.</span> <span class="nav-text">6.3 节 什么是广播消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P158-Demo所有程序都要要"><span class="nav-number">1.22.5.</span> <span class="nav-text">P158 Demo所有程序都要要</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第七章"><span class="nav-number">1.23.</span> <span class="nav-text">第七章</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-全都要，用启动方式使用Service，启动和终止分别使用什么函数，有什么特点"><span class="nav-number">1.23.1.</span> <span class="nav-text">7.1 全都要，用启动方式使用Service，启动和终止分别使用什么函数，有什么特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Service两种生命周期的含义，以及起始和终止函数"><span class="nav-number">1.23.2.</span> <span class="nav-text">Service两种生命周期的含义，以及起始和终止函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动过程当中隐式调用和显示调用"><span class="nav-number">1.23.3.</span> <span class="nav-text">启动过程当中隐式调用和显示调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P165-Demo都要要"><span class="nav-number">1.23.4.</span> <span class="nav-text">P165 Demo都要要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P175-Demo都要要"><span class="nav-number">1.23.5.</span> <span class="nav-text">P175 Demo都要要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P178-什么是需要使用远程服务，什么是AIDL，AIDL传递的参数类型有哪几种，创建与使用AIDL的步骤是什么（不需要代码）"><span class="nav-number">1.23.6.</span> <span class="nav-text">P178 什么是需要使用远程服务，什么是AIDL，AIDL传递的参数类型有哪几种，创建与使用AIDL的步骤是什么（不需要代码）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第八章"><span class="nav-number">1.24.</span> <span class="nav-text">第八章</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SharePreference-以什么格式保存文件"><span class="nav-number">1.24.1.</span> <span class="nav-text">SharePreference 以什么格式保存文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三种访问模式是哪三种，对应的查看名是什么（P196）"><span class="nav-number">1.24.2.</span> <span class="nav-text">三种访问模式是哪三种，对应的查看名是什么（P196）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SimplePreferenceDemo-代码都要（P197）"><span class="nav-number">1.24.3.</span> <span class="nav-text">SimplePreferenceDemo 代码都要（P197）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2节-内部文件存储放在什么地方"><span class="nav-number">1.24.4.</span> <span class="nav-text">8.2节 内部文件存储放在什么地方</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内部文件操作模式"><span class="nav-number">1.24.5.</span> <span class="nav-text">内部文件操作模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P201-InternalFIleDemo"><span class="nav-number">1.24.6.</span> <span class="nav-text">P201 InternalFIleDemo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P206-8-2-3-资源文件当中RAW文件夹，XML文件夹区别"><span class="nav-number">1.24.7.</span> <span class="nav-text">P206 8.2.3 资源文件当中RAW文件夹，XML文件夹区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-3-数据库存储"><span class="nav-number">1.24.8.</span> <span class="nav-text">8.3 数据库存储</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#打开Sqllite命令"><span class="nav-number">1.24.8.1.</span> <span class="nav-text">打开Sqllite命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sqlite3-常用命令"><span class="nav-number">1.24.8.2.</span> <span class="nav-text">sqlite3 常用命令</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库编程P215-221所有代码都需要-P221-SQLliteDemo"><span class="nav-number">1.24.9.</span> <span class="nav-text">数据库编程P215-221所有代码都需要 P221 SQLliteDemo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表8-5-1-2-4-9-10"><span class="nav-number">1.24.10.</span> <span class="nav-text">表8.5 1 2 4 9 10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-4节-数据共享-什么是ConnectProvider特点，作用，创建步骤需要重载哪六个方法名称"><span class="nav-number">1.24.11.</span> <span class="nav-text">8.4节 数据共享 什么是ConnectProvider特点，作用，创建步骤需要重载哪六个方法名称</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P227-查询操作"><span class="nav-number">1.24.12.</span> <span class="nav-text">P227 查询操作</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
