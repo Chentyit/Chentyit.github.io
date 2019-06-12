@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://www.chentyit.com/2019/06/10/Android复习提纲/活动声明周期.png">
 <meta property="og:image" content="https://www.chentyit.com/2019/06/10/Android复习提纲/进程优先级.jpg">
 <meta property="og:image" content="https://www.chentyit.com/2019/06/10/Android复习提纲/Activity%20事件回调函数的调用顺序.jpg">
-<meta property="og:updated_time" content="2019-06-11T01:18:26.403Z">
+<meta property="og:updated_time" content="2019-06-12T10:11:56.687Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android复习提纲">
 <meta name="twitter:description" content="Android复习提纲12345678910111213141516171819202122232425/*** * * *                                                    __----~~~~~~~~~~~------___ *                                   .  .   ~~//====......">
@@ -394,7 +394,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  6,140
+                  6,179
                 </span>
               
 
@@ -479,7 +479,7 @@
 <p>platforms 目录用来存放 SDK 和 AVD管理器下载的各种版本的 SDK</p>
 <p>platforms-tools 目录中保存了与平台调试相关的工具，入 adb、aapt 和 dx 等</p>
 <p>samples 目录是实例代码和程序的存放目录</p>
-<p>temp 是临时存放文件的目录，在 SDK 和 AVD 管理器下载开发包是，下载文件会临时存放在这个目录</p>
+<p>temp 是临时存放文件的目录，在 SDK 和 AVD 管理器下载开发包时，下载文件会临时存放在这个目录</p>
 <p>tools 目录保存了通用的 Android 开发调试工具和 Android 手机模拟器</p>
 <p>SDK Manager.exe 和 AVD Manager.exe 分别是 SDK 和 AVD 的管理器</p>
 <p>SDK Readme.txt 是 Android SDK 的说明文档</p>
@@ -527,7 +527,7 @@
 <p>gen 目录：用来保存 ADT 自动生成的 java 文件，例如 R.java 或 ADL 文件</p>
 <p>assets 目录：用来存放原始格式的文件，其中的文件不能被 R.java 文件索引，只能以字节流读取</p>
 <p>bin 目录：保存了编译过程中产生的文件，以及最终产生的 apk 文件</p>
-<p>res 目录：资源目录，Android 程序所有的图像、颜色、风格、主题、界面布局和字符串等资源都保存在旗下的几个子目录中</p>
+<p>res 目录：资源目录，Android 程序所有的图像、颜色、风格、主题、界面布局和字符串等资源都保存在其下的几个子目录中</p>
 <p>android.jar 文件：Android 程序所能引用的函数库文件，Android 系统所支持 API 都包含在这个文件中</p>
 <p>android-support-v4.jar 文件：是 Android 兼容性包（Compatibility package），让一个在 Android 4.0 上开发的应用可以在 API level 4 的安卓系统中工作</p>
 <p>proguard.cfg 文件：提供 ProGuard 工具进行代码优化和代码混淆使用的配置文件</p>
@@ -565,15 +565,14 @@
 <li>android:name —— 定义了实现 Activity 类的名称，可以是完整名称，也可以是简化后的名称</li>
 <li>android:lable —— 定义 Activity 的标签名称，标签名称将在用户界面的 Activity 上部显示</li>
 </ol>
-<p><strong>activity元素</strong></p>
-<p>作用：在程序启动时，将 MainActivity 这个 Activity 作为默认启动模块</p>
+<p><strong>intent-filter元素</strong></p>
+<p>作用：设置一个过滤器</p>
 <p>子元素：</p>
 <ol>
-<li><p><em>action</em></p>
-</li>
-<li><p><em>categor</em></p>
-</li>
+<li><em>action</em></li>
+<li><em>categor</em></li>
 </ol>
+<p>在程序启动时，可以将 MainActivity 这个 Activity 作为默认启动模块</p>
 <h3 id="什么是-R-java-文件，作用是什么（P49）"><a href="#什么是-R-java-文件，作用是什么（P49）" class="headerlink" title="什么是 R.java 文件，作用是什么（P49）"></a>什么是 R.java 文件，作用是什么（P49）</h3><p>R.java 文件是 ADT 自动生成的文件，包含对drawable、layout 和 values 目录内的资源的引用指针，Android 程序能够直接通过 R 类型引用目录中的资源。R.java 文件不能手工修改，所有代码必须由 ADT 自动生成。</p>
 <h3 id="4-1-程序生命周期，重点：安卓生命周期中包含哪五种生命进程，分别在什么时候执行或者产生，5种进程优先级是什么"><a href="#4-1-程序生命周期，重点：安卓生命周期中包含哪五种生命进程，分别在什么时候执行或者产生，5种进程优先级是什么" class="headerlink" title="4.1 程序生命周期，重点：安卓生命周期中包含哪五种生命进程，分别在什么时候执行或者产生，5种进程优先级是什么"></a>4.1 程序生命周期，重点：安卓生命周期中包含哪五种生命进程，分别在什么时候执行或者产生，5种进程优先级是什么</h3><center>生命周期</center>
 
@@ -585,8 +584,8 @@
 <ol>
 <li>进程中的 Activity 正在与用户进行交互</li>
 <li>进程服务被 Activity 调用，而且这个 Activity 正在与用户进行交互</li>
-<li>进程服务正在执行声明周期中的回调函数</li>
-<li>进程的 BroadcastReceiver 正在执行 onReceive() 函数</li>
+<li>进程服务正在执行生命周期中的回调函数</li>
+<li>进程的 Broadcast Receiver 正在执行 onReceive() 函数</li>
 </ol>
 <p><strong>可见进程：</strong>指部分程序界面能够被用户看见，却不在前台与用户交互，不响应界面事件的进程</p>
 <ol>
@@ -596,7 +595,7 @@
 <p><strong>服务进程：</strong>包含已经启动的服务的进程就是服务进程</p>
 <p><strong>后台进程：</strong>不包含任何已经启动的服务，而且没有任何用户可见的 Activity，则这个进程就是后台进程</p>
 <ol>
-<li>仅有 Activity 组件的进程，打那个用户启动了其他应用程序是这个进程的 Activity 完全被遮挡，这个进程便成为后台进程</li>
+<li>仅有 Activity 组件的进程，当用户启动了其他应用程序时，这个进程的 Activity 完全被遮挡，这个进程便成为后台进程</li>
 </ol>
 <p><strong>空进程：</strong>是不包含任何活跃组件的进程</p>
 <ol>
@@ -617,7 +616,7 @@
 </li>
 </ol>
 <h3 id="4-3-节"><a href="#4-3-节" class="headerlink" title="4.3 节"></a>4.3 节</h3><blockquote>
-<p>Activity四种状态以及定</p>
+<p>Activity四种状态以及定义</p>
 </blockquote>
 <blockquote>
 <blockquote>
@@ -713,7 +712,7 @@
 <p>Activity 三种生命周期的含义分别起始方法是什么，终止方法是什么</p>
 </blockquote>
 <p><img src="/2019/06/10/Android复习提纲/Activity 事件回调函数的调用顺序.jpg" alt="Activity 事件回调函数的调用顺序"></p>
-<h3 id="P72-代码（整个程序）-启动-》隐藏-》再启动-》消亡-执行了什么回调函数，执行顺序是什么"><a href="#P72-代码（整个程序）-启动-》隐藏-》再启动-》消亡-执行了什么回调函数，执行顺序是什么" class="headerlink" title="P72 代码（整个程序） 启动-》隐藏 -》再启动 -》消亡 执行了什么回调函数，执行顺序是什么"></a>P72 代码（整个程序） 启动-》隐藏 -》再启动 -》消亡 执行了什么回调函数，执行顺序是什么</h3><p>onCreate() -&gt; onStart() -&gt; onResume() -&gt; onPause() -&gt; onSaveInstanceState() -&gt; onStop() -&gt; onRestart() -&gt; onStart() -&gt; onResume()</p>
+<h3 id="P72-代码（整个程序）-启动-》隐藏-》再启动-》消亡-执行了什么回调函数，执行顺序是什么"><a href="#P72-代码（整个程序）-启动-》隐藏-》再启动-》消亡-执行了什么回调函数，执行顺序是什么" class="headerlink" title="P72 代码（整个程序） 启动-》隐藏 -》再启动 -》消亡 执行了什么回调函数，执行顺序是什么"></a>P72 代码（整个程序） 启动-》隐藏 -》再启动 -》消亡 执行了什么回调函数，执行顺序是什么</h3><p>onCreate() -&gt; onStart() -&gt; onResume() -&gt; onPause() -&gt; onSaveInstanceState() -&gt; onStop() -&gt; onRestart() -&gt; onStart() -&gt; onResume() -&gt; onPause() -&gt; onStop() -&gt; onDestory()</p>
 <h3 id="LogCat有哪几种日志类型，级别是什么，具体使用代码是什么（P77-倒数第二段）"><a href="#LogCat有哪几种日志类型，级别是什么，具体使用代码是什么（P77-倒数第二段）" class="headerlink" title="LogCat有哪几种日志类型，级别是什么，具体使用代码是什么（P77 倒数第二段）"></a>LogCat有哪几种日志类型，级别是什么，具体使用代码是什么（P77 倒数第二段）</h3><p>Log.v()：用来记录详细信息</p>
 <p>Log.d()：用来记录调试信息</p>
 <p>Log.i()：用来记录通知信息</p>
@@ -753,30 +752,30 @@
 <p>onOptionsItemSelected()：响应用户操作</p>
 <p>创建代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreateContextMenu</span> <span class="params">(ContextMenu menu, View v, ContextMenuInfo menuInfo)</span> </span>&#123;</span><br><span class="line">    menu.setHeaderTitle(<span class="string">"快捷菜单标题"</span>);</span><br><span class="line">    menu.add(<span class="number">0</span>, CONTEXT_MENU_1, <span class="number">0</span>, <span class="string">"菜单子项1"</span>)；</span><br><span class="line">    menu.add(<span class="number">0</span>, CONTEXT_MENU_2, <span class="number">1</span>, <span class="string">"菜单子项2"</span>)；</span><br><span class="line">    menu.add(<span class="number">0</span>, CONTEXT_MENU_3, <span class="number">2</span>, <span class="string">"菜单子项3"</span>)；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="快捷菜单与其他菜单有什么不同"><a href="#快捷菜单与其他菜单有什么不同" class="headerlink" title="快捷菜单与其他菜单有什么不同"></a>快捷菜单与其他菜单有什么不同</h3><p>快捷菜单类似于计算机程序中的邮件菜单，当用户点击界面上某个元素超过 2 秒后，将启动注册到该界面元素的快捷菜单，快捷菜单采用浮动的显示方式，启动方式与其他菜单不同</p>
+<h3 id="快捷菜单与其他菜单有什么不同"><a href="#快捷菜单与其他菜单有什么不同" class="headerlink" title="快捷菜单与其他菜单有什么不同"></a>快捷菜单与其他菜单有什么不同</h3><p>快捷菜单类似于计算机程序中的右键菜单，当用户点击界面上某个元素超过 2 秒后，将启动注册到该界面元素的快捷菜单，快捷菜单采用浮动的显示方式，启动方式与其他菜单不同</p>
 <p>需要用 registerForContextMenu() 函数将快捷菜单与指定的组件绑定或者说注册</p>
 <h3 id="界面事件的返回值对消息传递的影响机制（5-6-1节）"><a href="#界面事件的返回值对消息传递的影响机制（5-6-1节）" class="headerlink" title="界面事件的返回值对消息传递的影响机制（5.6.1节）"></a>界面事件的返回值对消息传递的影响机制（5.6.1节）</h3><p>控件设置监听器 -&gt; 事件传递给监听器</p>
 <p>控件没有设置监听器 -&gt; 事件传递给界面控件的其他事件处理函数</p>
 <p>界面控件设置了事件监听器，事件也可以再次传递给其他事件，是否继续传递时间给其他处理函数，是由监听器处理函数的返回值决定的，true -&gt; 不需要其他处理函数参与处理，false -&gt; 需要其他处理函数参与处理</p>
-<h3 id="Demo所有程序掌握-P139-第四行结合代码一起看（0-按下-1-抬起）（P138）"><a href="#Demo所有程序掌握-P139-第四行结合代码一起看（0-按下-1-抬起）（P138）" class="headerlink" title="Demo所有程序掌握 P139 第四行结合代码一起看（0 按下 1 抬起）（P138）"></a>Demo所有程序掌握 P139 第四行结合代码一起看（0 按下 1 抬起）（P138）</h3><h3 id="（最后一段）-触点压力和触点大小描述（P143）"><a href="#（最后一段）-触点压力和触点大小描述（P143）" class="headerlink" title="（最后一段） 触点压力和触点大小描述（P143）"></a>（最后一段） 触点压力和触点大小描述（P143）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">ProcessHistory</span><span class="params">(MotionEvent event)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> historySize = event.getHistorySize();				<span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; historySize; i++) &#123;					<span class="comment">// 2</span></span><br><span class="line">        <span class="keyword">long</span> time = event.getHistoricalEventTime(i);		 <span class="comment">// 3</span></span><br><span class="line">        <span class="keyword">float</span> pressure = event.getHistoricalPressure(i);	 <span class="comment">// 4</span></span><br><span class="line">        <span class="keyword">float</span> x = event.getHistoricalX(i);					<span class="comment">// 5</span></span><br><span class="line">        <span class="keyword">float</span> y = event.getHistoricalY(j); 					<span class="comment">// 6</span></span><br><span class="line">        <span class="keyword">float</span> size = event.getHistoricalSize(i);			<span class="comment">// 7</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 处理过程......</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> historySize;									  <span class="comment">// 8</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Demo所有程序掌握-P139-第四行结合代码一起看（0-按下-1-抬起）（P138）"><a href="#Demo所有程序掌握-P139-第四行结合代码一起看（0-按下-1-抬起）（P138）" class="headerlink" title="Demo所有程序掌握 P139 第四行结合代码一起看（0 按下 1 抬起）（P138）"></a>Demo所有程序掌握 P139 第四行结合代码一起看（0 按下 1 抬起）（P138）</h3><h3 id="（最后一段）-触点压力和触点大小描述（P143）"><a href="#（最后一段）-触点压力和触点大小描述（P143）" class="headerlink" title="（最后一段） 触点压力和触点大小描述（P143）"></a>（最后一段） 触点压力和触点大小描述（P143）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">ProcessHistory</span><span class="params">(MotionEvent event)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> historySize = event.getHistorySize(); <span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; historySize; i++) &#123; <span class="comment">// 2</span></span><br><span class="line">        <span class="keyword">long</span> time = event.getHistoricalEventTime(i); <span class="comment">// 3</span></span><br><span class="line">        <span class="keyword">float</span> pressure = event.getHistoricalPressure(i); <span class="comment">// 4</span></span><br><span class="line">        <span class="keyword">float</span> x = event.getHistoricalX(i); <span class="comment">// 5</span></span><br><span class="line">        <span class="keyword">float</span> y = event.getHistoricalY(j); <span class="comment">// 6</span></span><br><span class="line">        <span class="keyword">float</span> size = event.getHistoricalSize(i); <span class="comment">// 7</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 处理过程......</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> historySize; <span class="comment">// 8</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>（1）获取历史数据的数量</p>
 <p>（3）获取历史事件发生的时间</p>
 <p>（4）获取历史事件的触点压力</p>
 <p>（5）（6）获取历史事件的相对坐标</p>
 <p>（7）获取历史事件的触点尺寸</p>
 <p>（8）返回历史数据的数量，用于用户显示</p>
-<h3 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h3><h4 id="6-1节-P145-148-所有内容掌握"><a href="#6-1节-P145-148-所有内容掌握" class="headerlink" title="6.1节 P145-148 所有内容掌握"></a>6.1节 P145-148 所有内容掌握</h4><h5 id="（1）什么是Intent，作用是什么"><a href="#（1）什么是Intent，作用是什么" class="headerlink" title="（1）什么是Intent，作用是什么"></a>（1）什么是Intent，作用是什么</h5><p>Intent是一个动作的完整描述，包含了动作的产生组件、接收组件和传递的数据信息。Intent为Activity、Service和BroadcastReceiver等组件提供交互能力，将一个组件的数据和动作传递给另一个组件</p>
+<h3 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h3><h4 id="6-1节-P145-148-所有内容掌握"><a href="#6-1节-P145-148-所有内容掌握" class="headerlink" title="6.1节 P145-148 所有内容掌握"></a>6.1节 P145-148 所有内容掌握</h4><h5 id="（1）什么是Intent，作用是什么"><a href="#（1）什么是Intent，作用是什么" class="headerlink" title="（1）什么是Intent，作用是什么"></a>（1）什么是Intent，作用是什么</h5><p>Intent 是一个动作的完整描述，包含了动作的产生组件、接收组件和传递的数据信息。Intent 为 Activity、Service 和 BroadcastReceiver 等组件提供交互能力，将一个组件的数据和动作传递给另一个组件</p>
 <p>用途：</p>
 <ol>
-<li>Intent可以非常方便的启动Activity和Service</li>
-<li>在Android系统上发布广播信息。</li>
+<li>Intent 可以非常方便的启动 Activity 和 Service</li>
+<li>在 Android 系统上发布广播信息。</li>
 </ol>
-<h5 id="（2）什么是显示启动，如何编程"><a href="#（2）什么是显示启动，如何编程" class="headerlink" title="（2）什么是显示启动，如何编程"></a>（2）什么是显示启动，如何编程</h5><p>显示启动必须在Intent中指明启动的Activity所在的类。</p>
-<p>使用Intent来显示启动Activity，首先需要创建一个Intent，并为他指定当前得应用程序上下文以及要启动的Activity，把创建好的Intent作为参数传递给startActivity()方法</p>
-<h5 id="（3）什么是隐式启动，如何编程"><a href="#（3）什么是隐式启动，如何编程" class="headerlink" title="（3）什么是隐式启动，如何编程"></a>（3）什么是隐式启动，如何编程</h5><p>隐式启动由Android系统根据Intent的动作和数据来决定启动哪一个Activity</p>
+<h5 id="（2）什么是显示启动，如何编程"><a href="#（2）什么是显示启动，如何编程" class="headerlink" title="（2）什么是显示启动，如何编程"></a>（2）什么是显示启动，如何编程</h5><p>显示启动必须在 Intent 中指明启动的 Activity 所在的类。</p>
+<p>使用 Intent 来显示启动 Activity，首先需要创建一个 Intent，并为他指定当前得应用程序上下文以及要启动的 Activity，把创建好的 Intent 作为参数传递给 startActivity() 方法</p>
+<h5 id="（3）什么是隐式启动，如何编程"><a href="#（3）什么是隐式启动，如何编程" class="headerlink" title="（3）什么是隐式启动，如何编程"></a>（3）什么是隐式启动，如何编程</h5><p>隐式启动由 Android 系统根据 Intent 的动作和数据来决定启动哪一个 Activity</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_VIEW, Uri.parse(<span class="string">"http://www.baidu.com"</span>));</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
 <h5 id="（4）两种启动方式区别是什么"><a href="#（4）两种启动方式区别是什么" class="headerlink" title="（4）两种启动方式区别是什么"></a>（4）两种启动方式区别是什么</h5><p>隐式启动无需指明具体的类，只要提供需要处理的数据或动作即可；显示启动需要指明加载组件的类</p>
-<h5 id="（5）隐式启动时如何匹配到调度对象和类的"><a href="#（5）隐式启动时如何匹配到调度对象和类的" class="headerlink" title="（5）隐式启动时如何匹配到调度对象和类的"></a>（5）隐式启动时如何匹配到调度对象和类的</h5><p>Intent 的动作是 Intent.ACTION_VIE，数据是 Web 地址，使用 Uri.parse(urlString) 方法，可以简单地把一个字符串解释成 Uri 对象。Android 系统在匹配 Intent 时，首先根据动作 Intent.ACTION_VIEW，得知启动那个具备浏览功能的 Activity，但具体是浏览电话还是浏览网页，还需亚奥根据 URI 的数据类型进行判断</p>
+<h5 id="（5）隐式启动时如何匹配到调度对象和类的"><a href="#（5）隐式启动时如何匹配到调度对象和类的" class="headerlink" title="（5）隐式启动时如何匹配到调度对象和类的"></a>（5）隐式启动时如何匹配到调度对象和类的</h5><p>Intent 的动作是 Intent.ACTION_VIEW，数据是 Web 地址，使用 Uri.parse(urlString) 方法，可以简单地把一个字符串解释成 Uri 对象。Android 系统在匹配 Intent 时，首先根据动作 Intent.ACTION_VIEW，得知启动哪个具备浏览功能的 Activity，但具体是浏览电话还是浏览网页，还需要根据 URI 的数据类型进行判断</p>
 <h5 id="（6）Intent传递参数的代码编程"><a href="#（6）Intent传递参数的代码编程" class="headerlink" title="（6）Intent传递参数的代码编程"></a>（6）Intent传递参数的代码编程</h5><ul>
 <li>向下一个 Activity 传递参数</li>
 </ul>
@@ -784,8 +783,8 @@
 <ul>
 <li>向上一个 Activity 传递参</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// FirstActivity 先传一个数据过</span></span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent(FirstActivity.<span class="keyword">this</span>, SecondActivity.class);</span><br><span class="line">startActivityForResult(intent, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 SecondActivity 中传数据</span></span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">intent.putExtra(<span class="string">"data_return"</span>, <span class="string">"Hello FirstActivity"</span>);</span><br><span class="line">setResult(RESULT_OK, intent);</span><br><span class="line">finish();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 FirstActivity 中接收传递回来的值</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (requestCode) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">if</span> (resultCode == RESULT_OK) &#123;</span><br><span class="line">                String returnedDaata = data.getStringExtra(<span class="string">"data_return"</span>);</span><br><span class="line">                Log.d(<span class="string">"FirstActivity"</span>, returnedData);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="P151-所有程序都要会"><a href="#P151-所有程序都要会" class="headerlink" title="P151 所有程序都要会"></a>P151 所有程序都要会</h4><h4 id="P155-6-2节-过滤器"><a href="#P155-6-2节-过滤器" class="headerlink" title="P155 6.2节 过滤器"></a>P155 6.2节 过滤器</h4><h5 id="（1）什么是Intent过滤器，机制是什么"><a href="#（1）什么是Intent过滤器，机制是什么" class="headerlink" title="（1）什么是Intent过滤器，机制是什么"></a>（1）什么是Intent过滤器，机制是什么</h5><p>Intent过滤器是一种根据Intent中的动作（Action）、类别（Categorie）和数据（Data）等内容，对适合接收该Intent的组件进行匹配和筛选的机制。Intent过滤器的作用是匹配数据类型、路径和协议，还包括可以用来确定多个匹配项顺序的优先级。每个Intent过滤器可以定义多个<category>标签，程序开发人员可以使用自定义的类别，或使用Android系统提供的类别</category></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// FirstActivity 先设置一个 requestCode 为 1</span></span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent(FirstActivity.<span class="keyword">this</span>, SecondActivity.class);</span><br><span class="line">startActivityForResult(intent, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 SecondActivity 中传数据</span></span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">intent.putExtra(<span class="string">"data_return"</span>, <span class="string">"Hello FirstActivity"</span>);</span><br><span class="line">setResult(RESULT_OK, intent);</span><br><span class="line">finish();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 FirstActivity 中接收传递回来的值</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (requestCode) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">if</span> (resultCode == RESULT_OK) &#123;</span><br><span class="line">                String returnedDaata = data.getStringExtra(<span class="string">"data_return"</span>);</span><br><span class="line">                Log.d(<span class="string">"FirstActivity"</span>, returnedData);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="P151-所有程序都要会"><a href="#P151-所有程序都要会" class="headerlink" title="P151 所有程序都要会"></a>P151 所有程序都要会</h4><h4 id="P155-6-2节-过滤器"><a href="#P155-6-2节-过滤器" class="headerlink" title="P155 6.2节 过滤器"></a>P155 6.2节 过滤器</h4><h5 id="（1）什么是Intent过滤器，机制是什么"><a href="#（1）什么是Intent过滤器，机制是什么" class="headerlink" title="（1）什么是Intent过滤器，机制是什么"></a>（1）什么是Intent过滤器，机制是什么</h5><p>Intent 过滤器是一种根据 Intent 中的动作（Action）、类别（Categorie）和数据（Data）等内容，对适合接收该 Intent 的组件进行匹配和筛选的机制。Intent过滤器的作用是匹配数据类型、路径和协议，还包括可以用来确定多个匹配项顺序的优先级。每个Intent过滤器可以定义多个 <code>&lt;category&gt;</code> 标签，程序开发人员可以使用自定义的类别，或使用 Android 系统提供的类别</p>
 <h5 id="（2）怎么在android配置文档中配置过滤器"><a href="#（2）怎么在android配置文档中配置过滤器" class="headerlink" title="（2）怎么在android配置文档中配置过滤器"></a>（2）怎么在android配置文档中配置过滤器</h5><ul>
 <li>这个是用来设置默认用户界，动作是 android.intent.action.MAIN，类别是 android.intent.category.LAUNCHER</li>
 </ul>
@@ -794,28 +793,28 @@
 <li>以浏览的方式启动相应的 Activity，动作是 android.intent.action.VIEW，类别是 android.intent.category.DEFAULT，协议是 schemodemo，主机名称部分是 edu.hrbeu</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.VIEW"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">data</span> <span class="attr">anndroid:scheme</span>=<span class="string">"schemodemo"</span> <span class="attr">android:host</span>=<span class="string">"edu.hrbeu"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h5 id="（3）-Intent解析的匹配规则是什么-P156"><a href="#（3）-Intent解析的匹配规则是什么-P156" class="headerlink" title="（3） Intent解析的匹配规则是什么 P156"></a>（3） Intent解析的匹配规则是什么 P156</h5><p>Intent解析的匹配规则是：</p>
+<h5 id="（3）-Intent解析的匹配规则是什么-P156"><a href="#（3）-Intent解析的匹配规则是什么-P156" class="headerlink" title="（3） Intent解析的匹配规则是什么 P156"></a>（3） Intent解析的匹配规则是什么 P156</h5><p>Intent 解析的匹配规则是：</p>
 <ol>
-<li>Android系统把所有应用程序包中的Intent过滤器集合在一起，形成一个完整的Intent过滤器列表；</li>
-<li>在Intent与Intent过滤器进行匹配时，Android系统会将列表中所有Intent过滤器的“动作”和“类别”与Intent进行匹配，没有指定“动作”的Intent过滤器可以匹配任何的Intent，但是没有指定“类别”的Intent过滤器只能匹配没有“类别”的Intent；</li>
-<li>把Intent数据Uri的每个子部与Intent过滤器的<data>标签中的属性进行匹配；</data></li>
-<li>如果Intent过滤器的匹配结果多于一个，则可以根据在<intent-filter>标签中定义的优先级标签来对Intent过滤器进行排序，优先级最高的Intent过滤器将被选择。以上每步中不匹配的都将被过滤掉。</intent-filter></li>
+<li>Android 系统把所有应用程序包中的 Intent 过滤器集合在一起，形成一个完整的 Intent 过滤器列表；</li>
+<li>在 Intent 与 Intent 过滤器进行匹配时，Android 系统会将列表中所有 Intent 过滤器的“动作”和“类别”与 Intent 进行匹配，没有指定“动作”的 Intent 过滤器可以匹配任何的 Intent，但是没有指定“类别”的 Intent 过滤器只能匹配没有“类别”的 Intent；</li>
+<li>把 Intent 数据 Uri 的每个子部与 Intent 过滤器的 <code>&lt;data&gt;</code> 标签中的属性进行匹配；</li>
+<li>如果 Intent 过滤器的匹配结果多于一个，则可以根据在 <code>&lt;intent-filter&gt;</code> 标签中定义的优先级标签来对 Intent 过滤器进行排序，优先级最高的 Intent 过滤器将被选择。以上每步中不匹配的都将被过滤掉。</li>
 </ol>
-<h4 id="6-3-节-什么是广播消息"><a href="#6-3-节-什么是广播消息" class="headerlink" title="6.3 节 什么是广播消息"></a>6.3 节 什么是广播消息</h4><p>广播信息的内容可以是应用程序密切相关的数据信息，也可以是Android的系统信息，例如网络连接变化、电池电量变化、接收到短信或系统设置变化等</p>
+<h4 id="6-3-节-什么是广播消息"><a href="#6-3-节-什么是广播消息" class="headerlink" title="6.3 节 什么是广播消息"></a>6.3 节 什么是广播消息</h4><p>广播信息的内容可以是应用程序密切相关的数据信息，也可以是 Android 的系统信息，例如网络连接变化、电池电量变化、接收到短信或系统设置变化等</p>
 <h4 id="P158-Demo所有程序都要要"><a href="#P158-Demo所有程序都要要" class="headerlink" title="P158 Demo所有程序都要要"></a>P158 Demo所有程序都要要</h4><h3 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h3><h4 id="7-1-全都要，用启动方式使用Service，启动和终止分别使用什么函数，有什么特点"><a href="#7-1-全都要，用启动方式使用Service，启动和终止分别使用什么函数，有什么特点" class="headerlink" title="7.1 全都要，用启动方式使用Service，启动和终止分别使用什么函数，有什么特点"></a>7.1 全都要，用启动方式使用Service，启动和终止分别使用什么函数，有什么特点</h4><ul>
 <li><p>启动方式</p>
 <p>启动函数：Context.startService()</p>
 <p>终止函数：Context.stopService()</p>
-<p> 特点：在启动方式中，启动Service的组件不能够获取Service的对象实例，因此无法调用Service中的任何函数，也不能够获取Service中的任何状态和数据信息</p>
+<p> 特点：在启动方式中，启动 Service 的组件不能够获取 Service 的对象实例，因此无法调用 Service 中的任何函数，也不能够获取 Service 中的任何状态和数据信息</p>
 </li>
 <li><p>绑定方式</p>
-<p>通过Context.bindService()建立服务链接，通过Context.unbindService()停止服务链接</p>
-<p>特点：绑定Service的组件可以调用Service中实现的函数，或直接获取Service中状态和数据信息。如果在绑定过程中Service没有启动，Context.bindService()会自动启动Service，而且同一个Service可以绑定多个服务链接，这样可以同时为多个不同的组件提供服务</p>
+<p>通过 Context.bindService() 建立服务链接，通过 Context.unbindService() 停止服务链接</p>
+<p>特点：绑定 Service 的组件可以调用 Service 中实现的函数，或直接获取 Service 中状态和数据信息。如果在绑定过程中 Service 没有启动，Context.bindService() 会自动启动 Service，而且同一个 Service 可以绑定多个服务链接，这样可以同时为多个不同的组件提供服务</p>
 </li>
 </ul>
-<h4 id="Service两种生命周期的含义，以及起始和终止函数"><a href="#Service两种生命周期的含义，以及起始和终止函数" class="headerlink" title="Service两种生命周期的含义，以及起始和终止函数"></a>Service两种生命周期的含义，以及起始和终止函数</h4><p>完全生命周期从 onCreate() 开始到 onDestory() 结束，在 onCreate() 中完成Service的初始化工作，在 onDestory() 中释放所有占用的资源</p>
+<h4 id="Service两种生命周期的含义，以及起始和终止函数"><a href="#Service两种生命周期的含义，以及起始和终止函数" class="headerlink" title="Service两种生命周期的含义，以及起始和终止函数"></a>Service两种生命周期的含义，以及起始和终止函数</h4><p>完全生命周期从 onCreate() 开始到 onDestory() 结束，在 onCreate() 中完成 Service 的初始化工作，在 onDestory() 中释放所有占用的资源</p>
 <p>活动生命周期从 onStart() 开始，但没有与之对应的“停止”函数，因此可以粗略地认为活动生命周期是以 onDestory() 标志结束</p>
-<h4 id="启动过程当中隐式调用和显示调用"><a href="#启动过程当中隐式调用和显示调用" class="headerlink" title="启动过程当中隐式调用和显示调用"></a>启动过程当中隐式调用和显示调用</h4><h4 id="P165-Demo都要要"><a href="#P165-Demo都要要" class="headerlink" title="P165 Demo都要要"></a>P165 Demo都要要</h4><h4 id="P175-Demo都要要"><a href="#P175-Demo都要要" class="headerlink" title="P175 Demo都要要"></a>P175 Demo都要要</h4><h4 id="P178-什么是需要使用远程服务，什么是AIDL，AIDL传递的参数类型有哪几种，创建与使用AIDL的步骤是什么（不需要代码）"><a href="#P178-什么是需要使用远程服务，什么是AIDL，AIDL传递的参数类型有哪几种，创建与使用AIDL的步骤是什么（不需要代码）" class="headerlink" title="P178 什么是需要使用远程服务，什么是AIDL，AIDL传递的参数类型有哪几种，创建与使用AIDL的步骤是什么（不需要代码）"></a>P178 什么是需要使用远程服务，什么是AIDL，AIDL传递的参数类型有哪几种，创建与使用AIDL的步骤是什么（不需要代码）</h4><p>AIDL 是 Android 系统自定义的接口描述语言，可以简化进程间数据格式转换和数据交换的代码，通过定义 Service 内部的公共方法，允许在不同进程间的调用者和 Service 之间相互传递数据</p>
+<h4 id="启动过程当中隐式调用和显示调用"><a href="#启动过程当中隐式调用和显示调用" class="headerlink" title="启动过程当中隐式调用和显示调用"></a>启动过程当中隐式调用和显示调用</h4><h4 id="P165-Demo都要要"><a href="#P165-Demo都要要" class="headerlink" title="P165 Demo都要要"></a>P165 Demo都要要</h4><h4 id="P175-Demo都要要"><a href="#P175-Demo都要要" class="headerlink" title="P175 Demo都要要"></a>P175 Demo都要要</h4><h4 id="P178-什么是需要使用远程服务，什么是AIDL，AIDL传递的参数类型有哪几种，创建与使用AIDL的步骤是什么（不需要代码）"><a href="#P178-什么是需要使用远程服务，什么是AIDL，AIDL传递的参数类型有哪几种，创建与使用AIDL的步骤是什么（不需要代码）" class="headerlink" title="P178 什么是需要使用远程服务，什么是AIDL，AIDL传递的参数类型有哪几种，创建与使用AIDL的步骤是什么（不需要代码）"></a>P178 什么是需要使用远程服务，什么是AIDL，AIDL传递的参数类型有哪几种，创建与使用AIDL的步骤是什么（不需要代码）</h4><p>AIDL(Android Interface Definition Language) 是 Android 系统自定义的接口描述语言，可以简化进程间数据格式转换和数据交换的代码，通过定义 Service 内部的公共方法，允许在不同进程间的调用者和 Service 之间相互传递数据</p>
 <center>AIDL 支持的数据类型</center>
 
 <table>
@@ -866,8 +865,8 @@
 </table>
 <p>步骤：</p>
 <ol>
-<li>使用AIDL语言定义远程服务的接口；</li>
-<li>通过继承Service类实现远程服务；</li>
+<li>使用 AIDL 语言定义远程服务的接口</li>
+<li>通过继承 Service 类实现远程服务</li>
 <li>绑定和使用远程服务</li>
 </ol>
 <h3 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h3><h4 id="SharePreference-以什么格式保存文件"><a href="#SharePreference-以什么格式保存文件" class="headerlink" title="SharePreference 以什么格式保存文件"></a>SharePreference 以什么格式保存文件</h4><p>使用 XMl 文件保存 NVP 格式的文件</p>
