@@ -1,9 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[C++复制构造函数]]></title>
+    <url>%2F2019%2F07%2F19%2FC-%E5%A4%8D%E5%88%B6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[12345678910111213141516171819202122232425262728#include&lt;iostream&gt;using namespace std;class A &#123;private: int value;public: A(int n) &#123; value = n; &#125; A(A other) &#123; value = other.value; &#125; void Print() &#123; cout &lt;&lt; value &lt;&lt; endl; &#125;&#125;;int main() &#123; A a = 10; A b = a; b.Print(); return 0;&#125; 上述代码中，复制构造函数 A(A other) 传入的是 A 的一个实例，由于是传值参数，把形参复制到实参会调用复制构造函数，如果允许复制构造函数传值，就会在复制构造函数内调用复制构造函数，就会形成永久递归，导致栈溢出 修改方案：将 A(A other) 修改为 A(const A&amp; other)]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>剑指Offer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C++的sizeof函数]]></title>
+    <url>%2F2019%2F07%2F19%2FC-%E7%9A%84sizeoff%E5%87%BD%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[1234567891011#include&lt;iostream&gt;using namespace std;class Chen &#123;&#125;;int main() &#123; Chen a; cout &lt;&lt; sizeof(a) &lt;&lt; endl; return 0;&#125; 定义一个空类型，里面没有任何成员变量和成员函数，对该类型求 sizeof，得到的结果是多少？ 正确答案：1 空类型的实例中不包含任何信息，sizeof 的结果本应该是 0，但声明类型的时候应该在内存中占有一定的空间，否则无法使用，占用大小由编译器决定，在 Visual Studio 中占 1 字节空间 如果在该类型中添加构造函数和析构函数，sizeof 的值是多少 正确答案：1 调用构造函数和析构函数只需要找到函数在内存中的地址就可以了，函数地址只与类型有关，与类型的实例无关，编译器不会为这两个函数添加信息，所以 sizeof 的值不会改变 如果把析构函数改成虚函数，sizeof 的值是多少 正确答案：根据计算机来说（32 位机是 4，64 位机是 8） C++ 编译器中，类型中一旦有虚函数，就会为类型生成虚函数表，并且为每一个实例添加一个指向虚函数表的指针，在 32 位机中，一个指针占 4 字节空间，64 位机中，一个指针占 8 字节空间]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>剑指Offer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Go语言的Goroutine]]></title>
+    <url>%2F2019%2F07%2F06%2FGo%E8%AF%AD%E8%A8%80%E7%9A%84Goroutine%2F</url>
+    <content type="text"><![CDATA[并发和并行 并发：多线程程序在一个核的 CPU 上运行 并行：多线程程序在多个核的 CPU 上运行 协程和线程 协程：独立的栈空间，共享堆空间，调度由用户自己控制，本质上有点类似于用户级线程，这些用户级线程的调度也是自己实现的 线程：一个线程上可以跑多个协程，协程是轻量级的线程 goroutine 调度模型 M：线程，OS线程抽象，代表着真正执行计算的资源，在绑定有效的P后，进入schedule循环；而schedule循环的机制大致是从Global队列、P的Local队列以及wait队列中获取G，切换到G的执行栈上并执行G的函数，调用goexit做清理工作并回到M，如此反复。M并不保留G状态，这是G可以跨M调度的基础，M的数量是不定的 P：上下文，表示逻辑处理器， 对G来说，P相当于CPU核，G只有绑定到P(在P的local runq中)才能被调度。对M来说，P提供了相关的执行环境(Context)，如内存分配状态(mcache)，任务队列(G)等，P的数量决定了系统内最大可并行的G的数量（前提：物理CPU核数 &gt;= P的数量），P的数量由用户设置的GOMAXPROCS决定，但是不论GOMAXPROCS设置为多大，P的数量最大为256 G：Goroutine，每个Goroutine对应一个G结构体，G存储Goroutine的运行堆栈、状态以及任务函数，可重用。G并非执行体，每个G需要绑定到P才能被调度执行]]></content>
+      <categories>
+        <category>Go</category>
+      </categories>
+      <tags>
+        <tag>自学笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Go语言的Struct]]></title>
+    <url>%2F2019%2F07%2F02%2FGo%E8%AF%AD%E8%A8%80%E7%9A%84Struct%2F</url>
+    <content type="text"><![CDATA[12345type Student struct &#123; Name string Age int score float32&#125; Struct 的定义struct 定义的三种方式： var stu Student var stu *Student = new (Student) var stu *Student = &amp;Student{} 其中 2 和 3 返回的都是指向结构体的指针，访问形式如下： stu.Name 或者 (*stu).Name Struct 的初始化struct 的内存布局：struct 中的所有字段在内存是连续的 12345678910111213141516171819202122232425262728func main() &#123; var stu Student stu.Age = 18 stu.Name = "hua" stu.score = 80 var stu1 *Student = &amp;Student&#123; Name:"cty", Age:21, score:100, &#125; var stu2 = Student&#123; Name:"cty", Age:21, score:100, &#125; var stu3 = new (Student) stu3.Age = 18 stu3.Name = "hua" stu3.score = 80 fmt.Println(stu) fmt.Println(*stu1) fmt.Println(stu2) fmt.Println(*stu3)&#125; 输出结果 1234&#123;hua 18 80&#125;&#123;cty 21 100&#125;&#123;cty 21 100&#125;&#123;hua 18 80&#125; 工厂模式golang 中的 struct 没有构造函数，一般可以使用工厂模式解决 1234567891011type Student struct &#123; Name string Age int&#125;func NewStudent(name string, age int) *Student &#123; return &amp;Student&#123; Name: name, Age: age, &#125;&#125; Tag可以为 struct 中的每个字段写上一个 tag，这个tag 可以通过反射机制获取，最常用的就是 json 序列化和反序列化 12345678910111213141516171819202122232425import ( "encoding/json" "fmt")type Student struct &#123; Name string `json:"student_name"` Age int `json:"student_age"` Score int `json:"student_score"`&#125;func main() &#123; var stu = Student&#123; Name: "sss", Age: 18, Score: 80, &#125; data, err := json.Marshal(stu) if err != nil &#123; fmt.Println("json encode stu failed, err: ", err) return &#125; fmt.Println(string(data))&#125; 输出结果 1&#123;&quot;student_name&quot;:&quot;sss&quot;,&quot;student_age&quot;:18,&quot;student_score&quot;:80&#125;]]></content>
+      <categories>
+        <category>Go</category>
+      </categories>
+      <tags>
+        <tag>自学笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Go语言切片]]></title>
     <url>%2F2019%2F07%2F01%2FGo%E8%AF%AD%E8%A8%80%E5%88%87%E7%89%87%2F</url>
-    <content type="text"><![CDATA[12345678910111213141516171819202122232425func testSlice() &#123; var slice []int var arr = [...]int&#123;1, 2, 3, 4, 5&#125; fmt.Println() fmt.Println(arr) slice = arr[1:] fmt.Println(slice) fmt.Println(len(slice)) fmt.Println(cap(slice)) fmt.Println() fmt.Println(arr) slice1 := slice[0:1] fmt.Println(slice1) fmt.Println(len(slice1)) fmt.Println(cap(slice1)) fmt.Println() fmt.Println(arr) slice2 := slice1[0:3] fmt.Println(slice2) fmt.Println(len(slice2)) fmt.Println(cap(slice2))&#125; 初学 Go 语言，疯狂踩坑，很多语法与 Java 不同，这是第一篇关于 Go 语言的学习笔记，开始记录一些学习中遇到的坑 关于切片，在 Java，Python，JS 等语言中都有过类似的语法，但是人家那个叫做截取，就是截取一段新的数组出来，但是 GO 语言就是那个不一样的烟火，刚开始看的时候，就有点懵，今天终于搞懂了，就特地来记录一下，就拿上面这段代码举例，咱们先把运行结果贴出来，方便解释： 1234567891011121314[1 2 3 4 5][2 3 4 5]44[1 2 3 4 5][2]14[1 2 3 4 5][2 3 4]34 我每次都打印一下 arr 就是为了看看切片的时候有没有影响到原数组（很明显没有） 现在来看源代码中的 slice = arr[1:] 这里就生成了第一块切片，也就是 [2, 3, 4, 5]，长度为 4，容量为 4，这个就是初始的切片 然后用 slice1 := slice[0:1] 得到 slice1，仍然没有影响到原数组，得到的切片就是 [2]，长度为 1，容量为 4，因为这个切片是从一个容量为 4 的切片中切出来的，容量不变，只是截取需要的值就行 最后用 slice2 := slice1[0:3] 得到 slice2，这里就和上面的解释一样的了，我就不赘述了 原本我以为从数组里面切出来后的切片再切，容量也会跟着变，但看样子，只要最初的的那个切片容量定了，那再由这个切面切出来的其他切面的容量也是一样，虽然目前看起来没什么用，但以后肯定会有机会用到的 关于自学笔记的博客我不太喜欢用太过专业的词汇来描述，简单能理解就好了，Go 语言不得不说在我放弃 C++ 学习 Java 后，唯一一个能让我觉得优雅的语言（仅个人主观喜好）]]></content>
+    <content type="text"><![CDATA[12345678910111213141516171819202122232425func testSlice() &#123; var slice []int var arr = [...]int&#123;1, 2, 3, 4, 5&#125; fmt.Println() fmt.Println(arr) slice = arr[1:] fmt.Println(slice) fmt.Println(len(slice)) fmt.Println(cap(slice)) fmt.Println() fmt.Println(arr) slice1 := slice[0:1] fmt.Println(slice1) fmt.Println(len(slice1)) fmt.Println(cap(slice1)) fmt.Println() fmt.Println(arr) slice2 := slice1[0:3] fmt.Println(slice2) fmt.Println(len(slice2)) fmt.Println(cap(slice2))&#125; 初学 Go 语言，疯狂踩坑，很多语法与 Java 不同，这是第一篇关于 Go 语言的学习笔记，开始记录一些学习中遇到的坑 关于切片，在 Java，Python，JS 等语言中都有过类似的语法，但是人家那个叫做截取，就是截取一段新的数组出来，但是 GO 语言就是那个不一样的烟火，刚开始看的时候，就有点懵，今天终于搞懂了，就特地来记录一下，就拿上面这段代码举例，咱们先把运行结果贴出来，方便解释： 1234567891011121314[1 2 3 4 5][2 3 4 5]44[1 2 3 4 5][2]14[1 2 3 4 5][2 3 4]34 我每次都打印一下 arr 就是为了看看切片的时候有没有影响到原数组（很明显没有） 现在来看源代码中的 slice = arr[1:] 这里就生成了第一块切片，也就是 [2, 3, 4, 5]，长度为 4，容量为 4，这个就是初始的切片 然后用 slice1 := slice[0:1] 得到 slice1，仍然没有影响到原数组，得到的切片就是 [2]，长度为 1，容量为 4，因为这个切片是从一个容量为 4 的切片中切出来的，容量不变，只是截取需要的值就行 最后用 slice2 := slice1[0:3] 得到 slice2，这里就和上面的解释一样的了，我就不赘述了 原本我以为从数组里面切出来后的切片再切，容量也会跟着变，但看样子，只要最初的的那个切片容量定了，那再由这个切面切出来的其他切面的容量也是一样，虽然目前看起来没什么用，但以后肯定会有机会用到的 关于自学笔记的博客我不太喜欢用太过专业的词汇来描述，简单能理解就好了，Go 语言不得不说在我放弃 C++ 学习 Java 后，唯一一个能让我觉得优雅的语言（仅个人主观喜好） 补充： 切片创建的方式： 1234var slice []type = make([]type, len)slice := make([]type, len)slice := make([]type, len, cap)// 或者使用数组创建]]></content>
       <categories>
         <category>Go</category>
       </categories>
@@ -19,8 +63,8 @@
         <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>自学笔记</tag>
         <tag>前端</tag>
+        <tag>自学笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -332,7 +376,7 @@
   <entry>
     <title><![CDATA[剑指Offer（二）]]></title>
     <url>%2F2019%2F03%2F10%2F%E5%89%91%E6%8C%87Offer%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[面试题目录 找出数组中重复的数字 不修改数组找出重复的数字 摄影：Roberto Nickson，来自Unsplash 找出数组中重复的数字(P39)题目 在一个长度为 n 的数组里的所有数字都在 0~n-1 的范围内，数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次，请找出数组中任意一个重复的数字。例如，如果输入长度为7，的数组 {2, 3, 1, 0, 2, 5, 3} ，那么对应的输出是重复的数字2和或者3。 解题思路 从头到位依次扫描这个数字中的每个数字，当扫描到下标为 i 的数字时，首先比较这个数字（用 m 表示）是不是等于 i，如果是，则接着扫描下一个数字；如果不是，则再拿它和第 m 个数字进行比较。如果它和第 m 个数字相等，就找到了一个重复的数字（该数字在下标为 i 和 m 的位置都出现了）；如果它和第 m 个数字不相等，就把第 i 个数字和第 m 个数字交换，把 m 个数字交换，把 m 放到属于它的位置。接下来，再重复比较、交换的过程，知道发现一个重复的数字。 代码 public class Test3_1 { private static boolean duplicate(int[] arr) { if (arr.length &lt;= 0) { return false; } for (int i1 : arr) { if (i1 &lt; 0 || i1 &gt; arr.length - 1) { return false; } } for (int i = 0; i &lt; arr.length; i++) { while (arr[i] != i) { if (arr[i] == arr[arr[i]]) { return true; } int temp = arr[i]; arr[i] = arr[temp]; arr[temp] = temp; } } return false; } public static void main(String[] args) { int[] arr = new int[]{2, 3, 1, 0, 2, 5, 3}; System.out.println(duplicate(arr)); } } 不修改数组找出重复的数字(P41)题目 在一个长度为 n+1 的数组里的所有数字都在 1~n 的范围内，所以数组中至少有一个数字是重复的，请找出数组中任意一个重复的数字，但不能修改输入的数组。例如，如果输入长度为 8 的数组 {2, 3, 5, 4, 3, 2, 6, 7}，那么对应的输出是重复的数字2或者3 解题思路 把从 1~n 的数字从中间的数字m分为两部分，前面一半为 1~m，后面一半为 m+1~n。如果 1~m 的数字的数目超过 m，那么这一班的区间里一定包含重复的数字；否则，另一半 m+1~n 的区间里一定包含重复的数字。 代码 public class Test3_2 { private static int getDuplication(int[] arr) { if (arr.length &lt;= 0) { return -1; } int start = 1; int end = arr.length - 1; while (end &gt;= start) { int middle = ((end - start) &gt;&gt; 1) + start; int count = countRange(arr, start, middle); if (end == start) { if (count &gt; 1) { return start; } else { break; } } if (count &gt; (middle - start + 1)) { end = middle; } else { start = middle + 1; } } return -1; } private static int countRange(int[] arr, int start, int end) { if (arr == null) { return 0; } int count = 0; for (int i : arr) { if (i &gt;= start &amp;&amp; i &lt;= end) { count++; } } return count; } public static void main(String[] args) { int[] arr = new int[] {2, 3, 5, 4, 3, 2, 6, 7}; System.out.println(getDuplication(arr)); } } 注：该方法无法找到全部重复数字，总时间复杂度为O(nlogn)，空间复杂度为O(1)]]></content>
+    <content type="text"><![CDATA[面试题目录 找出数组中重复的数字 不修改数组找出重复的数字 摄影：Roberto Nickson，来自Unsplash 找出数组中重复的数字(P39)题目 在一个长度为 n 的数组里的所有数字都在 0~n-1 的范围内，数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次，请找出数组中任意一个重复的数字。例如，如果输入长度为7，的数组 {2, 3, 1, 0, 2, 5, 3} ，那么对应的输出是重复的数字2和或者3。 解题思路 从头到位依次扫描这个数字中的每个数字，当扫描到下标为 i 的数字时，首先比较这个数字（用 m 表示）是不是等于 i，如果是，则接着扫描下一个数字；如果不是，则再拿它和第 m 个数字进行比较。如果它和第 m 个数字相等，就找到了一个重复的数字（该数字在下标为 i 和 m 的位置都出现了）；如果它和第 m 个数字不相等，就把第 i 个数字和第 m 个数字交换，把 m 个数字交换，把 m 放到属于它的位置。接下来，再重复比较、交换的过程，知道发现一个重复的数字。 代码 12345678910111213141516171819202122232425262728293031public class Test3_1 &#123; private static boolean duplicate(int[] arr) &#123; if (arr.length &lt;= 0) &#123; return false; &#125; for (int i1 : arr) &#123; if (i1 &lt; 0 || i1 &gt; arr.length - 1) &#123; return false; &#125; &#125; for (int i = 0; i &lt; arr.length; i++) &#123; while (arr[i] != i) &#123; if (arr[i] == arr[arr[i]]) &#123; return true; &#125; int temp = arr[i]; arr[i] = arr[temp]; arr[temp] = temp; &#125; &#125; return false; &#125; public static void main(String[] args) &#123; int[] arr = new int[]&#123;2, 3, 1, 0, 2, 5, 3&#125;; System.out.println(duplicate(arr)); &#125;&#125; 不修改数组找出重复的数字(P41)题目 在一个长度为 n+1 的数组里的所有数字都在 1~n 的范围内，所以数组中至少有一个数字是重复的，请找出数组中任意一个重复的数字，但不能修改输入的数组。例如，如果输入长度为 8 的数组 {2, 3, 5, 4, 3, 2, 6, 7}，那么对应的输出是重复的数字2或者3 解题思路 把从 1~n 的数字从中间的数字m分为两部分，前面一半为 1~m，后面一半为 m+1~n。如果 1~m 的数字的数目超过 m，那么这一班的区间里一定包含重复的数字；否则，另一半 m+1~n 的区间里一定包含重复的数字。 代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748public class Test3_2 &#123; private static int getDuplication(int[] arr) &#123; if (arr.length &lt;= 0) &#123; return -1; &#125; int start = 1; int end = arr.length - 1; while (end &gt;= start) &#123; int middle = ((end - start) &gt;&gt; 1) + start; int count = countRange(arr, start, middle); if (end == start) &#123; if (count &gt; 1) &#123; return start; &#125; else &#123; break; &#125; &#125; if (count &gt; (middle - start + 1)) &#123; end = middle; &#125; else &#123; start = middle + 1; &#125; &#125; return -1; &#125; private static int countRange(int[] arr, int start, int end) &#123; if (arr == null) &#123; return 0; &#125; int count = 0; for (int i : arr) &#123; if (i &gt;= start &amp;&amp; i &lt;= end) &#123; count++; &#125; &#125; return count; &#125; public static void main(String[] args) &#123; int[] arr = new int[] &#123;2, 3, 5, 4, 3, 2, 6, 7&#125;; System.out.println(getDuplication(arr)); &#125;&#125; 注：该方法无法找到全部重复数字，总时间复杂度为O(nlogn)，空间复杂度为O(1)]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -343,7 +387,7 @@
   <entry>
     <title><![CDATA[剑指Offer（一）]]></title>
     <url>%2F2019%2F03%2F09%2F%E5%89%91%E6%8C%87Offer%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[知识点目录 赋值运算符 C++ 中的 struct 和 class 的区别 摄影：Ernest Ojeh，来自Unsplash 赋值运算符(P25)有以下类型CMyString的声明，添加赋值运算符函数 class CMyString { public: CMyString(char* pData = nullptr); CMyString(const CMyString&amp; str); ~CMyString(void); private: char* m_pData; } 考点 是否发返回值的类型声明为该类型的引用，并在函数结束前返回实例自身的引用（*this) 是否把传入的参数声明为常量引用 是否释放实例自身已有的内存 判断传入的参数和当前的实例（*this）是不是同一个实例 经典解法 - 初级程序员 CMyString&amp; CMyString::operator = (const CMyString &amp;str) { if (this == &amp;str) { return *this; } delete []m_pData; m_pData = nullptr; m_pData = new char[strlen(str.m_pData) + 1]; strcpy(m_pData, str.m_pData); return *this; } 考虑异常安全性的解法 - 高级程序员 CMyString&amp; CMyString::operator = (const CMyString &amp;str) { if (this != &amp;str) { CMyString strTemp(str); // 创建一个临时实例 /** * 以下三行是将临时实例与自身实例进行交换 */ char* pTemp = strTemp.m_pData; strTemp.m_pData = m_pData; m_pData = pTemp; } // 到该作用域外后，临时实例将会调用析构函数，销毁内存 // 因为临时实例交换后就是之前的实例自身，析构后便可以达到销毁原实例内存的目的 return *this; } 源码地址 C++ 中的 struct 和 class 的区别 如果没有标明成员函数或者变量的访问权限级别，在 struct 中默认的是 public，而在class中默认的是private struct 定义的是值类型，值类型的实例在栈上分配内存；而 class 定义的是引用类型，引用类型的实例在堆上分配内存]]></content>
+    <content type="text"><![CDATA[知识点目录 赋值运算符 C++ 中的 struct 和 class 的区别 摄影：Ernest Ojeh，来自Unsplash 赋值运算符(P25)有以下类型CMyString的声明，添加赋值运算符函数 123456789class CMyString &#123; public: CMyString(char* pData = nullptr); CMyString(const CMyString&amp; str); ~CMyString(void); private: char* m_pData;&#125; 考点 是否发返回值的类型声明为该类型的引用，并在函数结束前返回实例自身的引用（*this) 是否把传入的参数声明为常量引用 是否释放实例自身已有的内存 判断传入的参数和当前的实例（*this）是不是同一个实例 经典解法 - 初级程序员 12345678910111213CMyString&amp; CMyString::operator = (const CMyString &amp;str) &#123; if (this == &amp;str) &#123; return *this; &#125; delete []m_pData; m_pData = nullptr; m_pData = new char[strlen(str.m_pData) + 1]; strcpy(m_pData, str.m_pData); return *this;&#125; 考虑异常安全性的解法 - 高级程序员 123456789101112131415CMyString&amp; CMyString::operator = (const CMyString &amp;str) &#123; if (this != &amp;str) &#123; CMyString strTemp(str); // 创建一个临时实例 /** * 以下三行是将临时实例与自身实例进行交换 */ char* pTemp = strTemp.m_pData; strTemp.m_pData = m_pData; m_pData = pTemp; &#125; // 到该作用域外后，临时实例将会调用析构函数，销毁内存 // 因为临时实例交换后就是之前的实例自身，析构后便可以达到销毁原实例内存的目的 return *this;&#125; 源码地址 C++ 中的 struct 和 class 的区别 如果没有标明成员函数或者变量的访问权限级别，在 struct 中默认的是 public，而在class中默认的是private struct 定义的是值类型，值类型的实例在栈上分配内存；而 class 定义的是引用类型，引用类型的实例在堆上分配内存]]></content>
       <categories>
         <category>C++</category>
       </categories>
@@ -393,18 +437,6 @@
       </categories>
       <tags>
         <tag>电影</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[FirstBlog]]></title>
-    <url>%2F2019%2F02%2F13%2FFirstBlog%2F</url>
-    <content type="text"><![CDATA[FirstBlog第一篇文章这是三级标题 列表1 列表2 a 子列表 b 子列表 列表3 ZEALER 倾斜字体 加粗 println(&quot;Hello World&quot;); for (int i = 0; i &lt; 10; i++) { println(&quot;Hello World&quot;); } 引用文章 Markdown源码# FirstBlog ## 第一篇文章 ### 这是三级标题 - 列表1 - 列表2 a 子列表 b 子列表 - 列表3 --- --------------------- [ZEALER](http://www.zealer.com/) ![白色缘起](https://img1.doubanio.com/view/photo/l/public/p2540374727.webp) *倾斜字体* **加粗** `println(&quot;Hello World&quot;);`]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>导航</tag>
-        <tag>分享</tag>
       </tags>
   </entry>
 </search>

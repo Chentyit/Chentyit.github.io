@@ -97,7 +97,7 @@
 <meta property="og:description" content="面试题目录 找出数组中重复的数字 不修改数组找出重复的数字    摄影：Roberto Nickson，来自Unsplash">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/03/10/剑指Offer（二）/roberto-nickson-1424153-unsplash.jpg">
-<meta property="og:updated_time" content="2019-04-16T12:09:32.028Z">
+<meta property="og:updated_time" content="2019-07-19T10:31:05.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指Offer（二）">
 <meta name="twitter:description" content="面试题目录 找出数组中重复的数字 不修改数组找出重复的数字    摄影：Roberto Nickson，来自Unsplash">
@@ -415,7 +415,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  790
+                  869
                 </span>
               
 
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -470,38 +470,8 @@
 <p>从头到位依次扫描这个数字中的每个数字，当扫描到下标为 i 的数字时，首先比较这个数字（用 m 表示）是不是等于 i，如果是，则接着扫描下一个数字；如果不是，则再拿它和第 m 个数字进行比较。如果它和第 m 个数字相等，就找到了一个重复的数字（该数字在下标为 i 和 m 的位置都出现了）；如果它和第 m 个数字不相等，就把第 i 个数字和第 m 个数字交换，把 m 个数字交换，把 m 放到属于它的位置。接下来，再重复比较、交换的过程，知道发现一个重复的数字。</p>
 </blockquote>
 <p><strong><em>代码</em></strong></p>
-<pre><code>public class Test3_1 {
-
-    private static boolean duplicate(int[] arr) {
-        if (arr.length &lt;= 0) {
-            return false;
-        }
-
-        for (int i1 : arr) {
-            if (i1 &lt; 0 || i1 &gt; arr.length - 1) {
-                return false;
-            }
-        }
-
-        for (int i = 0; i &lt; arr.length; i++) {
-            while (arr[i] != i) {
-                if (arr[i] == arr[arr[i]]) {
-                    return true;
-                }
-                int temp = arr[i];
-                arr[i] = arr[temp];
-                arr[temp] = temp;
-            }
-        }
-        return false;
-    }
-
-    public static void main(String[] args) {
-        int[] arr = new int[]{2, 3, 1, 0, 2, 5, 3};
-        System.out.println(duplicate(arr));
-    }
-}
-</code></pre><h3 id="不修改数组找出重复的数字-P41"><a href="#不修改数组找出重复的数字-P41" class="headerlink" title="不修改数组找出重复的数字(P41)"></a>不修改数组找出重复的数字(P41)</h3><p><strong><em>题目</em></strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test3_1</span> &#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> boolean <span class="title">duplicate</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (arr.length &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i1 : arr) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i1 &lt; <span class="number">0</span> || i1 &gt; arr.length - <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (arr[i] != i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (arr[i] == arr[arr[i]]) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">int</span> temp = arr[i];</span><br><span class="line">                arr[i] = arr[temp];</span><br><span class="line">                arr[temp] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">3</span>&#125;;</span><br><span class="line">        System.out.println(duplicate(arr));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="不修改数组找出重复的数字-P41"><a href="#不修改数组找出重复的数字-P41" class="headerlink" title="不修改数组找出重复的数字(P41)"></a>不修改数组找出重复的数字(P41)</h3><p><strong><em>题目</em></strong></p>
 <blockquote>
 <p>在一个长度为 n+1 的数组里的所有数字都在 1~n 的范围内，所以数组中至少有一个数字是重复的，请找出数组中任意一个重复的数字，但不能修改输入的数组。例如，如果输入长度为 8 的数组 {2, 3, 5, 4, 3, 2, 6, 7}，那么对应的输出是重复的数字2或者3</p>
 </blockquote>
@@ -510,55 +480,8 @@
 <p>把从 1~n 的数字从中间的数字m分为两部分，前面一半为 1~m，后面一半为 m+1~n。如果 1~m 的数字的数目超过 m，那么这一班的区间里一定包含重复的数字；否则，另一半 m+1~n 的区间里一定包含重复的数字。</p>
 </blockquote>
 <p><strong><em>代码</em></strong></p>
-<pre><code>public class Test3_2 {
-
-    private static int getDuplication(int[] arr) {
-        if (arr.length &lt;= 0) {
-            return -1;
-        }
-
-        int start = 1;
-        int end = arr.length - 1;
-        while (end &gt;= start) {
-            int middle = ((end - start) &gt;&gt; 1) + start;
-            int count = countRange(arr, start, middle);
-            if (end == start) {
-                if (count &gt; 1) {
-                    return start;
-                } else {
-                    break;
-                }
-            }
-
-            if (count &gt; (middle - start + 1)) {
-                end = middle;
-            } else {
-                start = middle + 1;
-            }
-        }
-        return -1;
-    }
-
-    private static int countRange(int[] arr, int start, int end) {
-        if (arr == null) {
-            return 0;
-        }
-
-        int count  = 0;
-        for (int i : arr) {
-            if (i &gt;= start &amp;&amp; i &lt;= end) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    public static void main(String[] args) {
-        int[] arr = new int[] {2, 3, 5, 4, 3, 2, 6, 7};
-        System.out.println(getDuplication(arr));
-    }
-}
-</code></pre><p><strong>注：该方法无法找到全部重复数字，总时间复杂度为O(nlogn)，空间复杂度为O(1)</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test3_2</span> &#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getDuplication</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (arr.length &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> end = arr.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (end &gt;= start) &#123;</span><br><span class="line">            <span class="keyword">int</span> middle = ((end - start) &gt;&gt; <span class="number">1</span>) + start;</span><br><span class="line">            <span class="keyword">int</span> count = countRange(arr, start, middle);</span><br><span class="line">            <span class="keyword">if</span> (end == start) &#123;</span><br><span class="line">                <span class="keyword">if</span> (count &gt; <span class="number">1</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> start;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (count &gt; (middle - start + <span class="number">1</span>)) &#123;</span><br><span class="line">                end = middle;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                start = middle + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">countRange</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (arr == null) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> count  = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : arr) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt;= start &amp;&amp; i &lt;= end) &#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">7</span>&#125;;</span><br><span class="line">        System.out.println(getDuplication(arr));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：该方法无法找到全部重复数字，总时间复杂度为O(nlogn)，空间复杂度为O(1)</strong></p>
 
       
     </div>
@@ -718,7 +641,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -729,7 +652,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -740,7 +663,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

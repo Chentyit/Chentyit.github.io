@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="翼叶知秋">
 <meta property="og:description" content="12345678910111213141516171819202122232425func testSlice()  &amp;#123;	var slice []int	var arr = [...]int&amp;#123;1, 2, 3, 4, 5&amp;#125;	fmt.Println()	fmt.Println(arr)	slice = arr[1:]	fmt.Println(slice)	fmt.Prin">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-01T04:05:46.203Z">
+<meta property="og:updated_time" content="2019-07-01T07:26:57.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Go语言切片">
 <meta name="twitter:description" content="12345678910111213141516171819202122232425func testSlice()  &amp;#123;	var slice []int	var arr = [...]int&amp;#123;1, 2, 3, 4, 5&amp;#125;	fmt.Println()	fmt.Println(arr)	slice = arr[1:]	fmt.Println(slice)	fmt.Prin">
@@ -413,7 +413,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  634
+                  670
                 </span>
               
 
@@ -465,6 +465,9 @@
 <blockquote>
 <p>关于自学笔记的博客我不太喜欢用太过专业的词汇来描述，简单能理解就好了，Go 语言不得不说在我放弃 C++ 学习 Java 后，唯一一个能让我觉得优雅的语言（仅个人主观喜好）</p>
 </blockquote>
+<p><strong>补充：</strong></p>
+<p>切片创建的方式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> slice []<span class="keyword">type</span> = <span class="built_in">make</span>([]<span class="keyword">type</span>, <span class="built_in">len</span>)</span><br><span class="line">slice := <span class="built_in">make</span>([]<span class="keyword">type</span>, <span class="built_in">len</span>)</span><br><span class="line">slice := <span class="built_in">make</span>([]<span class="keyword">type</span>, <span class="built_in">len</span>, <span class="built_in">cap</span>)</span><br><span class="line"><span class="comment">// 或者使用数组创建</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -533,6 +536,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/02/Go语言的Struct/" rel="prev" title="Go语言的Struct">
+                Go语言的Struct <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -611,7 +618,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -622,7 +629,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -633,7 +640,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

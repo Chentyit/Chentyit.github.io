@@ -97,7 +97,7 @@
 <meta property="og:description" content="知识点目录 赋值运算符 C++ 中的 struct 和 class 的区别    摄影：Ernest Ojeh，来自Unsplash">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/03/09/剑指Offer（一）/ernest-ojeh-1422985-unsplash.jpg">
-<meta property="og:updated_time" content="2019-03-10T14:54:35.922Z">
+<meta property="og:updated_time" content="2019-07-19T10:30:50.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指Offer（一）">
 <meta name="twitter:description" content="知识点目录 赋值运算符 C++ 中的 struct 和 class 的区别    摄影：Ernest Ojeh，来自Unsplash">
@@ -415,7 +415,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  409
+                  446
                 </span>
               
 
@@ -462,16 +462,8 @@
 </blockquote>
 <a id="more"></a>
 <h3 id="赋值运算符-P25"><a href="#赋值运算符-P25" class="headerlink" title="赋值运算符(P25)"></a>赋值运算符(P25)</h3><p>有以下类型CMyString的声明，添加赋值运算符函数</p>
-<pre><code>class CMyString {
-    public:
-        CMyString(char* pData = nullptr);
-        CMyString(const CMyString&amp; str);
-        ~CMyString(void);
-
-    private:
-        char* m_pData;
-}
-</code></pre><p><strong><em>考点</em></strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CMyString</span> &#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        CMyString(<span class="keyword">char</span>* pData = <span class="literal">nullptr</span>);</span><br><span class="line">        CMyString(<span class="keyword">const</span> CMyString&amp; str);</span><br><span class="line">        ~CMyString(<span class="keyword">void</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="keyword">char</span>* m_pData;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><em>考点</em></strong></p>
 <ul>
 <li>是否发返回值的类型声明为该类型的引用，并在函数结束前返回实例自身的引用（*this)</li>
 <li>是否把传入的参数声明为常量引用</li>
@@ -479,36 +471,10 @@
 <li>判断传入的参数和当前的实例（*this）是不是同一个实例</li>
 </ul>
 <p><strong>经典解法 - 初级程序员</strong></p>
-<pre><code>CMyString&amp; CMyString::operator = (const CMyString &amp;str) {
-    if (this == &amp;str) {
-        return *this;
-    }
-
-    delete []m_pData;
-    m_pData = nullptr;
-
-    m_pData = new char[strlen(str.m_pData) + 1];
-    strcpy(m_pData, str.m_pData);
-
-    return *this;
-}
-</code></pre><p><strong>考虑异常安全性的解法 - 高级程序员</strong></p>
-<pre><code>CMyString&amp; CMyString::operator = (const CMyString &amp;str) {
-    if (this != &amp;str) {
-        CMyString strTemp(str);             // 创建一个临时实例
-
-        /**
-         * 以下三行是将临时实例与自身实例进行交换
-         */
-        char* pTemp = strTemp.m_pData;
-        strTemp.m_pData = m_pData;
-        m_pData = pTemp;
-    }
-    // 到该作用域外后，临时实例将会调用析构函数，销毁内存
-    // 因为临时实例交换后就是之前的实例自身，析构后便可以达到销毁原实例内存的目的
-    return *this;
-}
-</code></pre><blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CMyString&amp; CMyString::<span class="keyword">operator</span> = (<span class="keyword">const</span> CMyString &amp;str) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> == &amp;str) &#123;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span> []m_pData;</span><br><span class="line">    m_pData = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    m_pData = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="built_in">strlen</span>(str.m_pData) + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">strcpy</span>(m_pData, str.m_pData);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>考虑异常安全性的解法 - 高级程序员</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">CMyString&amp; CMyString::<span class="keyword">operator</span> = (<span class="keyword">const</span> CMyString &amp;str) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> != &amp;str) &#123;</span><br><span class="line">        CMyString strTemp(str);             <span class="comment">// 创建一个临时实例</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 以下三行是将临时实例与自身实例进行交换</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">char</span>* pTemp = strTemp.m_pData;</span><br><span class="line">        strTemp.m_pData = m_pData;</span><br><span class="line">        m_pData = pTemp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 到该作用域外后，临时实例将会调用析构函数，销毁内存</span></span><br><span class="line">    <span class="comment">// 因为临时实例交换后就是之前的实例自身，析构后便可以达到销毁原实例内存的目的</span></span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>源码<a href="https://github.com/zhedahht/CodingInterviewChinese2/tree/master/01_AssignmentOperator" target="_blank" rel="noopener">地址</a></p>
 </blockquote>
 <h3 id="C-中的-struct-和-class-的区别"><a href="#C-中的-struct-和-class-的区别" class="headerlink" title="C++ 中的 struct 和 class 的区别"></a>C++ 中的 struct 和 class 的区别</h3><ul>
@@ -674,7 +640,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -685,7 +651,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -696,7 +662,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
