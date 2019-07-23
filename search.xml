@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[LeetCode刷题976]]></title>
+    <url>%2F2019%2F07%2F23%2FLeetCode%E5%88%B7%E9%A2%98976%2F</url>
+    <content type="text"><![CDATA[1234567给定由一些正数（代表长度）组成的数组 A，返回由其中三个长度组成的、面积不为零的三角形的最大周长。如果不能形成任何面积不为零的三角形，返回 0。来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/largest-perimeter-triangle/著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 示例1： 输入：[2,1,2]输出：5 示例2： 输入：[1,2,1]输出：0 示例3： 输入：[3,2,3,4]输出：10 示例4： 输入：[3,6,2,3]输出：8 思路： 理清楚三角形特点，两边之和大于第三边 A1 + A2 &gt; A3，两边之差小于第三边 |A1 - A2| &lt; A3 根据思路1可以得到在有序数组中，某一元素大于前两项之和即可 排序得到有序数组（升序降序随意） 根据思路 1 和 2 得到最大周长 Java 语言实现123456789101112131415161718192021222324252627282930313233343536373839404142434445464748class Solution &#123; /** * 这里使用的是快速排序 * 具体说明就不详细写了，单独起新博客写 */ public static void qsort(int[] arr, int left, int right) &#123; if (left &gt;= right) &#123; return; &#125; int value = arr[left]; int index = left; for (int i = left; i &lt;= right; i++) &#123; if (value &gt; arr[i]) &#123; arr[index] = arr[i]; arr[i] = arr[index + 1]; index++; &#125; &#125; arr[index] = value; qsort(arr, left, index - 1); qsort(arr, index + 1, right); &#125; /** * 求出满足三角形条件的最大周长 */ public int largestPerimeter(int[] A) &#123; // 判断所给的数组长度是否满足 3 条边 if (A.length &lt; 3) &#123; return 0; &#125; // 快速排序获得一个升序数组 qsort(A, 0, A.length - 1); // 设定一个最大值 int max = 0; // 开始计算最大值 for (int i = 2; i &lt; A.length; i++) &#123; // 计算出满足两边之和大于第三边的最大周长 if ((A[i] &lt; (A[i - 1] + A[i - 2])) &amp;&amp; (max &lt; A[i] + A[i - 1] + A[i - 2])) &#123; max = A[i] + A[i - 1] + A[i - 2]; &#125; &#125; // 返回最大周长 return max; &#125;&#125; Golang 语言实现1234567891011121314151617181920212223242526272829303132333435363738394041424344454647/** * 这里使用的是快速排序 * 具体说明就不详细写了，单独起新博客写 */func qsort(arr []int, left, right int) &#123; if left &gt;= right &#123; return &#125; value := arr[left] index := left for i := left; i &lt;= right; i++ &#123; if value &gt; arr[i] &#123; arr[index] = arr[i] arr[i] = arr[index + 1] index++ &#125; &#125; arr[index] = value qsort(arr, left, index - 1) qsort(arr, index + 1, right)&#125;/** * 求出满足三角形条件的最大周长 */func largestPerimeter(A []int) int &#123; // 判断所给的数组长度是否满足 3 条边 if len(A) &lt; 3 &#123; return 0 &#125; // 快速排序获得一个升序数组 qsort(A, 0, len(A) - 1) // 设定一个最大值 max := 0 // 开始计算最大值 for i := 2; i &lt; len(A); i++ &#123; // 计算出满足两边之和大于第三边的最大周长 if (A[i] &lt; (A[i-1] + A[i-2])) &amp;&amp; (A[i] + A[i - 1] + A[i - 2] &gt; max) &#123; max = A[i] + A[i - 1] + A[i - 2] &#125; &#125; // 返回最大周长 return max&#125;]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LeetCode刷题922]]></title>
+    <url>%2F2019%2F07%2F23%2FLeetCode%E5%88%B7%E9%A2%98922%2F</url>
+    <content type="text"><![CDATA[123456789给定一个非负整数数组 A， A 中一半整数是奇数，一半整数是偶数。对数组进行排序，以便当 A[i] 为奇数时，i 也是奇数；当 A[i] 为偶数时， i 也是偶数。你可以返回任何满足上述条件的数组作为答案。来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/sort-array-by-parity-ii著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 示例： 输入：[4, 2, 5, 7]输出：[4, 5, 2, 7]解释：[4, 7, 2, 5]，[2, 5, 4, 7]，[2, 7, 4, 5] 也会被接受。 思路： 设置奇偶指针指向奇偶位 如果满足奇偶数条件，指针加 2，不满足，两个指针位互换 Java 语言实现1234567891011121314151617181920212223242526class Solution &#123; public static int[] sortArrayByParityII(int[] A) &#123; // 设置奇数指针 int even = 0; // 设置偶数指针 int odd = 1; // 开始循环判断 while (even &lt; A.length &amp;&amp; odd &lt; A.length) &#123; // 判断是否满足偶数条件 if (A[even] % 2 == 0) &#123; even += 2; continue; &#125; // 判断是否满足奇数条件 if (A[odd] % 2 != 0) &#123; odd += 2; continue; &#125; // 不满足以上条件就交换两个指针的值 int buf = A[even]; A[even] = A[odd]; A[odd] = buf; &#125; return A; &#125;&#125; Golang 语言实现12345678910111213141516171819202122func sortArrayByParityII(A []int) []int &#123; // 设置奇数指针 even := 0 // 设置偶数指针 odd := 1 // 开始循环判断 for even &lt; len(A) &amp;&amp; odd &lt; len(A) &#123; // 判断是否满足偶数条件 if A[even]%2 == 0 &#123; even += 2 continue &#125; // 判断是否满足奇数条件 if A[odd]%2 != 0 &#123; odd += 2 continue &#125; // 不满足以上条件就交换两个指针的值 A[even], A[odd] = A[odd], A[even] &#125; return A&#125;]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[C++复制构造函数]]></title>
     <url>%2F2019%2F07%2F19%2FC-%E5%A4%8D%E5%88%B6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%2F</url>
     <content type="text"><![CDATA[12345678910111213141516171819202122232425262728#include&lt;iostream&gt;using namespace std;class A &#123;private: int value;public: A(int n) &#123; value = n; &#125; A(A other) &#123; value = other.value; &#125; void Print() &#123; cout &lt;&lt; value &lt;&lt; endl; &#125;&#125;;int main() &#123; A a = 10; A b = a; b.Print(); return 0;&#125; 上述代码中，复制构造函数 A(A other) 传入的是 A 的一个实例，由于是传值参数，把形参复制到实参会调用复制构造函数，如果允许复制构造函数传值，就会在复制构造函数内调用复制构造函数，就会形成永久递归，导致栈溢出 修改方案：将 A(A other) 修改为 A(const A&amp; other)]]></content>
@@ -63,8 +85,8 @@
         <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>自学笔记</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
