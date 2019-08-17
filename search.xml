@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Nginx安装]]></title>
+    <url>%2F2019%2F08%2F17%2FNginx%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[安装必要的 C++ 等插件1yum install -y gcc gcc-c++ automake autoconf libtool make 安装 PCRE1234tar -zxvf pcre2-10.33.tar.gz -C /usr/local/cd /usr/local/pcre2-10.33/./configuremake &amp;&amp; make install 安装 zlib12345wget http://zlib.net/zlib-1.2.11.tar.gztar -zxvf zlib-1.2.11.tar.gzcd zlib-1.2.11/./configuremake &amp;&amp; make install 安装 OpenSSL1yum -y install openssl openssl-devel 安装 Nginx12345678tar -zxvf nginx-1.8.1.tar.gz -C /usr/local/cd /usr/local/nginx-1.8.1/./configure --prefix=/usr/local/nginx/make &amp;&amp; make install# 启动需要到 Nginx 的目录下sbin/nginx -c conf/nginx.conf# 查看是否启动成功（80 端口启动)netstat -ntlp 更改配置文件12345location / &#123; root html; #index index.html index.htm; proxy_pass http://chentyit.com;&#125; 然后重新加载一下 1sbin/nginx -s reload [具体配置方式见官网](]]></content>
+      <categories>
+        <category>网络</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hadoop常见错误集]]></title>
     <url>%2F2019%2F08%2F13%2FHadoop%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E9%9B%86%2F</url>
     <content type="text"><![CDATA[摄影：Garrett Patz，来自Unsplash Hadoop集群从节点出现错误（Connection refused） 错误原因：Hadoop 集群 yarn-site.xml 配置错误： 默认情况下 yarn ResourceManager 相关服务IP地址指向的是0.0.0.0。 而在服务器中，0.0.0.0 指的是本机网络地址，那么 NodeManager 就会在本机找 ResourceManager 相关服务，而 slave 节点上并没有这些服务，这些服务在 ResourceManager Master 节点上。所以针对 Hadoop 集群配置 yare-site.xml 某些配置项不能使用默认配置。 注意：hadoop 伪分布式可以使用默认配置，因为所有服务都在本地运行 解决方法：修改所有节点上yare-site.xml配置文件，在该文件中配置ResourceManager Master节点所在地址即可解决问题。详细配置信息如下： 123456789101112&lt;property&gt; &lt;name&gt;yarn.resourcemanager.address&lt;/name&gt; &lt;value&gt;hadoopMaster:8032&lt;/value&gt; &lt;/property&gt; &lt;property&gt; &lt;name&gt;yarn.resourcemanager.scheduler.address&lt;/name&gt; &lt;value&gt;hadoopMaster:8030&lt;/value&gt; &lt;/property&gt;&lt;property&gt; &lt;name&gt;yarn.resourcemanager.resource-tracker.address&lt;/name&gt; &lt;value&gt;hadoopMaster:8031&lt;/value&gt; &lt;/property&gt; MR本地提交集群运行 问题描述：无法加载 core-site.xml 配置文件，没法找到 hdfs://ns 的路径，直接指定默认本地路径 错误原因：Maven 打包时没有将 XML 文件打包，所以运行程序时无法加载到 core-site.xml 文件 解决办法：在 pom.xml 文件的 &lt;build&gt;&lt;/build&gt; 添加 12345678910&lt;build&gt; &lt;resources&gt; &lt;resource&gt; &lt;directory&gt;src/main/java&lt;/directory&gt; &lt;includes&gt; &lt;include&gt;**/*.xml&lt;/include&gt; &lt;/includes&gt; &lt;/resource&gt; &lt;/resources&gt;&lt;/build&gt; 再重新打包运行即可 Unable to initialize MapOutputCollector org.apache.hadoop.mapred.MapTask$MapOutputBuffer 这个问题我花了很久时间，代码改了三次才运行成功 最后发现是因为 Mapper 和 Reducer 的传入值有问题，总结下来就是 Mapper 和 Reducer 的入参和出参的类型必须要使用 Hadoop 封装的类型，或者按照 Hadoop 要求封装的类型（自行封装的类，除了要实现 WritableComparable 接口，而且自定义类还必须要有无参构造方法），Hadoop 已封装类型如下：]]></content>
