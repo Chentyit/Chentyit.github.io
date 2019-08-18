@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Flume安装]]></title>
+    <url>%2F2019%2F08%2F18%2FFlume%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[安装 JDK下载 flume 安装包解压安装包更改配置文件修改 conf 下的 flume-env.sh.template 复制一份到 flume-env.sh 并修改文件中的 JAVA_HOME 为 jdk 的真实路径 复制一份 flume-conf.properties.template 到 flume-conf.properties 自定义配置文件自行创建文件夹存放自己编写的配置文件 net-logger.conf（本机运行）1234567891011121314151617181920212223# example.conf: A single-node Flume configuration# Name the components on this agenta1.sources = r1a1.sinks = k1a1.channels = c1# Describe/configure the sourcea1.sources.r1.type = netcata1.sources.r1.bind = localhosta1.sources.r1.port = 44444# Describe the sinka1.sinks.k1.type = logger# Use a channel which buffers events in memorya1.channels.c1.type = memorya1.channels.c1.capacity = 1000a1.channels.c1.transactionCapacity = 100# Bind the source and sink to the channela1.sources.r1.channels = c1a1.sinks.k1.channel = c1 启动 flume 1bin/flume-ng agent --conf conf --conf-file bigdata1/net-logger.conf --name a1 -Dflume.root.logger=INFO,console –conf-file 指定自定义配置文件（这个是单机启动） 安装 telnet 连接 flume 1telnet localhost 44444 就可以直接发送消息了，如果 flume 日志有打印对应的消息就是连接成功了 dir-hdfs.conf（抓取日志到 hdfs）配置路径同上 123456789101112131415161718192021222324252627282930313233a1.sources = r1a1.sources.r1.channels = c1a1.sources.r1.type = TAILDIR#记录偏移量a1.sources.r1.positionFile = /usr/local/flume1.8.0/iweb/taildir_position.jsona1.sources.r1.filegroups = f1 f2a1.sources.r1.filegroups.f1 = /root/iweb/test_log1/access.loga1.sources.r1.headers.f1.headerKey1 = value1a1.sources.r1.filegroups.f2 = /root/iweb/test_log2/access.loga1.sources.r1.headers.f2.headerKey1 = value2a1.sources.r1.fileHeader = truea1.channels = c1a1.channels.c1.type = memorya1.channels.c1.capacity = 10000a1.channels.c1.transactionCapacity = 10000a1.channels.c1.byteCapacityBufferPercentage = 20a1.channels.c1.byteCapacity = 800000a1.sinks = k1a1.sinks.k1.type = hdfsa1.sinks.k1.channel = c1a1.sinks.k1.hdfs.path = /flume/events/%y-%m-%d/%H%M%Sa1.sinks.k1.hdfs.filePrefix = events-#一定要加上a1.sinks.k1.hdfs.useLocalTimeStamp = truea1.sinks.k1.hdfs.round = truea1.sinks.k1.hdfs.roundValue = 10a1.sinks.k1.hdfs.roundUnit = minute#生成的文件类型，默认是Sequencefile，可用DataStream，则为普通文本a1.sinks.k1.hdfs.fileType = DataStream 创建 f1 和 f2 路径（除了最后一个文件） 启动 flume 重启一台终端连接到该主机，并向 f1 和 f2 路径下的 access.log（这是配置文件里面指定的，也可以自定义）写入数据 再开一台终端连接到主机，查看主机的日志文件（也是在上面的配置文件中配置） 每次写入都有一个偏移量，指定下一次读取文件的偏移位置，同时可以在 hdfs 的 web 页面进行查看]]></content>
+      <categories>
+        <category>Hadoop</category>
+      </categories>
+      <tags>
+        <tag>Flume</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Nginx安装]]></title>
     <url>%2F2019%2F08%2F17%2FNginx%E5%AE%89%E8%A3%85%2F</url>
     <content type="text"><![CDATA[安装必要的 C++ 等插件1yum install -y gcc gcc-c++ automake autoconf libtool make 安装 PCRE1234tar -zxvf pcre2-10.33.tar.gz -C /usr/local/cd /usr/local/pcre2-10.33/./configuremake &amp;&amp; make install 安装 zlib12345wget http://zlib.net/zlib-1.2.11.tar.gztar -zxvf zlib-1.2.11.tar.gzcd zlib-1.2.11/./configuremake &amp;&amp; make install 安装 OpenSSL1yum -y install openssl openssl-devel 安装 Nginx12345678tar -zxvf nginx-1.8.1.tar.gz -C /usr/local/cd /usr/local/nginx-1.8.1/./configure --prefix=/usr/local/nginx/make &amp;&amp; make install# 启动需要到 Nginx 的目录下sbin/nginx -c conf/nginx.conf# 查看是否启动成功（80 端口启动)netstat -ntlp 更改配置文件12345location / &#123; root html; # index index.html index.htm; proxy_pass http://chentyit.com;&#125; 然后重新加载一下 1sbin/nginx -s reload 具体配置方式见官网]]></content>
