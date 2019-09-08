@@ -88,20 +88,20 @@
 
 
 
-<meta name="description" content="下载 HBase 的安装包下载的是 2.0.6 版本 解压安装包1tar -xzcf hdfs-*** -C /usr/local 添加环境变量123456vim /etc/profileexport HBASE_HOME=&quot;/usr/local/hbase-2.0.6&quot;export PATH=$&amp;#123;PATH&amp;#125;:$&amp;#123;HBASE_HOME&amp;#125;/binsource">
+<meta name="description" content="下载 HBase 的安装包下载的是 2.0.6 版本 解压安装包1tar -xzvf hdfs-*** -C /usr/local 添加环境变量123456vim /etc/profileexport HBASE_HOME=&quot;/usr/local/hbase-2.0.6&quot;export PATH=$&amp;#123;PATH&amp;#125;:$&amp;#123;HBASE_HOME&amp;#125;/binsource">
 <meta name="keywords" content="HBase">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HBase 安装">
 <meta property="og:url" content="https://www.chentyit.com/2019/09/01/HBase-安装/index.html">
 <meta property="og:site_name" content="翼叶知秋">
-<meta property="og:description" content="下载 HBase 的安装包下载的是 2.0.6 版本 解压安装包1tar -xzcf hdfs-*** -C /usr/local 添加环境变量123456vim /etc/profileexport HBASE_HOME=&quot;/usr/local/hbase-2.0.6&quot;export PATH=$&amp;#123;PATH&amp;#125;:$&amp;#123;HBASE_HOME&amp;#125;/binsource">
+<meta property="og:description" content="下载 HBase 的安装包下载的是 2.0.6 版本 解压安装包1tar -xzvf hdfs-*** -C /usr/local 添加环境变量123456vim /etc/profileexport HBASE_HOME=&quot;/usr/local/hbase-2.0.6&quot;export PATH=$&amp;#123;PATH&amp;#125;:$&amp;#123;HBASE_HOME&amp;#125;/binsource">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/09/01/HBase-安装/hbase_web.png">
 <meta property="og:image" content="https://www.chentyit.com/2019/09/01/HBase-安装/hbase_jps.png">
-<meta property="og:updated_time" content="2019-09-01T03:47:23.652Z">
+<meta property="og:updated_time" content="2019-09-02T00:55:36.143Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HBase 安装">
-<meta name="twitter:description" content="下载 HBase 的安装包下载的是 2.0.6 版本 解压安装包1tar -xzcf hdfs-*** -C /usr/local 添加环境变量123456vim /etc/profileexport HBASE_HOME=&quot;/usr/local/hbase-2.0.6&quot;export PATH=$&amp;#123;PATH&amp;#125;:$&amp;#123;HBASE_HOME&amp;#125;/binsource">
+<meta name="twitter:description" content="下载 HBase 的安装包下载的是 2.0.6 版本 解压安装包1tar -xzvf hdfs-*** -C /usr/local 添加环境变量123456vim /etc/profileexport HBASE_HOME=&quot;/usr/local/hbase-2.0.6&quot;export PATH=$&amp;#123;PATH&amp;#125;:$&amp;#123;HBASE_HOME&amp;#125;/binsource">
 <meta name="twitter:image" content="https://www.chentyit.com/2019/09/01/HBase-安装/hbase_web.png">
 
 
@@ -454,7 +454,7 @@
 
       
         <h2 id="下载-HBase-的安装包"><a href="#下载-HBase-的安装包" class="headerlink" title="下载 HBase 的安装包"></a>下载 HBase 的安装包</h2><p>下载的是 2.0.6 版本</p>
-<h2 id="解压安装包"><a href="#解压安装包" class="headerlink" title="解压安装包"></a>解压安装包</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xzcf hdfs-*** -C /usr/local</span><br></pre></td></tr></table></figure>
+<h2 id="解压安装包"><a href="#解压安装包" class="headerlink" title="解压安装包"></a>解压安装包</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf hdfs-*** -C /usr/local</span><br></pre></td></tr></table></figure>
 <h2 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line">export HBASE_HOME="/usr/local/hbase-2.0.6"</span><br><span class="line">export PATH=$&#123;PATH&#125;:$&#123;HBASE_HOME&#125;/bin</span><br><span class="line"></span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
 <h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><h3 id="修改-conf-下的-hbase-env-sh"><a href="#修改-conf-下的-hbase-env-sh" class="headerlink" title="修改 /conf 下的 hbase-env.sh"></a>修改 /conf 下的 hbase-env.sh</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk8</span><br><span class="line"><span class="meta">#</span> 使用自己的 Zookeeper 不使用 HBase 自带的 ZK</span><br><span class="line">export HBASE_MANAGES_ZK=false</span><br></pre></td></tr></table></figure>
 <h3 id="修改-conf-下的-hbase-site-xml"><a href="#修改-conf-下的-hbase-site-xml" class="headerlink" title="修改 /conf 下的 hbase-site.xml"></a>修改 /conf 下的 hbase-site.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 这里不设置这个也可以，但是要在下面写上端口号，设置了也不会发生冲突 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.property.clientPort<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>2181<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.quorum<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>bigdata1:2181,bigdata2:2181,bigdata3:2181<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 可以不配置，如果要配置，需要和zookeeper配置文件zoo.cfg中的dataDir指定的路径相同 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.property.dataDir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/usr/local/zookeeper/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 设置 HDFS 的命名空间  --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 注意：这里要和 hadoop 里面的 core-site.xml 里面配置的 HDFS 命名空间名称相同  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://ns/hbase<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 设置为分布式 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.cluster.distributed<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -543,6 +543,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/09/08/Scrapy-一/" rel="prev" title="Scrapy(一)">
+                Scrapy(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -629,7 +633,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -640,7 +644,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -651,7 +655,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
