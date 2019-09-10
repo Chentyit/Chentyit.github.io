@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="字符串高级操作插入变量12345678910package cn.chentyit.chapter07object StringApp extends App &amp;#123;    val s = &quot;Hello&quot;    val name = &quot;PK&quot;    val team = &quot;AC Milan&quot;    println(s&quot;$s $name $team&quot;)&amp;#125; 多行字符串12345678">
+<meta name="description" content="字符串高级操作 匿名函数 Curry 函数 高阶函数 综合例子 偏函数">
 <meta name="keywords" content="大数据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scala函数高级操作">
 <meta property="og:url" content="https://www.chentyit.com/2019/09/10/Scala函数高级操作/index.html">
 <meta property="og:site_name" content="翼叶知秋">
-<meta property="og:description" content="字符串高级操作插入变量12345678910package cn.chentyit.chapter07object StringApp extends App &amp;#123;    val s = &quot;Hello&quot;    val name = &quot;PK&quot;    val team = &quot;AC Milan&quot;    println(s&quot;$s $name $team&quot;)&amp;#125; 多行字符串12345678">
+<meta property="og:description" content="字符串高级操作 匿名函数 Curry 函数 高阶函数 综合例子 偏函数">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-10T11:58:58.375Z">
+<meta property="og:updated_time" content="2019-09-10T12:04:59.559Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Scala函数高级操作">
-<meta name="twitter:description" content="字符串高级操作插入变量12345678910package cn.chentyit.chapter07object StringApp extends App &amp;#123;    val s = &quot;Hello&quot;    val name = &quot;PK&quot;    val team = &quot;AC Milan&quot;    println(s&quot;$s $name $team&quot;)&amp;#125; 多行字符串12345678">
+<meta name="twitter:description" content="字符串高级操作 匿名函数 Curry 函数 高阶函数 综合例子 偏函数">
 
 
 
@@ -413,7 +413,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,225
+                  1,250
                 </span>
               
 
@@ -450,7 +450,15 @@
       
 
       
-        <a id="more"></a>
+        <ul>
+<li>字符串高级操作</li>
+<li>匿名函数</li>
+<li>Curry 函数</li>
+<li>高阶函数</li>
+<li>综合例子</li>
+<li>偏函数</li>
+</ul>
+<a id="more"></a>
 <h2 id="字符串高级操作"><a href="#字符串高级操作" class="headerlink" title="字符串高级操作"></a>字符串高级操作</h2><h3 id="插入变量"><a href="#插入变量" class="headerlink" title="插入变量"></a>插入变量</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.chentyit.chapter07</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">StringApp</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> s = <span class="string">"Hello"</span></span><br><span class="line">    <span class="keyword">val</span> name = <span class="string">"PK"</span></span><br><span class="line">    <span class="keyword">val</span> team = <span class="string">"AC Milan"</span></span><br><span class="line"></span><br><span class="line">    println(<span class="string">s"<span class="subst">$s</span> <span class="subst">$name</span> <span class="subst">$team</span>"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="多行字符串"><a href="#多行字符串" class="headerlink" title="多行字符串"></a>多行字符串</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.chentyit.chapter07</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">StringApp</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="keyword">val</span> b =</span><br><span class="line">        <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">          | 这是一个多行字符串</span></span><br><span class="line"><span class="string">          | Hello world</span></span><br><span class="line"><span class="string">          | Chentyit</span></span><br><span class="line"><span class="string">          |"</span><span class="string">""</span>.stripMargin</span><br><span class="line">    println(b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.chentyit.chapter07</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 匿名函数：函数可以匿名，也可以不匿名</span></span><br><span class="line"><span class="comment"> * (参数名：参数类型) =&gt; 函数体</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">FunctoinApp</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> m1 = (x: <span class="type">Int</span>) =&gt; x + <span class="number">1</span></span><br><span class="line">  println(m1(<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">add</span> </span>= (x: <span class="type">Int</span>, y: <span class="type">Int</span>) =&gt; x + y</span><br><span class="line">  println(add(<span class="number">10</span>, <span class="number">20</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
