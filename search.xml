@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Java知识点day02(常用关键字)]]></title>
+    <url>%2F2019%2F09%2F19%2FJava%E7%9F%A5%E8%AF%86%E7%82%B9day02-%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E5%AD%97%2F</url>
+    <content type="text"><![CDATA[static修饰：类的变量，方法，方法块 修饰变量时：如果该变量时 public 时，则可以使用 类名.修饰变量名 调用该变量，static 修饰的变量可能会有线程安全的问题，当 static 修饰了共享的变量，在现场交互中就有可能造成安全问题，解决办法： 将被修饰的对象换成线程安全的对象 手动加锁 修饰方法时：表示该方法与类无关，任何类都可以直接访问，但是被 static 修饰的方法只能调用被 static 修饰的变量，static 修饰的方法没有线程问题，方法中的局部变量保存在栈中，每个栈都是隔离的，不会有问题 修饰方法块：静态代码块，加载 .class 到内存中的时候，先初始化 static 的代码块，常常用于初始化一些值 父类和子类加载顺序： 父类静态变量初始化 父类静态代码块初始化 子类静态变量初始化 子类静态代码块初始化 父类构造方法 子类构造方法 规律： 父类的静态变量和静态代码块比子类优先初始化 静态变量和静态代码块比类构造器优先初始化 final定义：不变的，不可改变的 修饰： 类：表示该类是无法被继承的 方法：表示该方法是无法被重写（Override） 变量：内存地址不可改变，且在声明的时候初始化就必须要完成 被 final 的修饰的对象，对象的内存地址不可以更改，但是对象中的内容可以更改 try &amp; catch &amp; finally用于捕捉异常的一套流程 try：用来确定代码指定的范围 catch：捕捉可能有可能会发生的异常 finally：用来执行一定要执行的代码块，无论有没有异常发生，总要执行 finally 语句，为程序提供了一个统一的出口，使程序能正常退出 如果 catch 中发生了异常，finally 还会继续执行，finally 中的代码执行完成后，才会抛出 catch 中的异常 volatile用来修饰某个共享变量，意思是当前共享变量的值被修改后，会及时通知到其他线程上，其他线程就能知道当前共享的变量已经被修改了 transient用来修饰类变量，意思是当前变量是无需进行序列化的，在序列化时，就会忽略该变量 default一般用在接口的方法上，意思是对于该接口，实现类无需强制实现，但自己必须有默认实现]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Java知识点day01(String & Long)]]></title>
     <url>%2F2019%2F09%2F18%2FJava%E7%9F%A5%E8%AF%86%E7%82%B9day01-String-Long%2F</url>
     <content type="text"><![CDATA[String不变性源码 12345![second_hello](D:\Blog\myblog\source\_posts\Java知识点day01-String-Long\second_hello.png)![second_hello](D:\Blog\myblog\source\_posts\Java知识点day01-String-Long\second_hello.png)public static void main(String[] args) &#123; String str = "hello"; str = "hello"; str = "world";&#125; 第一次 hello 第二次 hello 第三次 world 可以看出，str 对象并没有变化，但是指向的内存地址改变了 原因 1234public final class String implements java.io.Serializable, Comparable&lt;String&gt;, CharSequence &#123; /** The value is used for character storage. */ private final char value[];&#125; String 类被 final 修饰，不可以被继承 value[] 也被 final 修饰，说明这个是一个常量数组，一旦被赋值，内存地址就不可以再修改 value[] 被声明为私有属性，外部无法访问到，也没有 set / get 方法 所以针对于当前 String 的对象锁做的操作都是无法影响到 value[]，也就是当前对象指向的那个值，比如 replace，split，substring 等等都无法影响到当前值，只有把生成的新值返回给对象才会有效（其实是在字符串常量池中重新生成了一个新的字符串而已，原来的字符串也还在） 乱码原因 当前所用的编码集不包含当前语言的编码 二进制转化操作时，并没有强制规定字符编码 相等判断源码 1234567891011121314151617181920212223242526public boolean equals(Object anObject) &#123; // 先判断两个对象的地址是否相同，相同直接返回 true，否则继续判断 if (this == anObject) &#123; return true; &#125; // 判断另一个对象到底是不是字符串 if (anObject instanceof String) &#123; // 转化为字符串类型 String anotherString = (String)anObject; int n = value.length; // 判断两个字符串的长度 if (n == anotherString.value.length) &#123; char v1[] = value; char v2[] = anotherString.value; int i = 0; // 字符串长度相等就一个一个的判断字符串中每个字符是否相等 while (n-- != 0) &#123; if (v1[i] != v2[i]) return false; i++; &#125; return true; &#125; &#125; return false;&#125; 字符串操作建议使用谷歌的第三方工具包 Guava，里面提供了一系列方法，操作类似于 Scala 语言，不过多说明 LongLong 类型有缓存，他实现了一种缓存机制，缓存了从 -128 到 127 内所有的 Lang 值，也就是说如果使用这个范围内的值，直接冲缓存中拿 123456789101112private static class LongCache &#123; private LongCache()&#123;&#125; // 缓存，范围从 -128 到 127，+1 是因为还有 0 static final Long cache[] = new Long[-(-128) + 127 + 1]; // 静态代码块，Jvm 加载类的时候优先初始化这部分代码 static &#123; for(int i = 0; i &lt; cache.length; i++) cache[i] = new Long(i - 128); &#125;&#125; 使用 Long 时，推荐使用 ValueOf 方法，因为 ValueOf 会从缓存中去拿，如果命中缓存，会减小资源的开销]]></content>
