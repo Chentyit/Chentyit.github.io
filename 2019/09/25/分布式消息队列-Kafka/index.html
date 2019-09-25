@@ -97,7 +97,7 @@
 <meta property="og:description" content="概述 下载 架构及核心概念 部署及使用 容错性测试 API 编程 Flume &amp;amp; Kafka 整合 踩坑">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/09/25/分布式消息队列-Kafka/Flume&Kafka.png">
-<meta property="og:updated_time" content="2019-09-25T08:47:59.546Z">
+<meta property="og:updated_time" content="2019-09-25T10:39:27.866Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式消息队列 Kafka">
 <meta name="twitter:description" content="概述 下载 架构及核心概念 部署及使用 容错性测试 API 编程 Flume &amp;amp; Kafka 整合 踩坑">
@@ -415,7 +415,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,063
+                  2,677
                 </span>
               
 
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  11
+                  13
                 </span>
               
             </div>
@@ -478,15 +478,13 @@
 <ul>
 <li>配置环境变量就可以开始运行</li>
 </ul>
-<h2 id="架构及核心概念"><a href="#架构及核心概念" class="headerlink" title="架构及核心概念"></a>架构及核心概念</h2><p><strong>基础组件：</strong></p>
-<ul>
+<h2 id="架构及核心概念"><a href="#架构及核心概念" class="headerlink" title="架构及核心概念"></a>架构及核心概念</h2><h3 id="基础组件"><a href="#基础组件" class="headerlink" title="基础组件"></a>基础组件</h3><ul>
 <li>producer：生产者 —— 生产馒头</li>
 <li>consumer：消费者 —— 吃馒头</li>
 <li>broker：篮子</li>
 <li>topic：主题，相当于馒头的标签，标志消费者吃那个标签下的馒头</li>
 </ul>
-<p><strong>基本架构：</strong></p>
-<ul>
+<h3 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h3><ul>
 <li><p>Kafka is run as a cluster on one or more servers that can span multiple datacenters.</p>
 <p>（Kafka在一个或多个可以跨越多个数据中心的服务器上作为集群运行）</p>
 </li>
@@ -497,6 +495,34 @@
 <p>（每个记录由一个键，一个值和一个时间戳组成）</p>
 </li>
 </ul>
+<h3 id="四个核心-API"><a href="#四个核心-API" class="headerlink" title="四个核心 API"></a>四个核心 API</h3><ul>
+<li><strong>Producer API</strong> 发布消息到 1 和或多个 topic</li>
+<li><strong>Consumer API</strong> 订阅一个或多个 topic，并处理产生的消息</li>
+<li><strong>Stream API</strong> 充当一个流处理器，从 1 个或多个 topic 消费输出流，产生一个输出流到 1 个或多个输出 topic，有效将输入流转换到输出流</li>
+<li><strong>Connector API</strong> 允许侯建或运行可重复使用的生产者或消费者，将 topic 连接到现有的应用程序或数据系统。</li>
+</ul>
+<h3 id="主题和日志"><a href="#主题和日志" class="headerlink" title="主题和日志"></a>主题和日志</h3><p><strong>Topic</strong> 是发布的消息或者种子的名字。对于每个 Topic，Kafka 集群维护这一个分区的 log</p>
+<p>每个分区都是一个有序不可变的队列，且可以持续添加<strong>（只是局部有序，全局无序，如果要全局有序就只能有一个分区）</strong></p>
+<p>分区中以唯一的偏移量标记每个消息</p>
+<p>消费者持有和操作的都是偏移值，好处是不会影响到其他消费者，也更加自由灵活读取消息</p>
+<p><strong>分区设计目的</strong></p>
+<ul>
+<li>处理更多消息，不受单台服务器的限制</li>
+<li>分区可以作为并行处理单元</li>
+</ul>
+<h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>Log 的分区被分布式到集群中的多个服务器上，每个服务器处理它分到的分区。根据配置每个分区，还可以复制到其他服务器作为<strong>备份容错</strong>（下面有测试）</p>
+<p> 每个分区有一个 leader，0 个或多个 follower，Leader 处理此分区的读写请求，follower 被动复制数据，如果 leader 宕机，follower 被推举为新 leader（下面测试有体现）</p>
+<p>一个 leader 也有可能是其他分区的 follower，目的是为了负载均衡</p>
+<h3 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h3><p>向某个 Topic 发布消息，也负责选择发布到 Topic 上的哪个分区</p>
+<p>选择算法：轮流选择，权重选择等（由开发者决定）</p>
+<h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><p>消费模型有两种：<strong>队列</strong>和<strong>发布-订阅</strong></p>
+<ul>
+<li>队列：一组消费者从服务器读取消息，一条消息只有其中一个消费者处理</li>
+<li>发布-订阅：消息被广播给所有消费者，接收到消息的消费者都可以处理此消息</li>
+</ul>
+<h3 id="消费者组"><a href="#消费者组" class="headerlink" title="消费者组"></a>消费者组</h3><p>Kafka 为消费者模型提供的单一消费者凑相关模型</p>
+<p>所有消费者在一个组中就是队列模型</p>
+<p>不在一个组中就是发布-订阅模型</p>
 <h2 id="部署及使用"><a href="#部署及使用" class="headerlink" title="部署及使用"></a>部署及使用</h2><ul>
 <li><p>单节点单 Broker 部署及使用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># 配置 $KAFKA_HOME/config/server.properties 下的文件</span><br><span class="line">broker.id=0</span><br><span class="line">listeners</span><br><span class="line">log.dirs（不能是tmp，重启之后会消失）</span><br><span class="line">zookeeper.connect</span><br><span class="line"></span><br><span class="line"># 启动 Kafka</span><br><span class="line">kafka-server-start.sh config/server.properties</span><br><span class="line"></span><br><span class="line"># 创建 topic</span><br><span class="line">kafka-topics.sh --create --zookeeper hadoop000:2181 --replication-factor 1 --partitions 1 --topic cty_topic</span><br><span class="line"></span><br><span class="line"># 查看所有 topic</span><br><span class="line">kafka-topics.sh --list --zookeeper hadoop000:2181</span><br><span class="line"></span><br><span class="line"># 发送信息（生产馒头）</span><br><span class="line">kafka-console-producer.sh --broker-list hadoop000:9092 --topic cty_topic</span><br><span class="line"></span><br><span class="line"># 消费消息（吃馒头）</span><br><span class="line"># 写 --from-beginning（从第一个馒头开始吃）</span><br><span class="line"># 不写就是从新蒸好的馒头开始吃</span><br><span class="line">kafka-console-consumer.sh --zookeeper hadoop000:2181 --topic cty_topic --from-beginning</span><br><span class="line"></span><br><span class="line"># 查看所有 topic 的详细信息</span><br><span class="line">kafka-topics.sh --describe --zookeeper hadoop000:2181</span><br><span class="line"># 查看指定 topic 的详细信息</span><br><span class="line">kafka-topics.sh --describe --zookeeper hadoop000:2181 --topic cty_topic</span><br></pre></td></tr></table></figure>
@@ -803,7 +829,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载"><span class="nav-number">2.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构及核心概念"><span class="nav-number">3.</span> <span class="nav-text">架构及核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署及使用"><span class="nav-number">4.</span> <span class="nav-text">部署及使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容错性测试"><span class="nav-number">5.</span> <span class="nav-text">容错性测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API-编程"><span class="nav-number">6.</span> <span class="nav-text">API 编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flume-amp-Kafka-整合"><span class="nav-number">7.</span> <span class="nav-text">Flume &amp; Kafka 整合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#踩坑"><span class="nav-number">8.</span> <span class="nav-text">踩坑</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载"><span class="nav-number">2.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构及核心概念"><span class="nav-number">3.</span> <span class="nav-text">架构及核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础组件"><span class="nav-number">3.1.</span> <span class="nav-text">基础组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本架构"><span class="nav-number">3.2.</span> <span class="nav-text">基本架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四个核心-API"><span class="nav-number">3.3.</span> <span class="nav-text">四个核心 API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题和日志"><span class="nav-number">3.4.</span> <span class="nav-text">主题和日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式"><span class="nav-number">3.5.</span> <span class="nav-text">分布式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生产者"><span class="nav-number">3.6.</span> <span class="nav-text">生产者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消费者"><span class="nav-number">3.7.</span> <span class="nav-text">消费者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消费者组"><span class="nav-number">3.8.</span> <span class="nav-text">消费者组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署及使用"><span class="nav-number">4.</span> <span class="nav-text">部署及使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容错性测试"><span class="nav-number">5.</span> <span class="nav-text">容错性测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API-编程"><span class="nav-number">6.</span> <span class="nav-text">API 编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flume-amp-Kafka-整合"><span class="nav-number">7.</span> <span class="nav-text">Flume &amp; Kafka 整合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#踩坑"><span class="nav-number">8.</span> <span class="nav-text">踩坑</span></a></li></ol></div>
             
 
           </div>
