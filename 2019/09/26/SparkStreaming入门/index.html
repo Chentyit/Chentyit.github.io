@@ -88,20 +88,20 @@
 
 
 
-<meta name="description" content="概述将不同的数据源的数据经过 Spark Streaming 处理之后将结果输出到外部文件系统 特点：  低延迟 能从错误中高效地恢复 能够运行在成百上千的节点 能够将批处理，机器学习，图计算等子框架和 Spark Streaming 综合起来使用   输入进来的数据会被 Spark Streaming 处理成为 “批次”，然后由 Spark 引擎继续处理得到最终的数据流 应用场景 实时金融欺诈检">
+<meta name="description" content="概述 应用场景 案例测试 工作原理">
 <meta name="keywords" content="Spark">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SparkStreaming入门">
 <meta property="og:url" content="https://www.chentyit.com/2019/09/26/SparkStreaming入门/index.html">
 <meta property="og:site_name" content="翼叶知秋">
-<meta property="og:description" content="概述将不同的数据源的数据经过 Spark Streaming 处理之后将结果输出到外部文件系统 特点：  低延迟 能从错误中高效地恢复 能够运行在成百上千的节点 能够将批处理，机器学习，图计算等子框架和 Spark Streaming 综合起来使用   输入进来的数据会被 Spark Streaming 处理成为 “批次”，然后由 Spark 引擎继续处理得到最终的数据流 应用场景 实时金融欺诈检">
+<meta property="og:description" content="概述 应用场景 案例测试 工作原理">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://spark.apache.org/docs/2.2.0/img/streaming-flow.png">
 <meta property="og:image" content="https://www.chentyit.com/2019/09/26/SparkStreaming入门/细粒度.png">
-<meta property="og:updated_time" content="2019-09-26T12:03:51.388Z">
+<meta property="og:updated_time" content="2019-09-26T12:08:26.547Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SparkStreaming入门">
-<meta name="twitter:description" content="概述将不同的数据源的数据经过 Spark Streaming 处理之后将结果输出到外部文件系统 特点：  低延迟 能从错误中高效地恢复 能够运行在成百上千的节点 能够将批处理，机器学习，图计算等子框架和 Spark Streaming 综合起来使用   输入进来的数据会被 Spark Streaming 处理成为 “批次”，然后由 Spark 引擎继续处理得到最终的数据流 应用场景 实时金融欺诈检">
+<meta name="twitter:description" content="概述 应用场景 案例测试 工作原理">
 <meta name="twitter:image" content="http://spark.apache.org/docs/2.2.0/img/streaming-flow.png">
 
 
@@ -416,7 +416,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  525
+                  539
                 </span>
               
 
@@ -453,7 +453,14 @@
       
 
       
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>将不同的数据源的数据经过 Spark Streaming 处理之后将结果输出到外部文件系统</p>
+        <ul>
+<li>概述</li>
+<li>应用场景</li>
+<li>案例测试</li>
+<li>工作原理</li>
+</ul>
+<a id="more"></a>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>将不同的数据源的数据经过 Spark Streaming 处理之后将结果输出到外部文件系统</p>
 <p><strong>特点：</strong></p>
 <ul>
 <li>低延迟</li>
