@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="HBase,">
+  <meta name="keywords" content="Spark,">
 
 
 
@@ -88,21 +88,21 @@
 
 
 
-<meta name="description" content="下载 HBase 的安装包下载的是 2.0.6 版本 解压安装包1tar -xzvf hdfs-*** -C /usr/local 添加环境变量123456vim /etc/profileexport HBASE_HOME=&quot;/usr/local/hbase-2.0.6&quot;export PATH=$&amp;#123;PATH&amp;#125;:$&amp;#123;HBASE_HOME&amp;#125;/binsource">
-<meta name="keywords" content="HBase">
+<meta name="description" content="概述将不同的数据源的数据经过 Spark Streaming 处理之后将结果输出到外部文件系统 特点：  低延迟 能从错误中高效地恢复 能够运行在成百上千的节点 能够将批处理，机器学习，图计算等子框架和 Spark Streaming 综合起来使用   输入进来的数据会被 Spark Streaming 处理成为 “批次”，然后由 Spark 引擎继续处理得到最终的数据流 应用场景 实时金融欺诈检">
+<meta name="keywords" content="Spark">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HBase 安装">
-<meta property="og:url" content="https://www.chentyit.com/2019/09/01/HBase-安装/index.html">
+<meta property="og:title" content="SparkStreaming入门">
+<meta property="og:url" content="https://www.chentyit.com/2019/09/26/SparkStreaming入门/index.html">
 <meta property="og:site_name" content="翼叶知秋">
-<meta property="og:description" content="下载 HBase 的安装包下载的是 2.0.6 版本 解压安装包1tar -xzvf hdfs-*** -C /usr/local 添加环境变量123456vim /etc/profileexport HBASE_HOME=&quot;/usr/local/hbase-2.0.6&quot;export PATH=$&amp;#123;PATH&amp;#125;:$&amp;#123;HBASE_HOME&amp;#125;/binsource">
+<meta property="og:description" content="概述将不同的数据源的数据经过 Spark Streaming 处理之后将结果输出到外部文件系统 特点：  低延迟 能从错误中高效地恢复 能够运行在成百上千的节点 能够将批处理，机器学习，图计算等子框架和 Spark Streaming 综合起来使用   输入进来的数据会被 Spark Streaming 处理成为 “批次”，然后由 Spark 引擎继续处理得到最终的数据流 应用场景 实时金融欺诈检">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://www.chentyit.com/2019/09/01/HBase-安装/hbase_web.png">
-<meta property="og:image" content="https://www.chentyit.com/2019/09/01/HBase-安装/hbase_jps.png">
-<meta property="og:updated_time" content="2019-09-15T03:46:31.023Z">
+<meta property="og:image" content="http://spark.apache.org/docs/2.2.0/img/streaming-flow.png">
+<meta property="og:image" content="https://www.chentyit.com/2019/09/26/SparkStreaming入门/细粒度.png">
+<meta property="og:updated_time" content="2019-09-26T12:03:51.388Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HBase 安装">
-<meta name="twitter:description" content="下载 HBase 的安装包下载的是 2.0.6 版本 解压安装包1tar -xzvf hdfs-*** -C /usr/local 添加环境变量123456vim /etc/profileexport HBASE_HOME=&quot;/usr/local/hbase-2.0.6&quot;export PATH=$&amp;#123;PATH&amp;#125;:$&amp;#123;HBASE_HOME&amp;#125;/binsource">
-<meta name="twitter:image" content="https://www.chentyit.com/2019/09/01/HBase-安装/hbase_web.png">
+<meta name="twitter:title" content="SparkStreaming入门">
+<meta name="twitter:description" content="概述将不同的数据源的数据经过 Spark Streaming 处理之后将结果输出到外部文件系统 特点：  低延迟 能从错误中高效地恢复 能够运行在成百上千的节点 能够将批处理，机器学习，图计算等子框架和 Spark Streaming 综合起来使用   输入进来的数据会被 Spark Streaming 处理成为 “批次”，然后由 Spark 引擎继续处理得到最终的数据流 应用场景 实时金融欺诈检">
+<meta name="twitter:image" content="http://spark.apache.org/docs/2.2.0/img/streaming-flow.png">
 
 
 
@@ -132,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="https://www.chentyit.com/2019/09/01/HBase-安装/">
+  <link rel="canonical" href="https://www.chentyit.com/2019/09/26/SparkStreaming入门/">
 
 
 
 
 
-  <title>HBase 安装 | 翼叶知秋</title>
+  <title>SparkStreaming入门 | 翼叶知秋</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.chentyit.com/2019/09/01/HBase-安装/">
+    <link itemprop="mainEntityOfPage" href="https://www.chentyit.com/2019/09/26/SparkStreaming入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Tianyi">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">HBase 安装</h1>
+          <h1 class="post-title" itemprop="name headline">SparkStreaming入门</h1>
         
 
         <div class="post-meta">
@@ -347,8 +347,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-01T11:45:26+08:00">
-                2019-09-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-26T20:01:16+08:00">
+                2019-09-26
               </time>
             
 
@@ -388,8 +388,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/09/01/HBase-安装/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/01/HBase-安装/" itemprop="commentCount"></span>
+                <a href="/2019/09/26/SparkStreaming入门/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/26/SparkStreaming入门/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -416,7 +416,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  646
+                  525
                 </span>
               
 
@@ -432,7 +432,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  2
                 </span>
               
             </div>
@@ -453,27 +453,41 @@
       
 
       
-        <h2 id="下载-HBase-的安装包"><a href="#下载-HBase-的安装包" class="headerlink" title="下载 HBase 的安装包"></a>下载 HBase 的安装包</h2><p>下载的是 2.0.6 版本</p>
-<h2 id="解压安装包"><a href="#解压安装包" class="headerlink" title="解压安装包"></a>解压安装包</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf hdfs-*** -C /usr/local</span><br></pre></td></tr></table></figure>
-<h2 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line">export HBASE_HOME="/usr/local/hbase-2.0.6"</span><br><span class="line">export PATH=$&#123;PATH&#125;:$&#123;HBASE_HOME&#125;/bin</span><br><span class="line"></span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><h3 id="修改-conf-下的-hbase-env-sh"><a href="#修改-conf-下的-hbase-env-sh" class="headerlink" title="修改 /conf 下的 hbase-env.sh"></a>修改 /conf 下的 hbase-env.sh</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk8</span><br><span class="line"><span class="meta">#</span> 使用自己的 Zookeeper 不使用 HBase 自带的 ZK</span><br><span class="line">export HBASE_MANAGES_ZK=false</span><br></pre></td></tr></table></figure>
-<h3 id="修改-conf-下的-hbase-site-xml"><a href="#修改-conf-下的-hbase-site-xml" class="headerlink" title="修改 /conf 下的 hbase-site.xml"></a>修改 /conf 下的 hbase-site.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 这里不设置这个也可以，但是要在下面写上端口号，设置了也不会发生冲突 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.property.clientPort<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>2181<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.quorum<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>bigdata1:2181,bigdata2:2181,bigdata3:2181<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 可以不配置，如果要配置，需要和zookeeper配置文件zoo.cfg中的dataDir指定的路径相同 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.property.dataDir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/usr/local/zookeeper/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 设置 HDFS 的命名空间  --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 注意：这里要和 hadoop 里面的 core-site.xml 里面配置的 HDFS 命名空间名称相同  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://ns/hbase<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 设置为分布式 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.cluster.distributed<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="把-hadoop-的配置文件-core-site-xml-和-hdfs-site-xml-复制到-hbase-的配置文件目录下"><a href="#把-hadoop-的配置文件-core-site-xml-和-hdfs-site-xml-复制到-hbase-的配置文件目录下" class="headerlink" title="把 hadoop 的配置文件 core-site.xml 和 hdfs-site.xml 复制到 hbase 的配置文件目录下"></a>把 hadoop 的配置文件 core-site.xml 和 hdfs-site.xml 复制到 hbase 的配置文件目录下</h3><p>网上大多数教程都没有这一步，但是加上也没有报错</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp hadoop-2.8.4/etc/hadoop/core-site.xml hbase-2.0.6/conf/</span><br><span class="line">cp hadoop-2.8.4/etc/hadoop/hdfs-site.xml hbase-2.0.6/conf/</span><br></pre></td></tr></table></figure>
-<h3 id="修改-regionservers-文件"><a href="#修改-regionservers-文件" class="headerlink" title="修改 regionservers 文件"></a>修改 regionservers 文件</h3><p>在 regionservers 文件中添加节点（先把里面的 localhost 删掉）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim regionservers</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 添加如下内容（按自己要求修改）</span><br><span class="line">bigdata1</span><br><span class="line">bigdata2</span><br><span class="line">bigdata3</span><br></pre></td></tr></table></figure>
-<h3 id="添加并修改-backup-masters文件"><a href="#添加并修改-backup-masters文件" class="headerlink" title="添加并修改 backup-masters文件"></a>添加并修改 backup-masters文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim backup-masters</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 添加如下内容（按自己要求修改）</span><br><span class="line"><span class="meta">#</span> 这个是备用的 master 节点（防止当前 master 嗝屁后 HBase 集群也跟着嗝屁）</span><br><span class="line">bigdata6</span><br></pre></td></tr></table></figure>
-<h2 id="将-HBase-文件全部分发到集群的其他节点"><a href="#将-HBase-文件全部分发到集群的其他节点" class="headerlink" title="将 HBase 文件全部分发到集群的其他节点"></a>将 HBase 文件全部分发到集群的其他节点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r /etc/local/hbase-*** hostname:/etc/local</span><br></pre></td></tr></table></figure>
-<h2 id="同步时间（特别注意！！！）"><a href="#同步时间（特别注意！！！）" class="headerlink" title="同步时间（特别注意！！！）"></a>同步时间（<em>特别注意！！！</em>）</h2><p><strong>如果不同步时间，将无法启动</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 没有的话就用 yum 安装后再同步</span><br><span class="line">ntpdate -u ntp.api.bz</span><br></pre></td></tr></table></figure>
-<h2 id="启动-Zookeeper-amp-HDFS-amp-YARN"><a href="#启动-Zookeeper-amp-HDFS-amp-YARN" class="headerlink" title="启动 Zookeeper &amp; HDFS &amp; YARN"></a>启动 Zookeeper &amp; HDFS &amp; YARN</h2><p>启动后检查一下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zkServer.sh start</span><br><span class="line">start-dfs.sh</span><br><span class="line">start-yarn.sh</span><br></pre></td></tr></table></figure>
-<h2 id="启动-HBase"><a href="#启动-HBase" class="headerlink" title="启动 HBase"></a>启动 HBase</h2><p>(在集群的哪台机器启动，哪台就是当前的 Master)</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-hbase.sh</span><br></pre></td></tr></table></figure>
-<h2 id="观察启动状态"><a href="#观察启动状态" class="headerlink" title="观察启动状态"></a>观察启动状态</h2><p>在浏览器输入 <a href="http://hostname:16010" target="_blank" rel="noopener">http://hostname:16010</a> 可以按到 HBase 的节点状态（hostname 是启动 Hbase 的那台机器名）</p>
-<p><img src="/2019/09/01/HBase-安装/hbase_web.png" alt="hbase_web"></p>
-<p>在命令行输入 jps 查看进程（HRegionServer 和 HMaster 是否启动）</p>
-<p><img src="/2019/09/01/HBase-安装/hbase_jps.png" alt="hbase_jps"></p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>将不同的数据源的数据经过 Spark Streaming 处理之后将结果输出到外部文件系统</p>
+<p><strong>特点：</strong></p>
+<ul>
+<li>低延迟</li>
+<li>能从错误中高效地恢复</li>
+<li>能够运行在成百上千的节点</li>
+<li>能够将批处理，机器学习，图计算等子框架和 Spark Streaming 综合起来使用</li>
+</ul>
+<p><img src="http://spark.apache.org/docs/2.2.0/img/streaming-flow.png" alt="streaming-flow"></p>
+<p>输入进来的数据会被 Spark Streaming 处理成为 “批次”，然后由 Spark 引擎继续处理得到最终的数据流</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ul>
+<li>实时金融欺诈检测</li>
+<li>实时访问电子传感器的检测</li>
+<li>电商行业信息推荐</li>
+</ul>
+<h2 id="SparkStreaming-例子测试"><a href="#SparkStreaming-例子测试" class="headerlink" title="SparkStreaming 例子测试"></a>SparkStreaming 例子测试</h2><ol>
+<li><p>spark-submit 提交（词频分析）</p>
+<p>启动命令（监听 hadoop000 的 9999 端口）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./spark-submit --master local[2] --class org.apache.spark.examples.streaming.NetworkWordCount --name NetworkWordCount /home/hadoop/app/spark-2.2.0-bin-2.6.0-cdh5.7.0/examples/jars/spark-examples_2.11-2.2.0.jar hadoop000 9999</span><br></pre></td></tr></table></figure>
+<p>官方测试代码：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">NetworkWordCount</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (args.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="type">System</span>.err.println(<span class="string">"Usage: NetworkWordCount &lt;hostname&gt; &lt;port&gt;"</span>)</span><br><span class="line">            <span class="type">System</span>.exit(<span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">StreamingExamples</span>.setStreamingLogLevels()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> sparkConf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"NetworkWordCount"</span>)</span><br><span class="line">        <span class="keyword">val</span> ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(sparkConf, <span class="type">Seconds</span>(<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> lines = ssc.socketTextStream(args(<span class="number">0</span>), args(<span class="number">1</span>).toInt, <span class="type">StorageLevel</span>.<span class="type">MEMORY_AND_DISK_SER</span>)</span><br><span class="line">        <span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line">        <span class="keyword">val</span> wordCounts = words.map(x =&gt; (x, <span class="number">1</span>)).reduceByKey(_ + _)</span><br><span class="line">        wordCounts.print()</span><br><span class="line">        ssc.start()</span><br><span class="line">        ssc.awaitTermination()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>spark-shell 提交（词频分析）</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(sc, <span class="type">Seconds</span>(<span class="number">1</span>))</span><br><span class="line"><span class="keyword">val</span> lines = ssc.socketTextStream(<span class="string">"hadoop000"</span>, <span class="number">9999</span>)</span><br><span class="line"><span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line"><span class="keyword">val</span> wordCounts = words.map(x =&gt; (x, <span class="number">1</span>)).reduceByKey(_ + _)</span><br><span class="line">wordCounts.print()</span><br><span class="line">ssc.start()</span><br><span class="line">ssc.awaitTermination()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><h3 id="粗粒度"><a href="#粗粒度" class="headerlink" title="粗粒度"></a>粗粒度</h3><p>Spark Streaming 接收到实时数据流，把数据按照指定的时间段切成一片片小的数据块，然后把小的数据块传给 Spark Engine 处理</p>
+<h3 id="细粒度"><a href="#细粒度" class="headerlink" title="细粒度"></a>细粒度</h3><p><img src="/2019/09/26/SparkStreaming入门/细粒度.png" alt="细粒度"></p>
+<ol>
+<li>Spark 应用程序运行在 Driver 端，应用程序中有 StreamingContext 和 SparkContext</li>
+<li>Driver 命令在 Executor 上启动接收器</li>
+<li>接收器启动后，将收到的数据拆分成 block 并存放到内存中，如果设置多副本就拷贝到其他机器中</li>
+<li>Receiver 将 block 的信息返回给 StreamingContext，一定时间周期后，通知 SparkContext 启动 Jobs</li>
+<li>SparkContext 将 Jobs 分发到 Executor 上执行</li>
+</ol>
 
       
     </div>
@@ -520,7 +534,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/HBase/" rel="tag"><i class="fas fa-bookmark"></i> HBase</a>
+            <a href="/tags/Spark/" rel="tag"><i class="fas fa-bookmark"></i> Spark</a>
           
         </div>
       
@@ -533,8 +547,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/25/Flume-跨服务器拉取日志/" rel="next" title="Flume 跨服务器拉取日志">
-                <i class="fa fa-chevron-left"></i> Flume 跨服务器拉取日志
+              <a href="/2019/09/25/分布式消息队列-Kafka/" rel="next" title="分布式消息队列 Kafka">
+                <i class="fa fa-chevron-left"></i> 分布式消息队列 Kafka
               </a>
             
           </div>
@@ -542,10 +556,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/08/Scrapy-一/" rel="prev" title="Scrapy(一)">
-                Scrapy(一) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -745,7 +755,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载-HBase-的安装包"><span class="nav-number">1.</span> <span class="nav-text">下载 HBase 的安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解压安装包"><span class="nav-number">2.</span> <span class="nav-text">解压安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加环境变量"><span class="nav-number">3.</span> <span class="nav-text">添加环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置文件"><span class="nav-number">4.</span> <span class="nav-text">修改配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-conf-下的-hbase-env-sh"><span class="nav-number">4.1.</span> <span class="nav-text">修改 /conf 下的 hbase-env.sh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-conf-下的-hbase-site-xml"><span class="nav-number">4.2.</span> <span class="nav-text">修改 /conf 下的 hbase-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#把-hadoop-的配置文件-core-site-xml-和-hdfs-site-xml-复制到-hbase-的配置文件目录下"><span class="nav-number">4.3.</span> <span class="nav-text">把 hadoop 的配置文件 core-site.xml 和 hdfs-site.xml 复制到 hbase 的配置文件目录下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-regionservers-文件"><span class="nav-number">4.4.</span> <span class="nav-text">修改 regionservers 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加并修改-backup-masters文件"><span class="nav-number">4.5.</span> <span class="nav-text">添加并修改 backup-masters文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将-HBase-文件全部分发到集群的其他节点"><span class="nav-number">5.</span> <span class="nav-text">将 HBase 文件全部分发到集群的其他节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步时间（特别注意！！！）"><span class="nav-number">6.</span> <span class="nav-text">同步时间（特别注意！！！）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动-Zookeeper-amp-HDFS-amp-YARN"><span class="nav-number">7.</span> <span class="nav-text">启动 Zookeeper &amp; HDFS &amp; YARN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动-HBase"><span class="nav-number">8.</span> <span class="nav-text">启动 HBase</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#观察启动状态"><span class="nav-number">9.</span> <span class="nav-text">观察启动状态</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SparkStreaming-例子测试"><span class="nav-number">3.</span> <span class="nav-text">SparkStreaming 例子测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作原理"><span class="nav-number">4.</span> <span class="nav-text">工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#粗粒度"><span class="nav-number">4.1.</span> <span class="nav-text">粗粒度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#细粒度"><span class="nav-number">4.2.</span> <span class="nav-text">细粒度</span></a></li></ol></li></ol></div>
             
 
           </div>
