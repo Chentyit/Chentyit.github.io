@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.chentyit.com/"/>
-  <updated>2019-09-27T12:06:19.969Z</updated>
+  <updated>2019-09-28T00:56:45.347Z</updated>
   <id>https://www.chentyit.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Anaconda四步安装多环境（鼠标点击安装）</title>
+    <link href="https://www.chentyit.com/2019/09/28/Anaconda%E5%9B%9B%E6%AD%A5%E5%AE%89%E8%A3%85%E5%A4%9A%E7%8E%AF%E5%A2%83%EF%BC%88%E9%BC%A0%E6%A0%87%E7%82%B9%E5%87%BB%E5%AE%89%E8%A3%85%EF%BC%89/"/>
+    <id>https://www.chentyit.com/2019/09/28/Anaconda四步安装多环境（鼠标点击安装）/</id>
+    <published>2019-09-28T00:48:33.000Z</published>
+    <updated>2019-09-28T00:56:45.347Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>打开 Anaconda 交互界面</li><li>点击 Environment</li><li>点击添加</li><li>点击完成</li></ol><a id="more"></a><p><img src="/2019/09/28/Anaconda四步安装多环境（鼠标点击安装）/1.png" alt="打开 Anaconda 交互界面"></p><p><img src="/2019/09/28/Anaconda四步安装多环境（鼠标点击安装）/2.png" alt="点击 Environment"></p><p><img src="/2019/09/28/Anaconda四步安装多环境（鼠标点击安装）/3.png" alt="点击添加"></p><p><img src="/2019/09/28/Anaconda四步安装多环境（鼠标点击安装）/4.png" alt="点击完成"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;打开 Anaconda 交互界面&lt;/li&gt;
+&lt;li&gt;点击 Environment&lt;/li&gt;
+&lt;li&gt;点击添加&lt;/li&gt;
+&lt;li&gt;点击完成&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="Python" scheme="https://www.chentyit.com/categories/Python/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>SparkStreaming 核心</title>
@@ -518,31 +543,6 @@
     
     
       <category term="Nginx" scheme="https://www.chentyit.com/tags/Nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hadoop常见错误集</title>
-    <link href="https://www.chentyit.com/2019/08/13/Hadoop%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E9%9B%86/"/>
-    <id>https://www.chentyit.com/2019/08/13/Hadoop常见错误集/</id>
-    <published>2019-08-13T04:40:21.000Z</published>
-    <updated>2019-08-13T16:28:18.850Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/2019/08/13/Hadoop常见错误集/garrett-patz-1504925-unsplash.jpg" alt="插图"></p><blockquote><p>摄影：<a href="https://unsplash.com/photos/Ilu1Vv6EYds?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Garrett Patz</a>，来自<a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank" rel="noopener">Unsplash</a></p></blockquote><a id="more"></a><h2 id="Hadoop集群从节点出现错误（Connection-refused）"><a href="#Hadoop集群从节点出现错误（Connection-refused）" class="headerlink" title="Hadoop集群从节点出现错误（Connection refused）"></a>Hadoop集群从节点出现错误（Connection refused）</h2><p><img src="/2019/08/13/Hadoop常见错误集/Hadoop集群从节点出现错误.png" alt="Hadoop集群从节点出现错误"></p><h3 id="错误原因："><a href="#错误原因：" class="headerlink" title="错误原因："></a>错误原因：</h3><p>Hadoop 集群 yarn-site.xml 配置错误：</p><p>默认情况下 yarn ResourceManager 相关服务IP地址指向的是0.0.0.0。</p><p>而在服务器中，0.0.0.0 指的是本机网络地址，那么 NodeManager 就会在本机找 ResourceManager 相关服务，而 slave 节点上并没有这些服务，这些服务在 ResourceManager Master 节点上。所以针对 Hadoop 集群配置 yare-site.xml 某些配置项不能使用默认配置。</p><p>注意：hadoop 伪分布式可以使用默认配置，因为所有服务都在本地运行</p><h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><p>修改<strong>所有节点上</strong>yare-site.xml配置文件，在该文件中配置ResourceManager Master节点所在地址即可解决问题。详细配置信息如下：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hadoopMaster:8032<span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.scheduler.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hadoopMaster:8030<span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.resource-tracker.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hadoopMaster:8031<span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure><h2 id="MR本地提交集群运行"><a href="#MR本地提交集群运行" class="headerlink" title="MR本地提交集群运行"></a>MR本地提交集群运行</h2><p><img src="/2019/08/13/Hadoop常见错误集/MR本地提交集群运行错误.png" alt="MR本地提交集群运行错误"></p><h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p>无法加载 core-site.xml 配置文件，没法找到 hdfs://ns 的路径，直接指定默认本地路径</p><h3 id="错误原因：-1"><a href="#错误原因：-1" class="headerlink" title="错误原因："></a>错误原因：</h3><p>Maven 打包时没有将 XML 文件打包，所以运行程序时无法加载到 core-site.xml 文件</p><h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><p>在 pom.xml 文件的 <code>&lt;build&gt;&lt;/build&gt;</code> 添加</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/java<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure><p>再重新打包运行即可</p><h2 id="Unable-to-initialize-MapOutputCollector-org-apache-hadoop-mapred-MapTask-MapOutputBuffer"><a href="#Unable-to-initialize-MapOutputCollector-org-apache-hadoop-mapred-MapTask-MapOutputBuffer" class="headerlink" title="Unable to initialize MapOutputCollector org.apache.hadoop.mapred.MapTask$MapOutputBuffer"></a>Unable to initialize MapOutputCollector org.apache.hadoop.mapred.MapTask$MapOutputBuffer</h2><p><img src="/2019/08/13/Hadoop常见错误集/NoSuchMethodException.png" alt="NoSuchMethodException"></p><p>这个问题我花了很久时间，代码改了三次才运行成功</p><p>最后发现是因为 Mapper 和 Reducer 的传入值有问题，总结下来就是 Mapper 和 Reducer 的入参和出参的类型<strong>必须要使用 Hadoop 封装的类型，或者按照 Hadoop 要求封装的类型</strong>（自行封装的类，除了要实现 WritableComparable 接口，而且自定义类还必须要有<strong>无参构造方法</strong>），Hadoop 已封装类型如下：</p><p><img src="/2019/08/13/Hadoop常见错误集/Mapper和Reducer参数.png" alt="Mapper和Reducer参数"></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/2019/08/13/Hadoop常见错误集/garrett-patz-1504925-unsplash.jpg&quot; alt=&quot;插图&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;摄影：&lt;a href=&quot;https://unsplash.com/photos/Ilu1Vv6EYds?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Garrett Patz&lt;/a&gt;，来自&lt;a href=&quot;https://unsplash.com/?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="Hadoop" scheme="https://www.chentyit.com/categories/Hadoop/"/>
-    
-    
-      <category term="开发问题解决" scheme="https://www.chentyit.com/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"/>
     
   </entry>
   
