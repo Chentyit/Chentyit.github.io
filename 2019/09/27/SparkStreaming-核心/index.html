@@ -88,20 +88,20 @@
 
 
 
-<meta name="description" content="核心概念官网地址 StreamingContext要初始化 Spark Streaming 程序，必须创建 StreamingContext 对象，该对象是所有 Spark Streaming 功能的主要入口点 123456import org.apache.spark._import org.apache.spark.streaming._val conf = new SparkConf().s">
+<meta name="description" content="核心概念 代码实验">
 <meta name="keywords" content="Spark">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SparkStreaming 核心">
 <meta property="og:url" content="https://www.chentyit.com/2019/09/27/SparkStreaming-核心/index.html">
 <meta property="og:site_name" content="翼叶知秋">
-<meta property="og:description" content="核心概念官网地址 StreamingContext要初始化 Spark Streaming 程序，必须创建 StreamingContext 对象，该对象是所有 Spark Streaming 功能的主要入口点 123456import org.apache.spark._import org.apache.spark.streaming._val conf = new SparkConf().s">
+<meta property="og:description" content="核心概念 代码实验">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://spark.apache.org/docs/2.2.0/img/streaming-dstream.png">
 <meta property="og:image" content="http://spark.apache.org/docs/2.2.0/img/streaming-dstream-ops.png">
-<meta property="og:updated_time" content="2019-09-27T12:06:19.969Z">
+<meta property="og:updated_time" content="2019-09-28T12:19:46.445Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SparkStreaming 核心">
-<meta name="twitter:description" content="核心概念官网地址 StreamingContext要初始化 Spark Streaming 程序，必须创建 StreamingContext 对象，该对象是所有 Spark Streaming 功能的主要入口点 123456import org.apache.spark._import org.apache.spark.streaming._val conf = new SparkConf().s">
+<meta name="twitter:description" content="核心概念 代码实验">
 <meta name="twitter:image" content="http://spark.apache.org/docs/2.2.0/img/streaming-dstream.png">
 
 
@@ -416,7 +416,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  974
+                  982
                 </span>
               
 
@@ -453,7 +453,12 @@
       
 
       
-        <h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><p><a href="http://spark.apache.org/docs/2.2.0/streaming-programming-guide.html" target="_blank" rel="noopener">官网地址</a></p>
+        <ul>
+<li>核心概念</li>
+<li>代码实验</li>
+</ul>
+<a id="more"></a>
+<h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><p><a href="http://spark.apache.org/docs/2.2.0/streaming-programming-guide.html" target="_blank" rel="noopener">官网地址</a></p>
 <h3 id="StreamingContext"><a href="#StreamingContext" class="headerlink" title="StreamingContext"></a>StreamingContext</h3><p>要初始化 Spark Streaming 程序，必须创建 StreamingContext 对象，该对象是所有 Spark Streaming 功能的主要入口点</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming._</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(appName).setMaster(master)</span><br><span class="line"><span class="comment">// Seconds：必须根据应用程序的延迟要求和可用的群集资源来设置批处理间隔</span></span><br><span class="line"><span class="keyword">val</span> ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(conf, <span class="type">Seconds</span>(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
 <p><strong>StreamingContext 源码</strong>构造方法</p>
@@ -649,7 +654,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
