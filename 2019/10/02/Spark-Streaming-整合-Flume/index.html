@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="Flume-style Push-based Approach基于Flume的推送的方法 （管网翻译） Flume 旨在在 Flume 代理之间推送数据。在这种方法中，Spark Streaming 本质上设置了一个接收器，该接收器充当 Flume 的 Avro 代理，Flume 可以将数据推送到该接收器。  启动 Flume + Spark Streaming 应用程序时，其中一个 Spark">
+<meta name="description" content="Flume-style Push-based Approach Pull-based Approach using a Custom Sink（推荐使用）">
 <meta name="keywords" content="Flume,Spark">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark Streaming 整合 Flume">
 <meta property="og:url" content="https://www.chentyit.com/2019/10/02/Spark-Streaming-整合-Flume/index.html">
 <meta property="og:site_name" content="翼叶知秋">
-<meta property="og:description" content="Flume-style Push-based Approach基于Flume的推送的方法 （管网翻译） Flume 旨在在 Flume 代理之间推送数据。在这种方法中，Spark Streaming 本质上设置了一个接收器，该接收器充当 Flume 的 Avro 代理，Flume 可以将数据推送到该接收器。  启动 Flume + Spark Streaming 应用程序时，其中一个 Spark">
+<meta property="og:description" content="Flume-style Push-based Approach Pull-based Approach using a Custom Sink（推荐使用）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-02T04:25:08.677Z">
+<meta property="og:updated_time" content="2019-10-02T15:26:39.357Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark Streaming 整合 Flume">
-<meta name="twitter:description" content="Flume-style Push-based Approach基于Flume的推送的方法 （管网翻译） Flume 旨在在 Flume 代理之间推送数据。在这种方法中，Spark Streaming 本质上设置了一个接收器，该接收器充当 Flume 的 Avro 代理，Flume 可以将数据推送到该接收器。  启动 Flume + Spark Streaming 应用程序时，其中一个 Spark">
+<meta name="twitter:description" content="Flume-style Push-based Approach Pull-based Approach using a Custom Sink（推荐使用）">
 
 
 
@@ -413,7 +413,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,004
+                  1,020
                 </span>
               
 
@@ -450,7 +450,12 @@
       
 
       
-        <h2 id="Flume-style-Push-based-Approach"><a href="#Flume-style-Push-based-Approach" class="headerlink" title="Flume-style Push-based Approach"></a>Flume-style Push-based Approach</h2><p><strong>基于Flume的推送的方法</strong></p>
+        <ul>
+<li>Flume-style Push-based Approach</li>
+<li>Pull-based Approach using a Custom Sink（推荐使用）</li>
+</ul>
+<a id="more"></a>
+<h2 id="Flume-style-Push-based-Approach"><a href="#Flume-style-Push-based-Approach" class="headerlink" title="Flume-style Push-based Approach"></a>Flume-style Push-based Approach</h2><p><strong>基于Flume的推送的方法</strong></p>
 <p>（管网翻译）</p>
 <p>Flume 旨在在 Flume 代理之间推送数据。在这种方法中，Spark Streaming 本质上设置了一个接收器，该接收器充当 Flume 的 Avro 代理，Flume 可以将数据推送到该接收器。</p>
 <ul>
@@ -560,6 +565,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/10/02/Spark-Streaming-整合-Kafka/" rel="prev" title="Spark Streaming 整合 Kafka">
+                Spark Streaming 整合 Kafka <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -646,7 +655,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
