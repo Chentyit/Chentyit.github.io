@@ -88,20 +88,20 @@
 
 
 
-<meta name="description" content="简介设计思想分而治之：将大文件大批量文件，分布式存放在大量服务器上，以便于采取分而治之的方式对海量数据进行运算分析 重点概念文件切块、副本存放、元数据 重要特性 HDFS 中的文件在物理上是分块存储，块的大小可以通过配置参数 dfs.blocksize 来规定，默认大小在 hadoop2.x 版本中是 128M  HDFS 文件系统会给客户端提供一个统一的抽象目录树，客户端通过路径来访问文件  目">
+<meta name="description" content="简介 重要特性 HDFS 角色说明 HDFS 高可用机制 读数据流程 写数据流程">
 <meta name="keywords" content="HDFS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HDFS 概念">
 <meta property="og:url" content="https://www.chentyit.com/2019/10/09/HDFS-概念/index.html">
 <meta property="og:site_name" content="翼叶知秋">
-<meta property="og:description" content="简介设计思想分而治之：将大文件大批量文件，分布式存放在大量服务器上，以便于采取分而治之的方式对海量数据进行运算分析 重点概念文件切块、副本存放、元数据 重要特性 HDFS 中的文件在物理上是分块存储，块的大小可以通过配置参数 dfs.blocksize 来规定，默认大小在 hadoop2.x 版本中是 128M  HDFS 文件系统会给客户端提供一个统一的抽象目录树，客户端通过路径来访问文件  目">
+<meta property="og:description" content="简介 重要特性 HDFS 角色说明 HDFS 高可用机制 读数据流程 写数据流程">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/10/09/HDFS-概念/读数据.png">
 <meta property="og:image" content="https://www.chentyit.com/2019/10/09/HDFS-概念/写数据.png">
-<meta property="og:updated_time" content="2019-10-09T10:28:03.920Z">
+<meta property="og:updated_time" content="2019-10-09T10:39:15.883Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HDFS 概念">
-<meta name="twitter:description" content="简介设计思想分而治之：将大文件大批量文件，分布式存放在大量服务器上，以便于采取分而治之的方式对海量数据进行运算分析 重点概念文件切块、副本存放、元数据 重要特性 HDFS 中的文件在物理上是分块存储，块的大小可以通过配置参数 dfs.blocksize 来规定，默认大小在 hadoop2.x 版本中是 128M  HDFS 文件系统会给客户端提供一个统一的抽象目录树，客户端通过路径来访问文件  目">
+<meta name="twitter:description" content="简介 重要特性 HDFS 角色说明 HDFS 高可用机制 读数据流程 写数据流程">
 <meta name="twitter:image" content="https://www.chentyit.com/2019/10/09/HDFS-概念/读数据.png">
 
 
@@ -416,7 +416,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  985
+                  1,012
                 </span>
               
 
@@ -453,7 +453,16 @@
       
 
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><p>分而治之：将大文件大批量文件，分布式存放在大量服务器上，以便于采取分而治之的方式对海量数据进行运算分析</p>
+        <ul>
+<li>简介</li>
+<li>重要特性</li>
+<li>HDFS 角色说明</li>
+<li>HDFS 高可用机制</li>
+<li>读数据流程</li>
+<li>写数据流程</li>
+</ul>
+<a id="more"></a>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><p>分而治之：将大文件大批量文件，分布式存放在大量服务器上，以便于采取分而治之的方式对海量数据进行运算分析</p>
 <h3 id="重点概念"><a href="#重点概念" class="headerlink" title="重点概念"></a>重点概念</h3><p>文件切块、副本存放、元数据</p>
 <h2 id="重要特性"><a href="#重要特性" class="headerlink" title="重要特性"></a>重要特性</h2><ol>
 <li><p>HDFS 中的文件在物理上是<strong>分块存储</strong>，块的大小可以通过配置参数 dfs.blocksize 来规定，默认大小在 hadoop2.x 版本中是 128M</p>
