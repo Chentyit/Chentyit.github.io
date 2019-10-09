@@ -97,7 +97,7 @@
 <meta property="og:description" content="简介分布式协调服务，为其他的分布式程序提供协调服务 本身就是分布式程序 提供的服务包含：  主从协调 服务器节点动态上下线 统一配置管理 分布式共享锁 统一名称服务  底层其实只包含两层服务  管理（存储和读取）用户程序提交的数据 为用户程序提供数据节点监听服务  特性 一个 leader，多个 follower 组成的集群 全局数据一致：每个 ZK 服务器的数据都是一致的，无论哪个客户端连接到">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/09/15/Zookeeper概念/zkservice.jpg">
-<meta property="og:updated_time" content="2019-09-15T03:49:18.493Z">
+<meta property="og:updated_time" content="2019-10-09T01:01:10.220Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zookeeper概念">
 <meta name="twitter:description" content="简介分布式协调服务，为其他的分布式程序提供协调服务 本身就是分布式程序 提供的服务包含：  主从协调 服务器节点动态上下线 统一配置管理 分布式共享锁 统一名称服务  底层其实只包含两层服务  管理（存储和读取）用户程序提交的数据 为用户程序提供数据节点监听服务  特性 一个 leader，多个 follower 组成的集群 全局数据一致：每个 ZK 服务器的数据都是一致的，无论哪个客户端连接到">
@@ -479,7 +479,7 @@
 <h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><ol>
 <li>层次化结构，和文件系统差不多</li>
 <li>每个节点叫做 znode，并且有唯一路径标识</li>
-<li>每个 znode 可以包含数据和子节点（EPHEMERAL 不能有子节点，因为是短暂节点，连接断开后悔自己删除）</li>
+<li>每个 znode 可以包含数据和子节点（EPHEMERAL 不能有子节点，因为是短暂节点，连接断开后会自己删除）</li>
 <li>客户端可以在节点上设置监视器</li>
 </ol>
 <h2 id="Znode-节点类型"><a href="#Znode-节点类型" class="headerlink" title="Znode 节点类型"></a>Znode 节点类型</h2><ul>
