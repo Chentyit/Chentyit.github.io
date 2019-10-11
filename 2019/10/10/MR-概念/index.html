@@ -97,7 +97,7 @@
 <meta property="og:description" content="简介 MR 程序组成部分 MapTask 并行度 ReduceTask 的并行度 Shuffle 机制 文件太小如何处理 自定义分区 二次排序">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/10/10/MR-概念/shuffer.png">
-<meta property="og:updated_time" content="2019-10-10T07:53:21.596Z">
+<meta property="og:updated_time" content="2019-10-10T08:34:03.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MR 概念">
 <meta name="twitter:description" content="简介 MR 程序组成部分 MapTask 并行度 ReduceTask 的并行度 Shuffle 机制 文件太小如何处理 自定义分区 二次排序">
@@ -506,7 +506,7 @@
 <p><strong>wordcount 的 shuffle 详细过程：</strong></p>
 <ol>
 <li><strong>读取数据：</strong>MR 默认使用 TextInputFormat 来获取切片的数量，通过 createRecordReader 方法获取 RecordReader，缺省的 RecordReader 是 LineRecordReader，通过调用 LineRecordReader 的 nextKeyValue 方法获取每行的数据</li>
-<li><strong>溢出：</strong>通过 OutputCollector 收集器手机读取的数据，缺省使用的是 Task.CombineOutputCollector，调用其 collect 进行溢出，收集器默认的空间是 100 M，当收集器达到 80% 的时候开始溢出</li>
+<li><strong>溢出：</strong>通过 OutputCollector 收集器收集读取的数据，缺省使用的是 Task.CombineOutputCollector，调用其 collect 进行溢出，收集器默认的空间是 100 M，当收集器达到 80% 的时候开始溢出</li>
 <li><strong>分区排序：</strong>mapreduce 默认通过 HashPartitioner 进行分区且有序（在内存中结束）</li>
 <li><strong>输出文件：</strong>maptask 的最终输出文件分区有序</li>
 <li><strong>Reduce拉取文件：</strong>从各个分区中拉取相同的 key 到 reducetask 中，合并归并排序，相同的 key 看作一个 group</li>
@@ -679,7 +679,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">72</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
