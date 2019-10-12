@@ -98,7 +98,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/10/11/Hive-概念/hive架构图.png">
 <meta property="og:image" content="https://www.chentyit.com/2019/10/11/Hive-概念/hive执行流程.png">
-<meta property="og:updated_time" content="2019-10-11T07:31:56.697Z">
+<meta property="og:updated_time" content="2019-10-11T08:29:45.906Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive 概念">
 <meta name="twitter:description" content="简介 Hive 特点 Hive 架构 MetaStore 组件 Hive 执行流程 Hive 与传统数据库相比 创建 Hive 表 分区表和分桶表 Hive 优化">
@@ -519,7 +519,7 @@
 <p>command line interface，命令行接口</p>
 </li>
 <li><p>Thrift 客户端：</p>
-<p>hive 架构的许多客户端接口是简历在 thrift 客户端之上，包括 JDBC 和 ODBC 接口</p>
+<p>hive 架构的许多客户端接口是建立在 thrift 客户端之上，包括 JDBC 和 ODBC 接口</p>
 </li>
 <li><p>WebUI：</p>
 <p>hive 客户端提供了一种通过网页的方式访问 hive 所提供的服务，这个接口对应 hive 的 hwi（hive-web-interface），使用前需要启动 hwi 服务</p>
@@ -530,7 +530,7 @@
 <li>MetaStore 服务</li>
 <li>后台数据的存储</li>
 </ol>
-<p>后台数据存储的介质就是关系数据库，hive 默认的嵌入式磁盘数据库 derby，还有 mysql 数据库。MetaStore 服务是简历在后台数据存储介质之上，并且可以和 hive 服务是安装在一起的，运行在同一个 JVM 进程当中。</p>
+<p>后台数据存储的介质就是关系数据库，hive 默认的嵌入式磁盘数据库 derby，还有 mysql 数据库。MetaStore 服务是建立在后台数据存储介质之上，并且可以和 hive 服务是安装在一起的，运行在同一个 JVM 进程当中。</p>
 <p>但也可以将 MetaStore 服务从 Hive 中剥离出来，单独放在一个集群中，为这个集群安装防火墙，提供安全服务，保证元数据安全，客户端只需要通过防火墙认证连接到元数据即可，保证了 hive 的稳定性，也提高了效率</p>
 <h2 id="Hive-执行流程"><a href="#Hive-执行流程" class="headerlink" title="Hive 执行流程"></a>Hive 执行流程</h2><p><img src="/2019/10/11/Hive-概念/hive执行流程.png" alt="Hive 执行流程"></p>
 <h2 id="Hive-与传统数据库相比"><a href="#Hive-与传统数据库相比" class="headerlink" title="Hive 与传统数据库相比"></a>Hive 与传统数据库相比</h2><table>
@@ -574,7 +574,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>总结：</strong>hive 具有 sql 数据库的外表，但应用场景完全不同，hive 只适合用来做破脸数据统计分析</p>
+<p><strong>总结：</strong>hive 具有 sql 数据库的外表，但应用场景完全不同，hive 只适合用来做批量数据统计分析</p>
 <h3 id="其他比较"><a href="#其他比较" class="headerlink" title="其他比较"></a>其他比较</h3><ul>
 <li><p>读时模式 VS 写时模式</p>
 <p>在传统数据里，插入数据时，表的模式是强制确定了的，如果不符合，就不允许插入，在写入时检查数据被称为<strong>“写时模式”</strong></p>
@@ -588,7 +588,7 @@
 <li><p>索引</p>
 <ul>
 <li><strong>紧凑索引：</strong>存储每个值的 HDFS 的块号，不是存储文件内的偏移量，不会占用过多的磁盘空间</li>
-<li><strong>位图索引：</strong>使用压缩的<strong>位集合</strong>来存储具有某个特殊值得行，通常用于<strong>具有少取值可能的列</strong></li>
+<li><strong>位图索引：</strong>使用压缩的<strong>位集合</strong>来存储具有某个特殊值的行，通常用于<strong>具有少取值可能的列</strong></li>
 </ul>
 </li>
 </ul>
@@ -674,6 +674,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/12/HBase-概念/" rel="prev" title="HBase 概念">
+                HBase 概念 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -761,7 +765,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

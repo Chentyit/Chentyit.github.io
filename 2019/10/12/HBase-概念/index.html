@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Spark,">
+  <meta name="keywords" content="HBase,">
 
 
 
@@ -88,21 +88,20 @@
 
 
 
-<meta name="description" content="概述 应用场景 案例测试 工作原理">
-<meta name="keywords" content="Spark">
+<meta name="description" content="HBase 安装 简介 Hbase数据模型 RowKey 的设计 列簇设计">
+<meta name="keywords" content="HBase">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SparkStreaming入门">
-<meta property="og:url" content="https://www.chentyit.com/2019/09/26/SparkStreaming入门/index.html">
+<meta property="og:title" content="HBase 概念">
+<meta property="og:url" content="https://www.chentyit.com/2019/10/12/HBase-概念/index.html">
 <meta property="og:site_name" content="翼叶知秋">
-<meta property="og:description" content="概述 应用场景 案例测试 工作原理">
+<meta property="og:description" content="HBase 安装 简介 Hbase数据模型 RowKey 的设计 列簇设计">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://spark.apache.org/docs/2.2.0/img/streaming-flow.png">
-<meta property="og:image" content="https://www.chentyit.com/2019/09/26/SparkStreaming入门/细粒度.png">
-<meta property="og:updated_time" content="2019-09-26T12:08:26.547Z">
+<meta property="og:image" content="https://www.chentyit.com/2019/10/12/HBase-概念/hbase架构.jpg">
+<meta property="og:updated_time" content="2019-10-12T07:00:48.102Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SparkStreaming入门">
-<meta name="twitter:description" content="概述 应用场景 案例测试 工作原理">
-<meta name="twitter:image" content="http://spark.apache.org/docs/2.2.0/img/streaming-flow.png">
+<meta name="twitter:title" content="HBase 概念">
+<meta name="twitter:description" content="HBase 安装 简介 Hbase数据模型 RowKey 的设计 列簇设计">
+<meta name="twitter:image" content="https://www.chentyit.com/2019/10/12/HBase-概念/hbase架构.jpg">
 
 
 
@@ -132,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://www.chentyit.com/2019/09/26/SparkStreaming入门/">
+  <link rel="canonical" href="https://www.chentyit.com/2019/10/12/HBase-概念/">
 
 
 
 
 
-  <title>SparkStreaming入门 | 翼叶知秋</title>
+  <title>HBase 概念 | 翼叶知秋</title>
   
 
 
@@ -318,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.chentyit.com/2019/09/26/SparkStreaming入门/">
+    <link itemprop="mainEntityOfPage" href="https://www.chentyit.com/2019/10/12/HBase-概念/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chen Tianyi">
@@ -335,7 +334,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SparkStreaming入门</h1>
+          <h1 class="post-title" itemprop="name headline">HBase 概念</h1>
         
 
         <div class="post-meta">
@@ -347,8 +346,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-26T20:01:16+08:00">
-                2019-09-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-12T14:57:04+08:00">
+                2019-10-12
               </time>
             
 
@@ -388,8 +387,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/09/26/SparkStreaming入门/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/26/SparkStreaming入门/" itemprop="commentCount"></span>
+                <a href="/2019/10/12/HBase-概念/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/12/HBase-概念/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -416,7 +415,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  539
+                  1,301
                 </span>
               
 
@@ -432,7 +431,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  5
                 </span>
               
             </div>
@@ -454,47 +453,119 @@
 
       
         <ul>
-<li>概述</li>
-<li>应用场景</li>
-<li>案例测试</li>
-<li>工作原理</li>
+<li>HBase 安装</li>
+<li>简介</li>
+<li>Hbase数据模型</li>
+<li>RowKey 的设计</li>
+<li>列簇设计</li>
 </ul>
 <a id="more"></a>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>将不同的数据源的数据经过 Spark Streaming 处理之后将结果输出到外部文件系统</p>
-<p><strong>特点：</strong></p>
-<ul>
-<li>低延迟</li>
-<li>能从错误中高效地恢复</li>
-<li>能够运行在成百上千的节点</li>
-<li>能够将批处理，机器学习，图计算等子框架和 Spark Streaming 综合起来使用</li>
-</ul>
-<p><img src="http://spark.apache.org/docs/2.2.0/img/streaming-flow.png" alt="streaming-flow"></p>
-<p>输入进来的数据会被 Spark Streaming 处理成为 “批次”，然后由 Spark 引擎继续处理得到最终的数据流</p>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ul>
-<li>实时金融欺诈检测</li>
-<li>实时访问电子传感器的检测</li>
-<li>电商行业信息推荐</li>
-</ul>
-<h2 id="SparkStreaming-例子测试"><a href="#SparkStreaming-例子测试" class="headerlink" title="SparkStreaming 例子测试"></a>SparkStreaming 例子测试</h2><ol>
-<li><p>spark-submit 提交（词频分析）</p>
-<p>启动命令（监听 hadoop000 的 9999 端口）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./spark-submit --master local[2] --class org.apache.spark.examples.streaming.NetworkWordCount --name NetworkWordCount /home/hadoop/app/spark-2.2.0-bin-2.6.0-cdh5.7.0/examples/jars/spark-examples_2.11-2.2.0.jar hadoop000 9999</span><br></pre></td></tr></table></figure>
-<p>官方测试代码：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">NetworkWordCount</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (args.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="type">System</span>.err.println(<span class="string">"Usage: NetworkWordCount &lt;hostname&gt; &lt;port&gt;"</span>)</span><br><span class="line">            <span class="type">System</span>.exit(<span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">StreamingExamples</span>.setStreamingLogLevels()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> sparkConf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"NetworkWordCount"</span>)</span><br><span class="line">        <span class="keyword">val</span> ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(sparkConf, <span class="type">Seconds</span>(<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> lines = ssc.socketTextStream(args(<span class="number">0</span>), args(<span class="number">1</span>).toInt, <span class="type">StorageLevel</span>.<span class="type">MEMORY_AND_DISK_SER</span>)</span><br><span class="line">        <span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line">        <span class="keyword">val</span> wordCounts = words.map(x =&gt; (x, <span class="number">1</span>)).reduceByKey(_ + _)</span><br><span class="line">        wordCounts.print()</span><br><span class="line">        ssc.start()</span><br><span class="line">        ssc.awaitTermination()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>spark-shell 提交（词频分析）</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(sc, <span class="type">Seconds</span>(<span class="number">1</span>))</span><br><span class="line"><span class="keyword">val</span> lines = ssc.socketTextStream(<span class="string">"hadoop000"</span>, <span class="number">9999</span>)</span><br><span class="line"><span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line"><span class="keyword">val</span> wordCounts = words.map(x =&gt; (x, <span class="number">1</span>)).reduceByKey(_ + _)</span><br><span class="line">wordCounts.print()</span><br><span class="line">ssc.start()</span><br><span class="line">ssc.awaitTermination()</span><br></pre></td></tr></table></figure>
-</li>
+<h2 id="HBase-安装"><a href="#HBase-安装" class="headerlink" title="HBase 安装"></a>HBase 安装</h2><p><a href="http://chentyit.com/2019/09/01/HBase-%E5%AE%89%E8%A3%85/" target="_blank" rel="noopener">安装连接</a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="什么是-HBase"><a href="#什么是-HBase" class="headerlink" title="什么是 HBase"></a>什么是 HBase</h3><p>Hbase 是一个高可靠性，高性能，面向列，可伸缩的分布式存储系统，目标是存储并处理大型的数据</p>
+<h3 id="与传统数据相比"><a href="#与传统数据相比" class="headerlink" title="与传统数据相比"></a>与传统数据相比</h3><table>
+<thead>
+<tr>
+<th>特点</th>
+<th>MySQL</th>
+<th>HBase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据库的概念</td>
+<td>有数据库 database 的概念和表 table 的概念</td>
+<td>没有数据库的概念，有替代的命名空间 namespace 的概念，有表的概念，所有的表都是在一个 namespace 下的</td>
+</tr>
+<tr>
+<td>主键</td>
+<td>主键唯一决定了一行</td>
+<td>没有主键但是有行建：rowkey</td>
+</tr>
+<tr>
+<td>字段</td>
+<td>表中直接包含字段</td>
+<td>有列簇的概念，每个列簇中才包含了字段，给相同属性的列划分一个组，叫做 column family 列簇，在建表的时候至少要指明一个列簇，可以不给字段</td>
+</tr>
+<tr>
+<td>版本</td>
+<td>行列交叉可到一个唯一的单元格，数据的版本数只有 1</td>
+<td>可以存储多个版本 version（相当于是可以存储多个值），HBase 行列交叉得到一个唯一的单元格组，组中国可以多个单元格，可以设置 HBase 的 version 版本数，是 int 值，当 version 为 1 的时候没就没有单元格组的概念了，就是一个单元格，默认情况下，显示 timestamp 最新的那个单元格的值</td>
+</tr>
+<tr>
+<td>空值</td>
+<td>MySQL 中没有值的话就是 null，是占空间的</td>
+<td>对于 HBase 来说，如果没有这一列的信息，那么就不会存储，不会分配任何空间</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Hbase-架构"><a href="#Hbase-架构" class="headerlink" title="Hbase 架构"></a>Hbase 架构</h3><p><a href="https://blog.csdn.net/lzxlfly/article/details/82229511" target="_blank" rel="noopener"><strong>架构详解</strong></a></p>
+<p><img src="/2019/10/12/HBase-概念/hbase架构.jpg" alt="hbase架构"></p>
+<h3 id="HBase-集群中的角色"><a href="#HBase-集群中的角色" class="headerlink" title="HBase 集群中的角色"></a>HBase 集群中的角色</h3><ul>
+<li>一个或多个主节点 HMaster<ol>
+<li>管理 HRegionServer，通过 ZK 监控其状态，实现负载均衡</li>
+<li>管理和分配 HRegion，比如在 HRegion 进行 spilit 的时候将分配新的 HRegion，当 HRegionServer 退出或者宕机的时候对 HRegionServer 管理的 HRegion 进行迁移</li>
+<li>Admin 职能：创建、修改、删除 Table 的定义，实现 DDL 操作（namespace 和 table 的增删改，列簇的增删改）</li>
+<li>管理 namespace 和表的元数据（存储在 HDFS 上）</li>
+<li>权限控制</li>
 </ol>
-<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><h3 id="粗粒度"><a href="#粗粒度" class="headerlink" title="粗粒度"></a>粗粒度</h3><p>Spark Streaming 接收到实时数据流，把数据按照指定的时间段切成一片片小的数据块，然后把小的数据块传给 Spark Engine 处理</p>
-<h3 id="细粒度"><a href="#细粒度" class="headerlink" title="细粒度"></a>细粒度</h3><p><img src="/2019/09/26/SparkStreaming入门/细粒度.png" alt="细粒度"></p>
+</li>
+<li>多个从节点 RegionServer<ol>
+<li>管理自己负责的 Region 数据的读写</li>
+<li>读写 HDFS，管理 table 中的数据</li>
+<li>Client 直接通过 RegionServer 读写数据（从 ZK 中获取 meta 表的存储位置，从 meta 表中获取 RowKey 所在的 RegionServer 的位置）</li>
+</ol>
+</li>
+<li>Zookeeper<ol>
+<li>存放整个 HBase 集群的元数据</li>
+<li>保证任何时候，集群中只有一个master</li>
+<li>保证 HMaster 的失败恢复</li>
+<li>监控 RegionServer 的运行状态</li>
+<li>存储 HBase 的 schema 和 table 元数据</li>
+</ol>
+</li>
+</ul>
+<h3 id="HBase-中的表的特点"><a href="#HBase-中的表的特点" class="headerlink" title="HBase 中的表的特点"></a>HBase 中的表的特点</h3><ol>
+<li>大：一个表可以有上亿行，上百万列</li>
+<li>面向列：面向列的存储和权限控制，列独立检索</li>
+<li>稀疏：对于为空（null）的列，并不占用存储空间，因此，表可以设计的非常稀疏</li>
+<li>HBase 的存储数据都是二进制的</li>
+</ol>
+<h2 id="Hbase数据模型"><a href="#Hbase数据模型" class="headerlink" title="Hbase数据模型"></a>Hbase数据模型</h2><ul>
+<li><p>单元格（<strong>Cell</strong>）</p>
 <ol>
-<li>Spark 应用程序运行在 Driver 端，应用程序中有 StreamingContext 和 SparkContext</li>
-<li>Driver 命令在 Executor 上启动接收器</li>
-<li>接收器启动后，将收到的数据拆分成 block 并存放到内存中，如果设置多副本就拷贝到其他机器中</li>
-<li>Receiver 将 block 的信息返回给 StreamingContext，一定时间周期后，通知 SparkContext 启动 Jobs</li>
-<li>SparkContext 将 Jobs 分发到 Executor 上执行</li>
+<li>cell 由行和列的坐标交叉决定</li>
+<li>单元格是有版本的</li>
+<li>cell 的内容是未解析的字节数组</li>
+<li>cell 由 <strong>{rowkey, column(<code>&lt;column family&gt;</code> + <code>&lt;qualifier&gt;</code>), version)</strong> 来确定唯一的单元</li>
+<li>cell 中的数据是没有类型的，全部是字节码形式存储的</li>
 </ol>
+</li>
+<li><p>RowKey</p>
+<ol>
+<li>决定一行数据，按行检索数据，相当于一级索引</li>
+<li>按照字典顺序排序，说明数据是有序的</li>
+<li>只能存储 64k 的字节数据，RowKey 越短越好</li>
+</ol>
+</li>
+<li><p>列族 / 列簇（Column Family）</p>
+<ol>
+<li>HBase 表中的每个列都归属于某个列簇，列簇必须作为表模式（schema）定义的一部分预先给出，列名以列簇作为前缀，每个列簇都可以有多个列</li>
+<li>权限控制、存储以及调优都是在列簇层面进行的</li>
+<li>HBase 把同一列簇里面的数据存储在同一目录下，由几个文件保存</li>
+</ol>
+</li>
+<li><p>时间戳（Timestamp）</p>
+<ol>
+<li>在 HBase 每个 cell 存储单元对同一份数据可以有多个版本，根据唯一的时间戳来区分每个版本之间的差异，不同本的数据按照时间倒序排序，最新的数据版本排在最前面</li>
+<li>时间戳的类型是 64 位整型，一般由 HBase（在数据写入时自动）赋值，此时时间戳时精确到毫秒的当前系统时间</li>
+</ol>
+<p>时间戳也可以由客户显示赋值，如果应用程序要避免数据版本冲突，就必须自己生成具有唯一性的时间戳</p>
+</li>
+</ul>
+<h2 id="RowKey-的设计"><a href="#RowKey-的设计" class="headerlink" title="RowKey 的设计"></a>RowKey 的设计</h2><p><a href="https://blog.csdn.net/wangshuminjava/article/details/80575864" target="_blank" rel="noopener"><strong>rk设计</strong></a></p>
+<h2 id="列簇设计"><a href="#列簇设计" class="headerlink" title="列簇设计"></a>列簇设计</h2><p><a href="https://www.cnblogs.com/llphhl/p/6609876.html" target="_blank" rel="noopener">列簇设计</a></p>
+<p><strong>一般不建议设计多个列族</strong>，具体原因如下</p>
+<p>假如 HBase 的表设置两个列族，若已一个列族 1000 万行，另一个列族 100 行。当一个要求 region 分裂时候，会导致 100 行的列会同样分布到多个 region 中。这样就出现基数问题，会导致扫描列族A的性能低下。某个列族在 flush 的时候，它邻近的列族也会因关联效应出发 flush，最终导致系统产生更多的I/O。</p>
 
       
     </div>
@@ -541,7 +612,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Spark/" rel="tag"><i class="fas fa-bookmark"></i> Spark</a>
+            <a href="/tags/HBase/" rel="tag"><i class="fas fa-bookmark"></i> HBase</a>
           
         </div>
       
@@ -554,8 +625,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/25/分布式消息队列-Kafka/" rel="next" title="分布式消息队列 Kafka">
-                <i class="fa fa-chevron-left"></i> 分布式消息队列 Kafka
+              <a href="/2019/10/11/Hive-概念/" rel="next" title="Hive 概念">
+                <i class="fa fa-chevron-left"></i> Hive 概念
               </a>
             
           </div>
@@ -563,10 +634,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/27/SparkStreaming-核心/" rel="prev" title="SparkStreaming 核心">
-                SparkStreaming 核心 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -770,7 +837,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SparkStreaming-例子测试"><span class="nav-number">3.</span> <span class="nav-text">SparkStreaming 例子测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作原理"><span class="nav-number">4.</span> <span class="nav-text">工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#粗粒度"><span class="nav-number">4.1.</span> <span class="nav-text">粗粒度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#细粒度"><span class="nav-number">4.2.</span> <span class="nav-text">细粒度</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HBase-安装"><span class="nav-number">1.</span> <span class="nav-text">HBase 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-HBase"><span class="nav-number">2.1.</span> <span class="nav-text">什么是 HBase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与传统数据相比"><span class="nav-number">2.2.</span> <span class="nav-text">与传统数据相比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hbase-架构"><span class="nav-number">2.3.</span> <span class="nav-text">Hbase 架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HBase-集群中的角色"><span class="nav-number">2.4.</span> <span class="nav-text">HBase 集群中的角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HBase-中的表的特点"><span class="nav-number">2.5.</span> <span class="nav-text">HBase 中的表的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hbase数据模型"><span class="nav-number">3.</span> <span class="nav-text">Hbase数据模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RowKey-的设计"><span class="nav-number">4.</span> <span class="nav-text">RowKey 的设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列簇设计"><span class="nav-number">5.</span> <span class="nav-text">列簇设计</span></a></li></ol></div>
             
 
           </div>
