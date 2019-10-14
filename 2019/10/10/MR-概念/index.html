@@ -97,7 +97,7 @@
 <meta property="og:description" content="简介 MR 程序组成部分 MapTask 并行度 ReduceTask 的并行度 Shuffle 机制 文件太小如何处理 自定义分区 二次排序">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/10/10/MR-概念/shuffer.png">
-<meta property="og:updated_time" content="2019-10-10T08:34:03.054Z">
+<meta property="og:updated_time" content="2019-10-14T01:09:36.761Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MR 概念">
 <meta name="twitter:description" content="简介 MR 程序组成部分 MapTask 并行度 ReduceTask 的并行度 Shuffle 机制 文件太小如何处理 自定义分区 二次排序">
@@ -517,7 +517,7 @@
 <h2 id="二次排序"><a href="#二次排序" class="headerlink" title="二次排序"></a>二次排序</h2><p>在 hadoop 中一般都是按照 key 进行排序的，但有时候还需要按照 value 进行排序</p>
 <p>有两种方法：buffer and int memory sort 和 value-to-key conversion</p>
 <ul>
-<li>buffer and int memory sort：主要是在 reduce() 函数中，将每个 key 对应的 value 值保存下来，进行排序。缺点是会造成 out of memory</li>
+<li>buffer and in memory sort：主要是在 reduce() 函数中，将每个 key 对应的 value 值保存下来，进行排序。缺点是会造成 out of memory</li>
 <li>value-to-key conversion：主要思想是将 key 和 value 拼接成一个组合 key，然后进行排序，这样 reduce() 函数获取结果就实现了按照 key 排序，然后按照 value 排序，但是需要用户自己实现 paritioner，以便只按照 key 进行数据划分</li>
 </ul>
 
