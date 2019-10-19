@@ -97,7 +97,7 @@
 <meta property="og:description" content="HBase 安装 简介 Hbase数据模型 RowKey 的设计 列簇设计">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.chentyit.com/2019/10/12/HBase-概念/hbase架构.jpg">
-<meta property="og:updated_time" content="2019-10-12T08:47:12.769Z">
+<meta property="og:updated_time" content="2019-10-15T03:37:16.429Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HBase 概念">
 <meta name="twitter:description" content="HBase 安装 简介 Hbase数据模型 RowKey 的设计 列簇设计">
@@ -415,7 +415,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,301
+                  1,311
                 </span>
               
 
@@ -536,7 +536,7 @@
 <li>cell 由行和列的坐标交叉决定</li>
 <li>单元格是有版本的</li>
 <li>cell 的内容是未解析的字节数组</li>
-<li>cell 由 <strong>{rowkey, column(<code>&lt;column family&gt;</code> + <code>&lt;qualifier&gt;</code>), version)</strong> 来确定唯一的单元</li>
+<li>cell 由 <strong>{rowkey, column(<code>&lt;column family&gt;</code> + <code>&lt;qualifier&gt;</code>), value}</strong> 来确定唯一的单元</li>
 <li>cell 中的数据是没有类型的，全部是字节码形式存储的</li>
 </ol>
 </li>
@@ -562,6 +562,7 @@
 <p>时间戳也可以由客户显示赋值，如果应用程序要避免数据版本冲突，就必须自己生成具有唯一性的时间戳</p>
 </li>
 </ul>
+<h2 id="HBase-读数据流程"><a href="#HBase-读数据流程" class="headerlink" title="HBase 读数据流程"></a>HBase 读数据流程</h2><p><a href="https://www.imooc.com/article/73049" target="_blank" rel="noopener">hbase 读数据</a></p>
 <h2 id="RowKey-的设计"><a href="#RowKey-的设计" class="headerlink" title="RowKey 的设计"></a>RowKey 的设计</h2><p><a href="https://blog.csdn.net/wangshuminjava/article/details/80575864" target="_blank" rel="noopener"><strong>rk设计</strong></a></p>
 <h2 id="列簇设计"><a href="#列簇设计" class="headerlink" title="列簇设计"></a>列簇设计</h2><p><a href="https://www.cnblogs.com/llphhl/p/6609876.html" target="_blank" rel="noopener">列簇设计</a></p>
 <p><strong>一般不建议设计多个列族</strong>，具体原因如下</p>
@@ -634,6 +635,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/19/Flink-on-Yarn-集群-HA-安装及配置/" rel="prev" title="Flink on Yarn 集群 HA 安装及配置">
+                Flink on Yarn 集群 HA 安装及配置 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -721,7 +726,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -743,7 +748,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -837,7 +842,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HBase-安装"><span class="nav-number">1.</span> <span class="nav-text">HBase 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-HBase"><span class="nav-number">2.1.</span> <span class="nav-text">什么是 HBase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与传统数据相比"><span class="nav-number">2.2.</span> <span class="nav-text">与传统数据相比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hbase-架构"><span class="nav-number">2.3.</span> <span class="nav-text">Hbase 架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HBase-集群中的角色"><span class="nav-number">2.4.</span> <span class="nav-text">HBase 集群中的角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HBase-中的表的特点"><span class="nav-number">2.5.</span> <span class="nav-text">HBase 中的表的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hbase数据模型"><span class="nav-number">3.</span> <span class="nav-text">Hbase数据模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RowKey-的设计"><span class="nav-number">4.</span> <span class="nav-text">RowKey 的设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列簇设计"><span class="nav-number">5.</span> <span class="nav-text">列簇设计</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HBase-安装"><span class="nav-number">1.</span> <span class="nav-text">HBase 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-HBase"><span class="nav-number">2.1.</span> <span class="nav-text">什么是 HBase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与传统数据相比"><span class="nav-number">2.2.</span> <span class="nav-text">与传统数据相比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hbase-架构"><span class="nav-number">2.3.</span> <span class="nav-text">Hbase 架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HBase-集群中的角色"><span class="nav-number">2.4.</span> <span class="nav-text">HBase 集群中的角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HBase-中的表的特点"><span class="nav-number">2.5.</span> <span class="nav-text">HBase 中的表的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hbase数据模型"><span class="nav-number">3.</span> <span class="nav-text">Hbase数据模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HBase-读数据流程"><span class="nav-number">4.</span> <span class="nav-text">HBase 读数据流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RowKey-的设计"><span class="nav-number">5.</span> <span class="nav-text">RowKey 的设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列簇设计"><span class="nav-number">6.</span> <span class="nav-text">列簇设计</span></a></li></ol></div>
             
 
           </div>
