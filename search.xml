@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[集群环境Jar包冲突解决方案]]></title>
+    <url>%2F2019%2F12%2F20%2F%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83Jar%E5%8C%85%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%2F</url>
+    <content type="text"><![CDATA[开发环境：Maven 3.6 || jdk 1.8（解决方案亲测有效） 摄影：Christian Lambert，来自Unsplash 问题描述集成环境中（比如大数据的 CDH，Oozie）有配套的第三方 Jar 包，在自己编写的工具中使用了相同的包，但是版本不同，就会在运行是报错，包的版本产生冲突 1java.lang.NoSuchFieldError: INSTANCE 解决办法使用 maven-shade-plugin 对需要的第三方包重命名并重新打包，映射成自己定义的名字 解决步骤在 pom.xml 文件中添加 shade 插件1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556&lt;build&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt; &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt; &lt;configuration&gt; &lt;createDependencyReducedPom&gt;false&lt;/createDependencyReducedPom&gt; &lt;/configuration&gt; &lt;executions&gt; &lt;!-- Run shade goal on package phase --&gt; &lt;execution&gt; &lt;phase&gt;package&lt;/phase&gt; &lt;goals&gt; &lt;goal&gt;shade&lt;/goal&gt; &lt;/goals&gt; &lt;configuration&gt; &lt;relocations&gt; &lt;relocation&gt; &lt;pattern&gt;org.elasticsearch&lt;/pattern&gt; &lt;shadedPattern&gt;my.elasticsearch&lt;/shadedPattern&gt; &lt;/relocation&gt; &lt;relocation&gt; &lt;pattern&gt;org.apache.http&lt;/pattern&gt; &lt;shadedPattern&gt;my.apache.http&lt;/shadedPattern&gt; &lt;/relocation&gt; &lt;relocation&gt; &lt;pattern&gt;com.fasterxml.jackson&lt;/pattern&gt; &lt;shadedPattern&gt;my.fasterxml.jackson&lt;/shadedPattern&gt; &lt;/relocation&gt; &lt;/relocations&gt; &lt;!-- 配置主类 --&gt; &lt;transformers&gt; &lt;transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"&gt; &lt;mainClass&gt;com.xxx.app.EsApp&lt;/mainClass&gt; &lt;/transformer&gt; &lt;/transformers&gt; &lt;/configuration&gt; &lt;/execution&gt; &lt;/executions&gt; &lt;/plugin&gt; &lt;!-- 配置编译插件 --&gt; &lt;plugin&gt; &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt; &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt; &lt;configuration&gt; &lt;source&gt;1.8&lt;/source&gt; &lt;target&gt;1.8&lt;/target&gt; &lt;/configuration&gt; &lt;/plugin&gt; &lt;/plugins&gt;&lt;/build&gt; 主要配置： 12345678910111213141516&lt;relocations&gt; &lt;relocation&gt; &lt;pattern&gt;org.elasticsearch&lt;/pattern&gt; &lt;shadedPattern&gt;my.elasticsearch&lt;/shadedPattern&gt; &lt;/relocation&gt; &lt;relocation&gt; &lt;pattern&gt;org.apache.http&lt;/pattern&gt; &lt;shadedPattern&gt;my.apache.http&lt;/shadedPattern&gt; &lt;/relocation&gt; &lt;relocation&gt; &lt;pattern&gt;com.fasterxml.jackson&lt;/pattern&gt; &lt;shadedPattern&gt;my.fasterxml.jackson&lt;/shadedPattern&gt; &lt;/relocation&gt;&lt;/relocations&gt; 将官方包的名称及路径修改成为自定义的名称，防止冲突 重新编译打包推荐使用 luyten 这个工具打开编译打包好的 jar 包，在使用到对应类的 class 文件中就可以看到，原来的 org.elasticsearch 都被替换成 my.elasticsearch 了，其他同理，也就不会出现在集群环境重产生 jar 包冲突的错误了]]></content>
+      <categories>
+        <category>Maven</category>
+      </categories>
+      <tags>
+        <tag>开发问题解决</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[微信小程序-promise]]></title>
+    <url>%2F2019%2F12%2F14%2F%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-promise%2F</url>
+    <content type="text"><![CDATA[摄影：Max van den Oetelaar，来自Unsplash ES6 中的约定 pending：既不成功也不失败 fulfilled：成功状态 rejected：失败状态 代码写法 12345678910new Promise((resolve, reject) =&gt; &#123; setTimeout(() =&gt; &#123; console.log(1) resolve() &#125;, 1000)&#125;).then((res) =&gt; &#123; setTimeout(() =&gt; &#123; console.log(2) &#125;, 2000)&#125;) 或 12345678910111213141516171819202122232425262728let p1 = new Promise((resolve, reject) =&gt; &#123; setTimeout(() =&gt; &#123; console.log('p1') resolve() &#125;, 2000)&#125;)let p2 = new Promise((resolve, reject) =&gt; &#123; setTimeout(() =&gt; &#123; console.log('p2') resolve() &#125;, 1000)&#125;)let p3 = new Promise((resolve, reject) =&gt; &#123; setTimeout(() =&gt; &#123; console.log('p3') resolve() &#125;, 2000)&#125;)Promise.all([p1, p2, p3]).then((res) =&gt; &#123; console.log('全部完成') console.log(res)&#125;).catch((err) =&gt; &#123; console.log('失败') console.log(err)&#125;) Promise.race：是要有一个任务完成就算是完成了 Promise.race：所有任务开启运行]]></content>
+      <categories>
+        <category>微信小程序</category>
+      </categories>
+      <tags>
+        <tag>开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[微信小程序-wx]]></title>
+    <url>%2F2019%2F12%2F14%2F%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-wx%2F</url>
+    <content type="text"><![CDATA[摄影：Max van den Oetelaar，来自Unsplash wxwx:for作用：用于遍历 data 里面的数据 wx:for-item作用：用于指定遍历的元素名称（默认 item） wx:for-index作用：用于指定遍历的索引名称（默认 index） wx:key官方解释：当数据改变触发渲染层重新渲染的时候，会校正带有 key 的组件，框架会确保他们被重新排序，而不是重新创建，以确保使组件保持自身的状态，并且提高列表渲染时的效率。 12345678910111213141516&lt;block wx:for="&#123;&#123;arr&#125;&#125;" wx:key="*this" wx:for-item="data" wx:for-index="idx"&gt; &lt;view&gt; &lt;checkbox/&gt;&#123;&#123;data&#125;&#125; &lt;/view&gt;&lt;/block&gt;&lt;button bind:tap="sort"&gt;随机排序&lt;/button&gt;&lt;block wx:for="&#123;&#123;arrObj&#125;&#125;" wx:key="id"&gt; &lt;view&gt; &lt;checkbox/&gt;&#123;&#123;item.name&#125;&#125; &lt;/view&gt;&lt;/block&gt;&lt;button bind:tap="sortObj"&gt;随机排序&lt;/button&gt; bindbind:tap作用：绑定 js 函数]]></content>
+      <categories>
+        <category>微信小程序</category>
+      </categories>
+      <tags>
+        <tag>开发</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[微信小程序-轮播图]]></title>
     <url>%2F2019%2F12%2F09%2F%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E8%BD%AE%E6%92%AD%E5%9B%BE%2F</url>
     <content type="text"><![CDATA[摄影：Max van den Oetelaar，来自Unsplash 轮播图组件swiper： 1234567&lt;swiper indicator-dots="true" autoplay="true" interval="2000" duration="1000"&gt; &lt;block wx:for="&#123;&#123;swiperImgUrls&#125;&#125;"&gt; &lt;swiper-item&gt; &lt;image src="&#123;&#123;item.url&#125;&#125;" mode="widthFix" class="img"&gt;&lt;/image&gt; &lt;/swiper-item&gt; &lt;/block&gt;&lt;/swiper&gt; 1234.img &#123; width: 100%; height: 100%;&#125; indicator-dots=”true”：轮播图的导航器 autoplay=”true”：是否自动播放 interval=”2000”：设置滚动时间 duration=”1000”：滑动时长 mode： scaleToFill：不保证横纵比例缩放图片，但能让图片覆盖当前容器 aspectFit：显示图片完整的宽度，但不一定能填满容器高度 widthFix：保证宽度不变，高度自动变化，保证图片宽高比]]></content>
